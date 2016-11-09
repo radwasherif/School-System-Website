@@ -143,7 +143,7 @@ create table Assignments
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE
 	);
 
-create table Solution
+create table Solutions
 	(
 		student_ssn int,
 		assignment_number int,
@@ -164,7 +164,7 @@ create table Teachers_Grade_Solutions
 		grade int;
 		teacher_id int,
 		PRIMARY KEY (student_ssn, assignment_number, course_code, school_id),
-		FOREIGN KEY (student_ssn, assignment_number, course_code, school_id) REFERENCES Solution (student_ssn, assignment_number, course_code, school_id), ON DELETE CASCADE,
+		FOREIGN KEY (student_ssn, assignment_number, course_code, school_id) REFERENCES Solutions (student_ssn, assignment_number, course_code, school_id), ON DELETE CASCADE,
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE	
 	);
 

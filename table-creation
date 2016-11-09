@@ -1,2 +1,63 @@
-CREATE DATABASE School_System;
-USE School_System;  
+-- CREATE DATABASE School_System;
+-- USE School_System; 
+
+
+-- CREATE TABLE Schools (
+-- 	id INT PRIMARY KEY AUTO_INCREMENT, 
+-- 	name VARCHAR(30), 
+-- 	mission VARCHAR(120), 
+-- 	vision VARCHAR(120), 
+-- 	language VARCHAR(20), 
+-- 	general_info VARCHAR(120), 
+-- 	fees INT, 
+-- 	type VARCHAR(20), 
+-- 	min_grade INT, 
+-- 	max_grade INT, 
+-- 	email VARCHAR(50), 
+-- 	elementary BIT AS (min_grade = 1 AND max_grade >= 6) , 
+-- 	middle BIT AS (min_grade <= 7 AND max_grade >= 9), 
+-- 	high BIT AS (min_grade <= 10 AND max_grade = 12)
+-- );  
+
+
+-- CREATE TABLE Phone_Schools (
+-- 	phone VARCHAR(15), 
+-- 	school_id INT,
+-- 	FOREIGN KEY (school_id) REFERENCES Schools(id), 
+-- 	PRIMARY KEY (school_id, phone)
+-- ); 
+
+-- CREATE TABLE Supplies (
+-- 	PRIMARY KEY (name, school_id, grade),
+-- 	name VARCHAR(15), 
+-- 	school_id INT, 
+-- 	grade INT,
+-- 	FOREIGN KEY (school_id) REFERENCES Schools(id)
+-- ); 
+
+
+-- CREATE TABLE Clubs (
+-- 	PRIMARY KEY (name, school_id), 
+-- 	name VARCHAR(20), 
+-- 	school_id INT,
+-- 	FOREIGN KEY (school_id) REFERENCES Schools(id)
+-- ); 
+
+CREATE TABLE Students (
+	PRIMARY KEY (ssn), 
+	ssn INT, 
+	school_id INT, 
+	first_name VARCHAR(20),
+	last_name VARCHAR(20), 
+	username VARCHAR(20),
+	password VARCHAR(20), 
+	gender VARCHAR(10), 
+	birthdate date, 
+	age INT AS 2016 - YEAR(birthdate), 
+	grade INT, 
+	level VARCHAR(15)
+); 
+
+
+
+

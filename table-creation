@@ -21,10 +21,11 @@
 
 
 -- CREATE TABLE Phone_Schools (
+-- 	PRIMARY KEY (school_id, phone),
 -- 	phone VARCHAR(15), 
 -- 	school_id INT,
--- 	FOREIGN KEY (school_id) REFERENCES Schools(id), 
--- 	PRIMARY KEY (school_id, phone)
+-- 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE 
+	
 -- ); 
 
 -- CREATE TABLE Supplies (
@@ -32,32 +33,48 @@
 -- 	name VARCHAR(15), 
 -- 	school_id INT, 
 -- 	grade INT,
--- 	FOREIGN KEY (school_id) REFERENCES Schools(id)
+-- 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE
 -- ); 
 
 
--- CREATE TABLE Clubs (
--- 	PRIMARY KEY (name, school_id), 
--- 	name VARCHAR(20), 
--- 	school_id INT,
--- 	FOREIGN KEY (school_id) REFERENCES Schools(id)
--- ); 
-
-CREATE TABLE Students (
-	PRIMARY KEY (ssn), 
-	ssn INT, 
-	school_id INT, 
-	first_name VARCHAR(20),
-	last_name VARCHAR(20), 
-	username VARCHAR(20),
-	password VARCHAR(20), 
-	gender VARCHAR(10), 
-	birthdate date, 
-	age INT AS 2016 - YEAR(birthdate), 
-	grade INT, 
-	level VARCHAR(15)
+CREATE TABLE Clubs (
+	PRIMARY KEY (name, school_id), 
+	name VARCHAR(20), 
+	school_id INT,
+	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE
 ); 
 
+-- CREATE TABLE Students (
+-- 	PRIMARY KEY (ssn), 
+-- 	ssn INT, 
+-- 	school_id INT, 
+-- 	first_name VARCHAR(20),
+-- 	last_name VARCHAR(20), 
+-- 	username VARCHAR(20),
+-- 	password VARCHAR(20), 
+-- 	gender VARCHAR(10), 
+-- 	birthdate date, 
+-- 	age INT AS (YEAR('2016-1-1') - YEAR(birthdate)), 
+-- 	grade INT, 
+-- 	level VARCHAR(15), 
+-- 	FOREIGN KEY (school_id) REFERENCES Schools(id)
+-- ); 
 
+-- CREATE TABLE Parents (
+-- 	PRIMARY KEY (username), 
+-- 	username VARCHAR(20), 
+-- 	first_name VARCHAR(20), 
+-- 	last_name VARCHAR(20), 
+-- 	email VARCHAR(20), 
+-- 	address VARCHAR(120), 
+-- 	home_phone VARCHAR(15)
+-- ); 
+
+-- CREATE TABLE Mobiles_Of_Parents (
+-- 	PRIMARY KEY (mobile, username), 
+-- 	username VARCHAR(20), 
+-- 	mobile VARCHAR(15), 
+-- 	FOREIGN KEY (username) REFERENCES Parents(username) ON DELETE CASCADE
+-- );  
 
 

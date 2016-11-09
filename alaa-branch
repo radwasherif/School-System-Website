@@ -1,0 +1,49 @@
+-- create database School-System;
+-- use School-System;
+-- create table Adminstrators
+-- 	(
+-- 		id int PRIMARY KEY AUTO_INCREMENT, 
+-- 		FOREIGN KEY (id) REFERENCES Employee(id) ON DELETE CASCADE
+-- 	);
+
+-- create table Teachers 
+-- 	(
+-- 		id int PRIMARY KEY AUTO_INCREMENT,
+-- 		FOREIGN KEY (id) REFERENCES Employee(id) ON DELETE CASCADE,
+-- 		exp_years int,
+-- 		age int AS (YEAR(’2016-11-9’) - YEAR(start_date)) 
+-- 	);
+
+-- create table Teachers_Supervising_Teachers
+-- 	(
+-- 		supervisor_id int,
+-- 		teacher_id int,
+-- 		PRIMARY KEY (supervisor_id, teacher_id),
+-- 		FOREIGN KEY (supervisor_id) REFERENCES Teachers(id) ON DELETE CASCADE,
+-- 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE,
+-- 	);
+
+-- create table Activities
+-- 	(
+-- 		activity_datetime datetime,
+-- 		location varchar(100),
+-- 		equipment varchar(100),
+-- 		description varchar(500),
+-- 		type varchar(40),
+-- 		admin_id int,
+-- 		teacher_id int,
+-- 		PRIMARY KEY (activity_datetime, location),
+-- 		FOREIGN KEY (admin_id) REFERENCES Adminstrators(id) ON DELETE CASCADE,
+-- 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE
+-- 	);
+
+-- create table Activities_JoinedBy_Students
+-- 	(
+-- 		student_ssn int,
+-- 		activity_datetime datetime,
+-- 		location varchar(100),
+-- 		PRIMARY KEY (student_ssn, activity_datetime, location),
+-- 		FOREIGN KEY (student_ssn) REFERENCES Students ON DELETE CASCADE,
+-- 		FOREIGN KEY (activity_datetime, location) REFERENCES Activities ON DELETE CASCADE
+-- 	);
+

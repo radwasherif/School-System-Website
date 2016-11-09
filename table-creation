@@ -37,12 +37,12 @@
 -- ); 
 
 
-CREATE TABLE Clubs (
-	PRIMARY KEY (name, school_id), 
-	name VARCHAR(20), 
-	school_id INT,
-	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE
-); 
+-- CREATE TABLE Clubs (
+-- 	PRIMARY KEY (name, school_id), 
+-- 	name VARCHAR(20), 
+-- 	school_id INT,
+-- 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE
+-- ); 
 
 -- CREATE TABLE Students (
 -- 	PRIMARY KEY (ssn), 
@@ -77,4 +77,56 @@ CREATE TABLE Clubs (
 -- 	FOREIGN KEY (username) REFERENCES Parents(username) ON DELETE CASCADE
 -- );  
 
+-- CREATE TABLE Parents_Of_Students (
+-- 	PRIMARY KEY (parent_username, child_ssn), 
+-- 	parent_username VARCHAR(20), 
+-- 	child_ssn INT, 
+-- 	FOREIGN KEY (child_ssn) REFERENCES Students(ssn), 
+-- 	FOREIGN KEY (parent_username) REFERENCES Parents(username)
+-- ); 
 
+-- CREATE TABLE Club_Member_Student (
+-- 	PRIMARY KEY (student_ssn, school_id, club_name), 
+-- 	student_ssn INT, 
+-- 	school_id INT, 
+-- 	club_name VARCHAR(20), 
+-- 	FOREIGN KEY (club_name, school_id) REFERENCES Clubs(name, school_id) ON DELETE CASCADE, 
+-- 	FOREIGN KEY (student_ssn) REFERENCES Students(ssn) ON DELETE CASCADE
+-- );
+
+-- CREATE TABLE Parent_Review_School (
+-- 	PRIMARY KEY (school_id, parent_username), 
+-- 	school_id INT, 
+-- 	parent_username VARCHAR(20), 
+-- 	review VARCHAR(200), 
+-- 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE, 
+-- 	FOREIGN KEY (parent_username) REFERENCES Parents(username) ON DELETE CASCADE 
+-- ); 
+-- CREATE TABLE School_Apply_Student(
+--  	PRIMARY KEY (school_id, student_ssn), 
+--  	school_id INT,
+--  	student_ssn INT,
+--  	parent_username VARCHAR(20), 
+--  	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE, 
+--  	FOREIGN KEY (student_ssn) REFERENCES Students(ssn) ON DELETE CASCADE, 
+--  	FOREIGN KEY (parent_username) REFERENCES Parents(username) ON DELETE SET NULL 
+-- ); 
+
+CREATE TABLE Employees (
+	PRIMARY KEY(id), 
+	id INT AUTO_INCREMENT, 
+	school_id INT, 
+	first_name VARCHAR(20), 
+	middle_name VARCHAR(20), 
+	last_name VARCHAR(20), 
+	username VARCHAR(20), 
+	password VARCHAR(20), 
+	email VARCHAR(50), 
+	gender VARCHAR(10), 
+	address VARCHAR(40), 
+	birthdate DATETIME, 
+	salary INT, 
+	start_date DATETIME, 
+	age INT AS (YEAR('2016-1-1') - YEAR(birthdate)), 
+	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE SET NULL
+); 

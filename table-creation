@@ -4,23 +4,25 @@ USE School_System;
 
 CREATE TABLE Schools (
 	id INT PRIMARY KEY AUTO_INCREMENT, 
-	name VARCHAR(30), 
+	name VARCHAR(30),
+	address VARCHAR(100),  
 	mission VARCHAR(120), 
 	vision VARCHAR(120), 
 	language VARCHAR(20), 
 	general_info VARCHAR(120), 
 	fees INT, 
 	type VARCHAR(20), 
+	CHECK (type = 'national' OR type = 'international'), 
 	min_grade INT, 
 	max_grade INT, 
 	email VARCHAR(50), 
-	elementary BIT AS (min_grade = 1 AND max_grade >= 6) , 
-	middle BIT AS (min_grade <= 7 AND max_grade >= 9), 
-	high BIT AS (min_grade <= 10 AND max_grade = 12)
+	elementary BOOLEAN AS (min_grade == 1 AND max_grade >= 6) , 
+	middle BOOLEAN AS (min_grade <= 7 AND max_grade >= 9), 
+	high BOOLEAN AS (min_grade <= 10 AND max_grade == 12)
 );  
 
 
-CREATE TABLE Phone_Schools (
+CREATE TABLE Phone_School (
 	PRIMARY KEY (school_id, phone),
 	phone VARCHAR(15), 
 	school_id INT,
@@ -57,7 +59,7 @@ CREATE TABLE Students (
 	age INT AS (YEAR('2016-1-1') - YEAR(birthdate)), 
 	grade INT, 
 	level VARCHAR(15), 
-	FOREIGN KEY (school_id) REFERENCES Schools(id)
+	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE SET NULL 
 ); 
 
 CREATE TABLE Parents (
@@ -116,7 +118,7 @@ CREATE TABLE School_Apply_Student(
 CREATE TABLE Employees (
 	PRIMARY KEY(id), 
 	id INT AUTO_INCREMENT, 
-	school_id INT, 
+	school_id INT DEFAULT NULL, 
 	first_name VARCHAR(20), 
 	middle_name VARCHAR(20), 
 	last_name VARCHAR(20), 
@@ -125,9 +127,9 @@ CREATE TABLE Employees (
 	email VARCHAR(50), 
 	gender VARCHAR(10), 
 	address VARCHAR(40), 
-	birthdate DATETIME, 
+	birthdate DATE, 
 	salary INT, 
-	start_date DATETIME NOT NULL, 
+	start_date DATE NOT NULL, 
 	age INT AS (YEAR('2016-1-1') - YEAR(birthdate)), 
 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE SET NULL
 ); 
@@ -196,7 +198,9 @@ create table Courses
 		code int,
 		name varchar(50),
 		description varchar(250),
-		grade int
+		grade int, 
+		level VARCHAR(20), 
+		CHECK (level = 'elementary' or level = 'middle' or level = 'high')
 		
 	);
 

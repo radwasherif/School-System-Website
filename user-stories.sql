@@ -59,16 +59,32 @@ DELIMITER //
 -- 	WHERE S.name = name OR S.type = type OR S.address = address; 
 -- END //
 
-CREATE PROCEDURE view_school_info(IN school INT) 
-BEGIN
-	SELECT S.name, S.name, S.address, S.mission, S.vision, S.language, S.general_info, S.fees, S.type, S.elementary, S.middle, S.high, 
-	E.first_name, E.middle_name, E.last_name, R.review 
-	FROM School S 
-	INNER JOIN Parent_Review_School R ON S.id = R.school_id 
-	INNER JOIN Employees E ON E.school_id = S.id 
-	INNER JOIN Teachers T ON T.id = E.id; 
+-- CREATE PROCEDURE view_school_info(IN school INT) 
+-- BEGIN
+-- 	SELECT S.name, S.name, S.address, S.mission, S.vision, S.language, S.general_info, S.fees, S.type, S.elementary, S.middle, S.high, 
+-- 	E.first_name, E.middle_name, E.last_name, R.review 
+-- 	FROM School S 
+-- 	INNER JOIN Parent_Review_School R ON S.id = R.school_id 
+-- 	INNER JOIN Employees E ON E.school_id = S.id 
+-- 	INNER JOIN Teachers T ON T.id = E.id; 
 
-END //
+-- END //
+CREATE PROCEDURE view_applied_teacher (IN admin_id INT) 
+  BEGIN 
+  		SELECT * 
+  		FROM Employees E1, Employees E2 
+  		INNER JOIN Teachers T ON E1.id = T.id 
+  		INNER JOIN Administrators A ON E2.id = A.id  
+  		WHERE E.username = NULL AND E.password = NULL AND E1.school_id = E2.school_id; 
+  END //
+
+CREATE PROCEDURE verify_applied_teacher(IN teacher_id INT, IN username_in VARCHAR(20), IN password_in VARCHAR(20))
+BEGIN
+	UPDATE Employees E 
+	SET E.username = username_in, E.password = password_in
+	WHERE E.id = teacher_id; 
+END	//
+
 
 DELIMITER ; 
 

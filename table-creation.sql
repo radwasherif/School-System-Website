@@ -16,9 +16,9 @@ CREATE TABLE Schools (
 	min_grade INT, 
 	max_grade INT, 
 	email VARCHAR(50), 
-	elementary BOOLEAN AS (min_grade == 1 AND max_grade >= 6) , 
+	elementary BOOLEAN AS (min_grade = 1 AND max_grade >= 6) , 
 	middle BOOLEAN AS (min_grade <= 7 AND max_grade >= 9), 
-	high BOOLEAN AS (min_grade <= 10 AND max_grade == 12)
+	high BOOLEAN AS (min_grade <= 10 AND max_grade = 12)
 );  
 
 
@@ -63,7 +63,8 @@ CREATE TABLE Students (
 ); 
 
 CREATE TABLE Parents (
-	PRIMARY KEY (username), 
+	PRIMARY KEY (id),
+	id INT AUTO_INCREMENT, 
 	username VARCHAR(20), 
 	first_name VARCHAR(20), 
 	last_name VARCHAR(20), 
@@ -72,19 +73,19 @@ CREATE TABLE Parents (
 	home_phone VARCHAR(15)
 ); 
 
-CREATE TABLE Mobiles_Of_Parents (
-	PRIMARY KEY (mobile, username), 
-	username VARCHAR(20), 
+CREATE TABLE Mobile_Of_Parent (
+	PRIMARY KEY (mobile, parent_id), 
+	parent_id INT, 
 	mobile VARCHAR(15), 
-	FOREIGN KEY (username) REFERENCES Parents(username) ON DELETE CASCADE
+	FOREIGN KEY (parent_id) REFERENCES Parents(id) ON DELETE CASCADE
 );  
 
-CREATE TABLE Parents_Of_Students (
-	PRIMARY KEY (parent_username, child_ssn), 
-	parent_username VARCHAR(20), 
+CREATE TABLE Parent_Of_Student (
+	PRIMARY KEY (parent_id, child_ssn), 
+	parent_id INT, 
 	child_ssn INT, 
 	FOREIGN KEY (child_ssn) REFERENCES Students(ssn), 
-	FOREIGN KEY (parent_username) REFERENCES Parents(username)
+	FOREIGN KEY (parent_id) REFERENCES Parents(id)
 ); 
 
 CREATE TABLE Club_Member_Student (
@@ -97,21 +98,21 @@ CREATE TABLE Club_Member_Student (
 );
 
 CREATE TABLE Parent_Review_School (
-	PRIMARY KEY (school_id, parent_username), 
+	PRIMARY KEY (school_id, parent_id), 
 	school_id INT, 
-	parent_username VARCHAR(20), 
+	parent_id INT, 
 	review VARCHAR(200), 
 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE, 
-	FOREIGN KEY (parent_username) REFERENCES Parents(username) ON DELETE CASCADE 
+	FOREIGN KEY (parent_id) REFERENCES Parents(id) ON DELETE CASCADE 
 ); 
 CREATE TABLE School_Apply_Student(
  	PRIMARY KEY (school_id, student_ssn), 
  	school_id INT,
  	student_ssn INT,
- 	parent_username VARCHAR(20), 
+ 	parent_id INT, 
  	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE, 
  	FOREIGN KEY (student_ssn) REFERENCES Students(ssn) ON DELETE CASCADE, 
- 	FOREIGN KEY (parent_username) REFERENCES Parents(username) ON DELETE SET NULL 
+ 	FOREIGN KEY (parent_id) REFERENCES Parents(id) ON DELETE SET NULL 
 ); 
 
 
@@ -224,11 +225,11 @@ create table Courses_TaughtIn_Schools
 
 create table Parents_Rate_Teachers
 	(
-		PRIMARY KEY (parent_username, teacher_id),
-		parent_username varchar (20),
-		teacher_id int,
-		rating int,
-		FOREIGN KEY (parent_username) REFERENCES Parents(username) ON DELETE CASCADE,
+		PRIMARY KEY (parent_id, teacher_id),
+		parent_id INT,
+		teacher_id INT,
+		rating INT,
+		FOREIGN KEY (parent_id) REFERENCES Parents(id) ON DELETE CASCADE,
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE
 	);
 
@@ -319,24 +320,24 @@ create table Reports
 
 create table Parents_View_Reports
 	(
-		parent_username varchar(20),
+		parent_id INT,
 		report_date date,
 		student_ssn int,
 		teacher_id int,
-		PRIMARY KEY (parent_username, report_date, student_ssn, teacher_id),
-		FOREIGN KEY (parent_username) REFERENCES Parents(username) ON DELETE CASCADE,
+		PRIMARY KEY (parent_id, report_date, student_ssn, teacher_id),
+		FOREIGN KEY (parent_id) REFERENCES Parents(id) ON DELETE CASCADE,
 		FOREIGN KEY (report_date, student_ssn, teacher_id) REFERENCES Reports(report_date, student_ssn, teacher_id) ON DELETE CASCADE
 	);
 
 create table Parents_Reply_Reports
 	(
-		parent_username varchar(20),
+		parent_id INT,
 		report_date date,
 		student_ssn int,
 		teacher_id int,
 		content varchar(250),
-		PRIMARY KEY (parent_username, report_date, student_ssn, teacher_id),
-		FOREIGN KEY (parent_username) REFERENCES Parents(username) ON DELETE CASCADE,
+		PRIMARY KEY (parent_id, report_date, student_ssn, teacher_id),
+		FOREIGN KEY (parent_id) REFERENCES Parents(id) ON DELETE CASCADE,
 		FOREIGN KEY (report_date, student_ssn, teacher_id) REFERENCES Reports(report_date, student_ssn, teacher_id) ON DELETE CASCADE
 	);
 

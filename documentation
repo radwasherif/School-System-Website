@@ -1,12 +1,24 @@
 **DISCLAIMER: We've tried to stick to the description to the best of our abilities. This documentations explains our understanding and design decisions in detail. 
+==> SCHOOL ADMINISTRATOR: 
+*view_school(school_id): takes school id, selects all relevent information about school from the database
 
-view_school(school_id): takes school id, selects all relevent information about school from the database
+*view_applied_teacher(admin_id): takes the admin's id and shows all teachers whose IDs are null and are related to his/her school. We assume that when a teacher is first created, his/her username and password are set to null until verified by an admin. 
 
-view_applied_teacher(admin_id): takes the admin's id and shows all teachers whose IDs are null and are related to his/her school. We assume that when a teacher is first created, his/her username and password are set to null until verified by an admin. 
+*verify_applied_teacher(teacher_id, username_in, password_in): used by an admin to manually assign a username and password to a teacher who has started working at his/her school. We update the start_date of a teacher only if it were originally null, meaning that this is his/her first job. 
 
-verify_applied_teacher(teacher_id, username_in, password_in): used by an admin to manually assign a username and password to a teacher who has started working at his/her school. We update the start_date of a teacher only if it were originally null, meaning that this is his/her first job. 
+*delete_employee(emp_id): we assume that the admin of a school has no authority to delete an employee from the database completely. He/she can only "delete" the employee from his/her school's system by setting their school_id, username and passwod to null. 
 
-delete_employee(emp_id): we assume that the admin of a school has no authority to delete an employee from the database completely. He/she can only "delete" the employee from his/her school's system by setting their school_id, username and passwod to null. 
+*delete_student(student_id): same as delete_employee
+
+*edit_school_[column]: this group of procedures take the admin id and the new value of column they are defined to change and change them. 
 
 
+
+
+==> TEACHER: 
+*teacher_signup: 
+
+*teacher_view_courses
+
+*teacher_post_assignment
   

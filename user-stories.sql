@@ -104,22 +104,17 @@ DELIMITER //
   -- 		WHERE A.school_id = school_id; 
   -- END //
 
+
 -- CREATE PROCEDURE verify_applied_student(IN student_ssn INT, IN password VARCHAR(20))
 -- BEGIN 
--- 	DECLARE num INT;
+-- 	DECLARE last_id INT;
 -- 	DECLARE ext VARCHAR(100); 
--- 	SELECT COUNT(*)
--- 	FROM Student S1 
--- 	INNER JOIN Student S2 ON S1.first_name = S2.first_name AND S1.last_name = S2.last_name AND S1.ssn <> S2.ssn
--- 	WHERE S1.ssn = student_ssn; 
-
--- 	IF count = 0 THEN SET ext = ''; ELSE SET ext = CONCAT('', count); END IF; 
+-- 	SELECT MAX(id) INTO last_id
+-- 	FROM Students St INNER JOIN Schools Sc ON St.school_id = Sc.id; 
 
 -- 	UPDATE Student S
--- 	SET S.username = CONCAT(first_name, '.', last_name, ext)
+-- 	SET S.username = CONCAT(first_name, '.', last_name, (last_id + 1))
 -- 	WHERE S.ssn = student_ssn; 
-
-
 -- END // 
 
 -- CREATE PROCEDURE delete_student(IN student_ssn INT) 
@@ -135,7 +130,177 @@ DELIMITER //
 -- 	SET E.school_id = NULL, E.username = NULL, E.password = NULL;
 -- END //
 
-CREATE PROCEDURE edit_school_name (IN old_name VARCHAR(30), IN new_name VARCHAR(30))
+-- CREATE PROCEDURE edit_school_name (IN admin_id INT, IN new_name VARCHAR(30))
+-- BEGIN
+-- 	DECLARE school_id INT; 
+-- 	CALL get_admin_school(admin_id, school_id); 
+
+-- 	UPDATE Schools S
+-- 	SET S.name = new_name
+-- 	WHERE S.id = school_id; 
+-- END //
+
+-- CREATE PROCEDURE edit_school_address(IN admin_id INT, IN new_address VARCHAR(100))
+-- BEGIN
+-- 	DECLARE school_id INT; 
+-- 	CALL get_admin_school(admin_id, school_id); 
+
+-- 	UPDATE Schools S 
+-- 	SET S.address = new_address
+-- 	WHERE S.id = school_id; 
+-- END //
+
+
+-- CREATE PROCEDURE edit_school_vision (IN admin_id INT, IN new_vision VARCHAR(120))
+-- BEGIN
+-- 	DECLARE school_id INT; 
+-- 	CALL get_admin_school(admin_id, school_id); 
+
+-- 	UPDATE Schools S
+-- 	SET S.vision = new_vision
+-- 	WHERE S.id = school_id; 
+-- END //
+
+
+-- CREATE PROCEDURE edit_school_mission (IN admin_id INT, IN new_mission VARCHAR(120))
+-- BEGIN
+-- 	DECLARE school_id INT; 
+-- 	CALL get_admin_school(admin_id, school_id); 
+
+-- 	UPDATE Schools S
+-- 	SET S.mission = new_mission
+-- 	WHERE S.id = school_id; 
+-- END //
+
+
+-- CREATE PROCEDURE edit_school_language (IN admin_id INT, IN new_language VARCHAR(20))
+-- BEGIN
+-- 	DECLARE school_id INT; 
+-- 	CALL get_admin_school(admin_id, school_id); 
+
+-- 	UPDATE Schools S
+-- 	SET S.language = new_language
+-- 	WHERE S.id = school_id; 
+-- END //
+
+
+-- CREATE PROCEDURE edit_school_general_info (IN admin_id INT, IN new_general_info VARCHAR(120))
+-- BEGIN
+-- 	DECLARE school_id INT; 
+-- 	CALL get_admin_school(admin_id, school_id); 
+
+-- 	UPDATE Schools S
+-- 	SET S.name = new_name
+-- 	WHERE S.id = school_id; 
+-- END //
+
+
+-- CREATE PROCEDURE edit_school_fees (IN admin_id INT, IN new_fees INT)
+-- BEGIN
+-- 	DECLARE school_id INT; 
+-- 	CALL get_admin_school(admin_id, school_id); 
+
+-- 	UPDATE Schools S
+-- 	SET S.fees = new_fees
+-- 	WHERE S.id = school_id; 
+-- END //
+
+
+-- CREATE PROCEDURE edit_school_type (IN admin_id INT, IN new_type VARCHAR(20))
+-- BEGIN
+-- 	DECLARE school_id INT; 
+-- 	CALL get_admin_school(admin_id, school_id); 
+
+-- 	UPDATE Schools S
+-- 	SET S.type = new_type
+-- 	WHERE S.id = school_id; 
+-- END //
+
+
+-- CREATE PROCEDURE edit_school_email (IN admin_id INT, IN new_email VARCHAR(50))
+-- BEGIN
+-- 	DECLARE school_id INT; 
+-- 	CALL get_admin_school(admin_id, school_id); 
+
+-- 	UPDATE Schools S
+-- 	SET S.email = new_email
+-- 	WHERE S.id = school_id; 
+-- END //
+
+
+
+-- CREATE PROCEDURE admin_post_announcement(IN title VARCHAR(50), IN announcement_date DATE, IN type VARCHAR(50), 
+-- 	IN descriptoin VARCHAR(500), IN admin_id INT)
+-- BEGIN
+-- 	INSERT INTO Announcements (title, announcement_date, type, descriptoin, admin_id) 
+-- 	VALUES (title, announcement_date, type, descriptoin, admin_id); 
+-- END //
+
+
+-- CREATE PROCEDURE admin_create_activity( IN ativity_datetime DATETIME, location VARCHAR(100),equipment VARCHAR(100),
+-- description VARCHAR(500), type VARCHAR(40), admin_id INT, teacher_id INT)
+-- BEGIN
+-- 	IF EXISTS (SELECT * FROM Employees E1 INNER JOIN Employees E2 ON E1.school_id = E2.school_id WHERE E1.id = admin_id AND E2.teacher_id) THEN 
+-- 	INSERT INTO Acitivities (activity_datetime, location, equipment, descriptoin, type, admin_id, teacher_id) 
+-- 	VALUES (activity_datetime, location, equipment, descriptoin, type, admin_id, teacher_id); 
+-- 	END IF; 
+-- END //
+
+-- CREATE PROCEDURE change_activity_teacher(IN activity_datetime DATETIME, location VARCHAR(100), new_teacher_id INT, admin_id INT)
+-- BEGIN
+-- 	IF EXISTS (SELECT * FROM Employees E1 INNER JOIN Employees E2 ON E1.school_id = E2.school_id WHERE E1.id = admin_id AND E2.teacher_id) THEN 
+-- 	UPDATE Activities A 
+-- 	SET A.teacher_id = new_teacher_id
+-- 	WHERE A.activity_datetime = activity_datetime AND A.location = location;
+-- 	END IF; 
+-- END //
+
+CREATE PROCEDURE admin_accept_application(IN admin_id INT, student_ssn INT, password_in VARCHAR(30))
+BEGIN
+	DECLARE school_id INT; 
+	SET school_id = get_admin_school(admin_id); 
+	IF EXISTS (SELECT School_Apply_Student S WHERE S.school_id = school_id AND S.student_ssn = student_ssn)
+	THEN verify_applied_student(student_ssn, password); 
+	END IF; 
+END  //
+
+
+
+-- CREATE PROCEDURE get_admin_school(IN admin_id INT, OUT school_id INT)
+-- 	SELECT E.school_id INTO school_id
+-- 	FROM Administrators A INNER JOIN Employees E ON E.id = A.id; 
+-- //
+
+
+-- CREATE PROCEDURE teacher_sign_up(IN first_name VARCHAR(20), IN middle_name VARCHAR(20), IN last_name VARCHAR(20), IN birthdate DATE, IN address VARCHAR(100), IN email VARCHAR(50), IN gender VARCHAR(10))
+-- BEGIN
+--   INSERT INTO Employees (first_name, middle_name, last_name, birthdate, address, email, gender)
+--   VALUES (first_name, middle_name, last_name, birthdate, address, email, gender);
+--   SET @emp_id = LAST_INSERT_ID();
+--   INSERT INTO Teachers (id) VALUES (emp_id);
+-- END //
+
+
+-- CREATE PROCEDURE teacher_view_courses(IN teacher_id INT)
+-- BEGIN
+--   SELECT C.name, C.level, C.grade
+--   FROM Teachers T
+--   INNER JOIN Courses_TaughtTo_Students_By_Teachers CT ON T.id = CT.teacher_id  
+--   INNER JOIN Courses C  ON C.code = CT.course_code
+--   WHERE T.id = teacher_id
+--   GROUP BY level AND grade;
+
+-- END //
+
+-- CREATE PROCEDURE teacher_post_assignment(IN teacher_id INT, IN course_code INT, IN post_date DATE, IN due_date DATE, IN content VARCHAR(1000), IN assignment_number INT)
+-- BEGIN
+--   DECLARE school_id INT;
+--   SELECT E.school_id INTO school_id
+--   FROM Employees E
+--   WHERE id = teacher_id;
+--   INSERT INTO Assignemnts (assignment_number, course_code, school_id, post_date, due_date, content, teacher_id)
+--    VALUES (assignment_number, course_code, school_id, post_date, due_date, content, teacher_id);
+-- END //
 
 DELIMITER ; 
 

@@ -105,13 +105,14 @@ DELIMITER //
 
 CREATE PROCEDURE verify_applied_student(IN student_ssn INT, IN password VARCHAR(20))
 BEGIN 
-	DELCARE num INT; 
+	DECLARE num INT; 
+    DECLARE extension VARCHAR(100); 
 	SELECT COUNT(*)
 	FROM Student S1 
 	INNER JOIN Student S2 ON S1.first_name = S2.first_name AND S1.last_name = S2.last_name AND S1.ssn <> S2.ssn
 	WHERE S1.ssn = student_ssn; 
 
-	DECLARE extension VARCHAR(100); 
+	
 
 	IF count = 0 THEN SET extension = ''; ELSE extension = count; END IF; 
 
@@ -120,7 +121,39 @@ BEGIN
 	WHERE S.ssn = student_ssn; 
 
 
-END
+END  //
+
+CREATE PROCEDURE teacher_sign_up(IN first_name VARCHAR(20), IN middle_name VARCHAR(20), IN last_name VARCHAR(20), IN birthdate DATE, IN address VARCHAR(100), IN email VARCHAR(50), IN gender VARCHAR(10))
+BEGIN
+  INSERT INTO Employees (first_name, middle_name, last_name, birthdate, address, email, gender)
+  VALUES (first_name, middle_name, last_name, birthdate, address, email, gender);
+  @emp_id = LAST_INSERT_ID();
+  INSERT INTO Teachers (id) VALUES (emp_id);
+END //
+
+
+CREATE PROCEDURE teacher_view_courses(IN teacher_id INT)
+BEGIN
+  SELECT C.name, C.level, C.grade
+  FROM Teachers T
+  INNER JOIN Courses_TaughtTo_Students_By_Teachers CT ON T.id = CT.teacher_id  
+  INNER JOIN Courses C  ON C.code = CT.course_code
+  WHERE T.id = teacher_id
+  GROUP BY level AND grade;
+
+END //
+
+CREATE PROCEDURE teacher_post_assignment(IN teacher_id INT, IN course_code INT, IN post_date DATE, IN due_date DATE, IN content VARCHAR(1000), IN assignment_number INT)
+BEGIN
+  DECLARE school_id INT;
+  SELECT E.school_id INTO school_id
+  FROM Employees E
+  WHERE id = teacher_id;
+  INSERT INTO Assignemnts (assignment_number, course_code, school_id, post_date, due_date, content, teacher_id)
+   VALUES (assignment_number, course_code, school_id, post_date, due_date, content, teacher_id);
+END //
+
+
 DELIMITER ; 
 
 

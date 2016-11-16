@@ -13,7 +13,7 @@ CREATE TABLE Schools (
 	fees INT, 
 	type VARCHAR(20), 
 	CHECK (type = 'national' OR type = 'international'),  
-	email VARCHAR(50), 
+	email VARCHAR(50) 
 );  
 
 
@@ -116,6 +116,7 @@ CREATE TABLE School_Apply_Student(
  	school_id INT,
  	student_ssn INT,
  	parent_id INT, 
+ 	status VARCHAR(20),
  	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE, 
  	FOREIGN KEY (student_ssn) REFERENCES Students(ssn) ON DELETE CASCADE, 
  	FOREIGN KEY (parent_id) REFERENCES Parents(id) ON DELETE SET NULL 

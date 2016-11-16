@@ -69,23 +69,58 @@ DELIMITER //
 -- 	INNER JOIN Teachers T ON T.id = E.id; 
 
 -- END //
-CREATE PROCEDURE view_applied_teacher (IN admin_id INT) 
-  BEGIN 
-  		SELECT * 
-  		FROM Employees E1, Employees E2 
-  		INNER JOIN Teachers T ON E1.id = T.id 
-  		INNER JOIN Administrators A ON E2.id = A.id  
-  		WHERE E.username = NULL AND E.password = NULL AND E1.school_id = E2.school_id; 
-  END //
+-- CREATE PROCEDURE view_applied_teacher (IN admin_id INT) 
+--   BEGIN 
+--   		SELECT * 
+--   		FROM Employees E1, Employees E2 
+--   		INNER JOIN Teachers T ON E1.id = T.id 
+--   		INNER JOIN Administrators A ON E2.id = A.id  
+--   		WHERE E.username = NULL AND E.password = NULL AND E1.school_id = E2.school_id; 
+--   END //
 
-CREATE PROCEDURE verify_applied_teacher(IN teacher_id INT, IN username_in VARCHAR(20), IN password_in VARCHAR(20))
-BEGIN
-	UPDATE Employees E 
-	SET E.username = username_in, E.password = password_in
-	WHERE E.id = teacher_id; 
-END	//
+-- CREATE PROCEDURE verify_applied_teacher(IN teacher_id INT, IN password_in VARCHAR(20))
+-- BEGIN
+-- 	UPDATE Employees E 
+-- 	SET E.username = CONCAT (E.first_name,'.', E.last_name, E.id), E.password = password_in
+-- 	WHERE E.id = teacher_id; 
+
+-- 	UPDATE Teachers T 
+-- 	SET T.start_date = CURDATE()
+-- 	WHERE T.id = teacher_id; 
+-- END	//
+  
+  -- CREATE PROCEDURE view_applied_students (IN admin_id INT) 
+  -- BEGIN
+  -- 		DECLARE school_id INT; 
+  -- 		SELECT S.id into school_id
+  -- 		FROM Schools 
+  -- 		INNER JOIN Employees E ON E.school_id = S.id 
+  -- 		INNER JOIN Administrators A ON A.id = E.id; 
+
+  -- 		SELECT S.ssn, S.first_name, S.last_name, S.birthdate, S.gender, S.age
+  -- 		FROM Students S 
+  -- 		INNER JOIN School_Apply_Student A ON  A.student_ssn = S.ssn 
+  -- 		WHERE A.school_id = school_id; 
+  -- END //
+
+CREATE PROCEDURE verify_applied_student(IN student_ssn INT, IN password VARCHAR(20))
+BEGIN 
+	DELCARE num INT; 
+	SELECT COUNT(*)
+	FROM Student S1 
+	INNER JOIN Student S2 ON S1.first_name = S2.first_name AND S1.last_name = S2.last_name AND S1.ssn <> S2.ssn
+	WHERE S1.ssn = student_ssn; 
+
+	DECLARE extension VARCHAR(100); 
+
+	IF count = 0 THEN SET extension = ''; ELSE extension = count; END IF; 
+
+	UPDATE Student S
+	SET S.username = CONCAT(first_name, '.', last_name, extension)
+	WHERE S.ssn = student_ssn; 
 
 
+END
 DELIMITER ; 
 
 

@@ -129,8 +129,7 @@ CREATE TABLE Employees (
 	gender VARCHAR(10), 
 	address VARCHAR(40), 
 	birthdate DATE, 
-	salary INT, 
-	start_date DATE NOT NULL, 
+	salary INT,  
 	age INT AS (YEAR('2016-1-1') - YEAR(birthdate)), 
 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE SET NULL
 ); 
@@ -143,9 +142,8 @@ create table Adminstrators (
 create table Teachers 
 	(
 		id int PRIMARY KEY,
-		start_date DATETIME,
-		exp_years int,
-		age int AS (YEAR('2016-11-9') - YEAR(start_date)),
+		start_date DATE,
+		exp_years INT AS (YEAR('2016-11-9') - YEAR(start_date)),
 		FOREIGN KEY (id) REFERENCES Employees(id) ON DELETE CASCADE
 	);
 

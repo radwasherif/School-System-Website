@@ -84,9 +84,10 @@ DELIMITER //
 -- 	SET E.username = CONCAT (E.first_name,'.', E.last_name, E.id), E.password = password_in
 -- 	WHERE E.id = teacher_id; 
 
+
 -- 	UPDATE Teachers T 
 -- 	SET T.start_date = CURDATE()
--- 	WHERE T.id = teacher_id; 
+-- 	WHERE T.id = teacher_id and T.start_date = NULL; 
 -- END	//
   
   -- CREATE PROCEDURE view_applied_students (IN admin_id INT) 
@@ -103,24 +104,39 @@ DELIMITER //
   -- 		WHERE A.school_id = school_id; 
   -- END //
 
-CREATE PROCEDURE verify_applied_student(IN student_ssn INT, IN password VARCHAR(20))
-BEGIN 
-	DELCARE num INT; 
-	SELECT COUNT(*)
-	FROM Student S1 
-	INNER JOIN Student S2 ON S1.first_name = S2.first_name AND S1.last_name = S2.last_name AND S1.ssn <> S2.ssn
-	WHERE S1.ssn = student_ssn; 
+-- CREATE PROCEDURE verify_applied_student(IN student_ssn INT, IN password VARCHAR(20))
+-- BEGIN 
+-- 	DECLARE num INT;
+-- 	DECLARE ext VARCHAR(100); 
+-- 	SELECT COUNT(*)
+-- 	FROM Student S1 
+-- 	INNER JOIN Student S2 ON S1.first_name = S2.first_name AND S1.last_name = S2.last_name AND S1.ssn <> S2.ssn
+-- 	WHERE S1.ssn = student_ssn; 
 
-	DECLARE extension VARCHAR(100); 
+-- 	IF count = 0 THEN SET ext = ''; ELSE SET ext = CONCAT('', count); END IF; 
 
-	IF count = 0 THEN SET extension = ''; ELSE extension = count; END IF; 
-
-	UPDATE Student S
-	SET S.username = CONCAT(first_name, '.', last_name, extension)
-	WHERE S.ssn = student_ssn; 
+-- 	UPDATE Student S
+-- 	SET S.username = CONCAT(first_name, '.', last_name, ext)
+-- 	WHERE S.ssn = student_ssn; 
 
 
-END
+-- END // 
+
+-- CREATE PROCEDURE delete_student(IN student_ssn INT) 
+-- BEGIN
+-- 	UPDATE Students S 
+-- 	SET S.school_id = NULL, S.username = NULL, S.password = NULL
+-- 	WHERE S.ssn = student_ssn;  
+-- END // 
+
+-- CREATE PROCEDURE delete_employee(IN emp_id INT)
+-- BEGIN
+-- 	UPDATE Employees E
+-- 	SET E.school_id = NULL, E.username = NULL, E.password = NULL;
+-- END //
+
+CREATE PROCEDURE edit_school_name (IN old_name VARCHAR(30), IN new_name VARCHAR(30))
+
 DELIMITER ; 
 
 

@@ -4,4 +4,9 @@ view_school(school_id): takes school id, selects all relevent information about 
 
 view_applied_teacher(admin_id): takes the admin's id and shows all teachers whose IDs are null and are related to his/her school. We assume that when a teacher is first created, his/her username and password are set to null until verified by an admin. 
 
-verify_applied_teacher(teacher_id, username_in, password_in): used by an admin to manually assign a username and password to a teacher who has started working at his/her school  
+verify_applied_teacher(teacher_id, username_in, password_in): used by an admin to manually assign a username and password to a teacher who has started working at his/her school. We update the start_date of a teacher only if it were originally null, meaning that this is his/her first job. 
+
+delete_employee(emp_id): we assume that the admin of a school has no authority to delete an employee from the database completely. He/she can only "delete" the employee from his/her school's system by setting their school_id, username and passwod to null. 
+
+
+  

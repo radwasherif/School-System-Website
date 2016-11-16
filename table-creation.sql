@@ -139,6 +139,7 @@ CREATE TABLE Employees (
 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE SET NULL
 ); 
 
+
 CREATE TABLE Adminstrators (
 		id int PRIMARY KEY, 
 		FOREIGN KEY (id) REFERENCES Employees(id) ON DELETE CASCADE

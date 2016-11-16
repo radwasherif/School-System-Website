@@ -12,13 +12,8 @@ CREATE TABLE Schools (
 	general_info VARCHAR(120), 
 	fees INT, 
 	type VARCHAR(20), 
-	CHECK (type = 'national' OR type = 'international'), 
-	min_grade INT, 
-	max_grade INT, 
+	CHECK (type = 'national' OR type = 'international'),  
 	email VARCHAR(50), 
-	elementary BOOLEAN AS (min_grade = 1 AND max_grade >= 6) , 
-	middle BOOLEAN AS (min_grade <= 7 AND max_grade >= 9), 
-	high BOOLEAN AS (min_grade <= 10 AND max_grade = 12)
 );  
 
 
@@ -29,6 +24,16 @@ CREATE TABLE Phone_School (
 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE 
 	
 ); 
+
+CREATE TABLE Level_School
+(
+	PRIMARY KEY (school_id, level),
+	level VARCHAR(15),
+	CHECK (level = 'elementary' or level = 'middle' or level = 'high'),
+	school_id INT,
+	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE
+);
+
 
 CREATE TABLE Supplies (
 	PRIMARY KEY (name, school_id, grade),
@@ -135,12 +140,12 @@ CREATE TABLE Employees (
 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE SET NULL
 ); 
 
-create table Adminstrators (
+CREATE TABLE Adminstrators (
 		id int PRIMARY KEY, 
 		FOREIGN KEY (id) REFERENCES Employees(id) ON DELETE CASCADE
 	);
 
-create table Teachers 
+CREATE TABLE Teachers 
 	(
 		id int PRIMARY KEY,
 		start_date DATETIME,
@@ -149,7 +154,7 @@ create table Teachers
 		FOREIGN KEY (id) REFERENCES Employees(id) ON DELETE CASCADE
 	);
 
-create table Teachers_Supervising_Teachers
+CREATE TABLE Teachers_Supervising_Teachers
 	(
 		supervisor_id int,
 		teacher_id int,
@@ -158,7 +163,7 @@ create table Teachers_Supervising_Teachers
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE
 	);
 
-create table Activities
+CREATE TABLE Activities
 	(	
 		PRIMARY KEY (activity_datetime, location),
 		activity_datetime datetime,
@@ -172,7 +177,7 @@ create table Activities
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE
 	);
 
-create table Activities_JoinedBy_Students
+CREATE TABLE Activities_JoinedBy_Students
 	(	
 		PRIMARY KEY (student_ssn, activity_datetime, location),
 		student_ssn int,
@@ -182,7 +187,7 @@ create table Activities_JoinedBy_Students
 		FOREIGN KEY (activity_datetime, location) REFERENCES Activities(activity_datetime, location) ON DELETE CASCADE
 	);
 
-create table Announcements
+CREATE TABLE Announcements
 	(	
 		PRIMARY KEY (title, announcement_date),
 		title varchar(50),
@@ -193,7 +198,7 @@ create table Announcements
 		FOREIGN KEY (admin_id) REFERENCES Adminstrators(id) ON DELETE SET NULL
 	);
 
-create table Courses
+CREATE TABLE Courses
 	(
 		PRIMARY KEY (code),
 		code int,
@@ -205,7 +210,7 @@ create table Courses
 		
 	);
 
-create table Courses_Prerequisite_Courses
+CREATE TABLE Courses_Prerequisite_Courses
 	(
 		PRIMARY KEY (pre_code, code),
 		pre_code int,
@@ -214,7 +219,7 @@ create table Courses_Prerequisite_Courses
 		FOREIGN KEY (code) REFERENCES Courses(code) ON DELETE CASCADE
 	);
 
-create table Courses_TaughtIn_Schools
+CREATE TABLE Courses_TaughtIn_Schools
 	(
 		PRIMARY KEY (course_code, school_id),
 		course_code int,
@@ -223,7 +228,7 @@ create table Courses_TaughtIn_Schools
 		FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE
 	);
 
-create table Parents_Rate_Teachers
+CREATE TABLE Parents_Rate_Teachers
 	(
 		PRIMARY KEY (parent_id, teacher_id),
 		parent_id INT,
@@ -233,7 +238,7 @@ create table Parents_Rate_Teachers
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE
 	);
 
-create table Questions
+CREATE TABLE Questions
 	(
 		PRIMARY KEY (q_id),
 		q_id int,
@@ -244,7 +249,7 @@ create table Questions
 		FOREIGN KEY (course_code) REFERENCES Courses(code) ON DELETE CASCADE
 	);
 
-create table Answers
+CREATE TABLE Answers
 	(
 		PRIMARY KEY (answer_sub_id, q_id),
 		answer_sub_id int,
@@ -256,7 +261,7 @@ create table Answers
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE SET NULL
 	);
 
-create table Courses_TaughtTo_Students_By_Teachers
+CREATE TABLE Courses_TaughtTo_Students_By_Teachers
 	(
 		PRIMARY KEY (course_code, student_ssn),
 		course_code int,
@@ -267,7 +272,7 @@ create table Courses_TaughtTo_Students_By_Teachers
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE
 	);
 
-create table Assignments
+CREATE TABLE Assignments
 	(
 		PRIMARY KEY (assignment_number, course_code, school_id),
 		assignment_number int,
@@ -282,7 +287,7 @@ create table Assignments
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE
 	);
 
-create table Solutions
+CREATE TABLE Solutions
 	(
 		PRIMARY KEY (student_ssn, assignment_number, course_code, school_id),
 		student_ssn int,
@@ -294,7 +299,7 @@ create table Solutions
 		FOREIGN KEY (assignment_number, course_code, school_id) REFERENCES Assignments(assignment_number, course_code, school_id) ON DELETE CASCADE
 	);
 
-create table Teachers_Grade_Solutions
+CREATE TABLE Teachers_Grade_Solutions
 	(
 		PRIMARY KEY (student_ssn, assignment_number, course_code, school_id),
 		student_ssn int,
@@ -307,7 +312,7 @@ create table Teachers_Grade_Solutions
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE	
 	);
 
-create table Reports
+CREATE TABLE Reports
 	(
 		report_date date,
 		student_ssn int,
@@ -318,7 +323,7 @@ create table Reports
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE
 	);
 
-create table Parents_View_Reports
+CREATE TABLE Parents_View_Reports
 	(
 		parent_id INT,
 		report_date date,
@@ -329,7 +334,7 @@ create table Parents_View_Reports
 		FOREIGN KEY (report_date, student_ssn, teacher_id) REFERENCES Reports(report_date, student_ssn, teacher_id) ON DELETE CASCADE
 	);
 
-create table Parents_Reply_Reports
+CREATE TABLE Parents_Reply_Reports
 	(
 		parent_id INT,
 		report_date date,

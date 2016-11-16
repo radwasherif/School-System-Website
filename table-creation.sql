@@ -54,6 +54,7 @@ CREATE TABLE Clubs (
 CREATE TABLE Students (
 	PRIMARY KEY (ssn), 
 	ssn INT, 
+	id INT,
 	school_id INT, 
 	first_name VARCHAR(20),
 	last_name VARCHAR(20), 
@@ -132,7 +133,7 @@ CREATE TABLE Employees (
 	password VARCHAR(20), 
 	email VARCHAR(50), 
 	gender VARCHAR(10), 
-	address VARCHAR(40), 
+	address VARCHAR(100), 
 	birthdate DATE, 
 	salary INT,  
 	age INT AS (YEAR('2016-1-1') - YEAR(birthdate)), 
@@ -265,7 +266,7 @@ CREATE TABLE Courses_TaughtTo_Students_By_Teachers
 		PRIMARY KEY (course_code, student_ssn),
 		course_code int,
 		student_ssn int,
-		teacher_id int,
+		teacher_id int NOT NULL,
 		FOREIGN KEY (course_code) REFERENCES Courses(code) ON DELETE CASCADE,
 		FOREIGN KEY (student_ssn) REFERENCES Students(ssn) ON DELETE CASCADE,
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE

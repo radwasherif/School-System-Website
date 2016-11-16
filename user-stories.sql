@@ -255,14 +255,17 @@ DELIMITER //
 -- 	END IF; 
 -- END //
 
-CREATE PROCEDURE admin_accept_application(IN admin_id INT, student_ssn INT, password_in VARCHAR(30))
-BEGIN
-	DECLARE school_id INT; 
-	SET school_id = get_admin_school(admin_id); 
-	IF EXISTS (SELECT School_Apply_Student S WHERE S.school_id = school_id AND S.student_ssn = student_ssn)
-	THEN verify_applied_student(student_ssn, password); 
-	END IF; 
-END  //
+-- CREATE PROCEDURE admin_accept_application(IN admin_id INT, student_ssn INT, password_in VARCHAR(30))
+-- BEGIN
+-- 	DECLARE school_id INT; 
+-- 	SET school_id = get_admin_school(admin_id); 
+-- 	IF EXISTS (SELECT School_Apply_Student S WHERE S.school_id = school_id AND S.student_ssn = student_ssn)
+-- 	THEN CALL verify_applied_student(student_ssn, password); 
+-- 	END IF; 
+
+-- 	DELETE FROM School_Apply_Student USING S AS School_Apply_Student
+-- 	WHERE S.school_id = school_id AND S.student_ssn = student_ssn; 
+-- END  //
 
 
 
@@ -289,8 +292,7 @@ END  //
 --   INNER JOIN Courses C  ON C.code = CT.course_code
 --   WHERE T.id = teacher_id
 --   GROUP BY level AND grade;
-
--- END //
+-- END // 
 
 -- CREATE PROCEDURE teacher_post_assignment(IN teacher_id INT, IN course_code INT, IN post_date DATE, IN due_date DATE, IN content VARCHAR(1000), IN assignment_number INT)
 -- BEGIN
@@ -301,6 +303,104 @@ END  //
 --   INSERT INTO Assignemnts (assignment_number, course_code, school_id, post_date, due_date, content, teacher_id)
 --    VALUES (assignment_number, course_code, school_id, post_date, due_date, content, teacher_id);
 -- END //
+
+
+-- CREATE PROCEDURE teacher_view_solutions(IN teacher_id INT)
+-- BEGIN
+--   SELECT SOL.assignment_number, SOL.course_code, S.id, SOL.solution
+--   FROM Solutions SOL 
+--   INNER JOIN Students S ON SOL.student_ssn = S.ssn
+--   INNER JOIN Assignemnts A ON A.assignment_number = SOL.assignment_number AND A.course_code = SOL.course_code AND A.school_id = SOL.school_id
+--   WHERE A.teacher_id = teacher_id
+--   ORDER BY S.id;
+-- END //
+
+-- CREATE PROCEDURE teacher_grade_solutions(IN teacher_id INT, IN student_id INT, IN assignment_number INT, IN course_code INT, IN grade INT)
+-- BEGIN
+--   DECLARE school_id INT;
+--   DECLARE student_ssn INT;
+--   SELECT E.school_id INTO school_id
+--   FROM Employees E
+--   WHERE E.id = teacher_id;
+ 
+--   SELECT S.student_ssn INTO student_ssn
+--   FROM Students S 
+--   WHERE S.school_id = school_id AND S.id = student_id;  
+
+--   INSERT INTO Teachers_Grade_Solutions (student_ssn, assignment_number, course_code, school_id, grade, teacher_id) 
+--   VALUES (student_ssn, assignment_number, course_code, school_id, grade, teacher_id);
+-- END //
+
+-- CREATE PROCEDURE teacher_delete_assignment(IN teacher_id INT, IN courseCode INT, IN assignment_num INT)
+-- BEGIN
+--   DECLARE schoolID INT;
+--   SELECT E.school_id INTO schoolID
+--   FROM Employees E
+--   WHERE E.id = teacher_id;
+
+--   DELETE FROM Assignments 
+--   WHERE assignment_number = assignment_num AND course_code = courseCode AND school_id = schoolID;
+-- END //
+
+-- CREATE PROCEDURE teacher_write_report(IN teacher_id INT, IN student_id INT, IN report_date DATE, IN comment VARCHAR(500))
+-- BEGIN
+--   DECLARE school_id INT;
+--   DECLARE student_ssn INT;
+--   SELECT E.school_id INTO school_id
+--   FROM Employees E
+--   WHERE E.id = teacher_id;
+
+--   SELECT S.student_ssn INTO student_ssn
+--   FROM Students S
+--   WHERE S.student_id = student_id AND S.school_id = school_id;
+
+--   IF EXISTS (SELECT * FROM Courses_TaughtTo_Students_By_Teachers CT WHERE CT.student_ssn = student_ssn AND CT.teacher_id = teacher_id)
+--   THEN 
+--   INSERT INTO Reports (report_date, student_ssn, teacher_id, comment) 
+--   VALUES (report_date, student_ssn, teacher_id, comment);
+--   END IF;
+-- END //
+
+-- CREATE PROCEDURE teacher_view_questions(IN teacher_id INT, IN course_code INT)
+-- BEGIN 
+--   SELECT S.id, S.name, Q.q_id, Q.content, Q.course_code
+--   FROM Questions Q INNER JOIN Students S ON Q.student_ssn = S.ssn
+--   WHERE Q.course_code = course_code
+--    AND EXISTS (SELECT * FROM Courses_TaughtTo_Students_By_Teachers CT WHERE CT.teacher_id = teacher_id AND CT.course_code = course_code);
+-- END //
+
+-- CREATE PROCEDURE teacher_answer_questions(IN teacher_id INT, IN course_code INT, IN q_id INT, IN answer VARCHAR(250))
+-- BEGIN
+--   DECLARE count INT;
+--   SELECT COUNT DISTINCIT INTO count
+--   FROM Answers A
+--   WHERE A.course_code = course_code AND A.q_id = q_id;
+
+--   INSERT INTO Answers (answer_sub_id, q_id, answer, teacher_id) VALUES (count + 1, q_id, answer, teacher_id);
+
+-- END //
+
+-- CREATE PROCEDURE teacher_view_students(IN teacher_id INT)
+-- BEGIN
+--   SELECT S.first_name, S.last_name, S.id, S.username, S.ssn, S.grade, S.level, S.gender, S.birthdate, S.age
+--   FROM Students S
+--   WHERE EXISTS (SELECT * FROM Courses_TaughtTo_Students_By_Teachers CT WHERE CT.teacher_id = teacher_id AND CT.student_ssn = S.ssn)
+--   GROUP BY S.grade
+--   ORDER BY S.first_name, S.last_name;
+-- END //
+
+-- CREATE PROCEDURE teacher_view_students_without_activities(IN teacher_id INT)
+-- BEGIN
+--   DECLARE school_id INT;
+--   SELECT E.school_id INTO school_id
+--   FROM Employees E
+--   WHERE E.id = teacher_id;
+
+--   SELECT S.first_name, S.last_name, S.id, S.username, S.ssn, S.grade, S.level, S.gender, S.birthdate, S.age
+--   FROM Students S
+--   WHERE S.school_id = school_id AND A.ssn NOT IN (SELECT A.student_ssn FROM Activities_JoinedBy_Students);
+-- END //
+
 
 DELIMITER ; 
 

@@ -127,7 +127,7 @@ CREATE PROCEDURE teacher_sign_up(IN first_name VARCHAR(20), IN middle_name VARCH
 BEGIN
   INSERT INTO Employees (first_name, middle_name, last_name, birthdate, address, email, gender)
   VALUES (first_name, middle_name, last_name, birthdate, address, email, gender);
-  @emp_id = LAST_INSERT_ID();
+  SET @emp_id = LAST_INSERT_ID();
   INSERT INTO Teachers (id) VALUES (emp_id);
 END //
 
@@ -153,6 +153,7 @@ BEGIN
    VALUES (assignment_number, course_code, school_id, post_date, due_date, content, teacher_id);
 END //
 
+CREATE PROCEDURE 
 
 DELIMITER ; 
 

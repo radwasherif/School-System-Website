@@ -142,7 +142,8 @@ CREATE TABLE Employees (
 ); 
 
 
-CREATE TABLE Adminstrators (
+CREATE TABLE Adminstrators
+	 (
 		id int PRIMARY KEY, 
 		FOREIGN KEY (id) REFERENCES Employees(id) ON DELETE CASCADE
 	);

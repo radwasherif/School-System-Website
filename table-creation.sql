@@ -197,7 +197,7 @@ CREATE TABLE Announcements
 		descriptoin varchar(500),
 		admin_id int,
 		school_id INT, 
-		FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE
+		FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE,
 		FOREIGN KEY (admin_id) REFERENCES Adminstrators(id) ON DELETE SET NULL
 	);
 

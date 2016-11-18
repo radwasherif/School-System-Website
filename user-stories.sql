@@ -147,8 +147,8 @@ DELIMITER //
 -- 	FROM Students St INNER JOIN Schools Sc ON St.school_id = Sc.id; 
 
 -- 	UPDATE Student S
--- 	SET S.username = CONCAT(first_name, '.', last_name, (last_id + 1)), S.id = (last_id + 1)
--- 	WHERE S.ssn = student_ssn AND S.school_id = school_id; 
+-- 	SET S.username = CONCAT(first_name, '.', last_name, (last_id + 1)), S.id = (last_id + 1), S.school_id = school_id
+-- 	WHERE S.ssn = student_ssn; 
 
 -- 	END; 
 -- 	END IF; 
@@ -283,21 +283,23 @@ DELIMITER //
 -- END //
 
 
--- CREATE PROCEDURE admin_create_activity( IN ativity_datetime DATETIME, location VARCHAR(100),equipment VARCHAR(100),
+-- CREATE PROCEDURE admin_create_activity( IN name VARCHAR(70),IN ativity_datetime DATETIME, location VARCHAR(100),equipment VARCHAR(100),
 -- description VARCHAR(500), type VARCHAR(40), admin_id INT, teacher_id INT)
 -- BEGIN
+--   DECLARE school_id INT;
+--   CALL get_admin_school(admin_id, school_id);
 -- 	IF EXISTS (SELECT * FROM Employees E1 INNER JOIN Employees E2 ON E1.school_id = E2.school_id WHERE E1.id = admin_id AND E2.teacher_id) THEN 
--- 	INSERT INTO Acitivities (activity_datetime, location, equipment, descriptoin, type, admin_id, teacher_id) 
--- 	VALUES (activity_datetime, location, equipment, descriptoin, type, admin_id, teacher_id); 
+-- 	INSERT INTO Acitivities (name, school_id, activity_datetime, location, equipment, descriptoin, type, admin_id, teacher_id) 
+-- 	VALUES (name, school_id, activity_datetime, location, equipment, descriptoin, type, admin_id, teacher_id); 
 -- 	END IF; 
 -- END //
 
--- CREATE PROCEDURE change_activity_teacher(IN activity_datetime DATETIME, location VARCHAR(100), new_teacher_id INT, admin_id INT)
+-- CREATE PROCEDURE change_activity_teacher(IN activity_name VARCHAR(70), new_teacher_id INT, admin_id INT)
 -- BEGIN
 -- 	IF EXISTS (SELECT * FROM Employees E1 INNER JOIN Employees E2 ON E1.school_id = E2.school_id WHERE E1.id = admin_id AND E2.teacher_id) THEN 
 -- 	UPDATE Activities A 
 -- 	SET A.teacher_id = new_teacher_id
--- 	WHERE A.activity_datetime = activity_datetime AND A.location = location;
+-- 	WHERE A.name = activity_name;
 -- 	END IF; 
 -- END //
 
@@ -573,19 +575,21 @@ DELIMITER //
 -- CREATE PROCEDURE student_view_activities(IN student_ssn INT)
 -- BEGIN
 --   DECLARE school_id INT;
---   SELECT S.school_id INTO school_id
---   FROM Students S
---   WHERE S.ssn = student_ssn;
+--   CALL get_student_school(student_ssn, school_id);
 
 --   SELECT A.activity_datetime, A.location, A.equipment, A.description, A.type, (T.first_name, T.middle_name, T.last_name) AS teacher_name
 --   FROM Activities A INNER JOIN Employees T ON A.teacher_id = T.q_id
---   WHERE T.school_id = school_id;
+--   WHERE A.school_id = school_id;
 -- END //
 
 -- not complete .. el student el mafrood yda5al datetime w location, msh kteer shwya
--- CREATE PROCEDURE student_apply_activity(IN student_ssn INT)
+-- CREATE PROCEDURE student_apply_activity(IN student_ssn INT, IN activity_name VARCHAR(70))
 -- BEGIN
-  
+--   DECLARE school_id INT;
+--   CALL get_student_school(student_ssn, school_id);
+--   IF EXISTS(SELECT * FROM Activities A WHERE A.name = activity_name AND A.school_id = school_id)
+--   THEN INSERT INTO Activities_JoinedBy_Students(student_ssn, school_id, activity_name) VALUES (student_ssn, school_id, activity_name);
+--   END IF;
 -- END //
 
 
@@ -622,7 +626,52 @@ DELIMITER //
 --     AND EXISTS (SELECT * FROM Courses_TaughtTo_Students_By_Teachers CT WHERE CT.student_ssn = student_ssn AND CT.course_code = C.course_code);
 -- END //
 
+-- CREATE PROCEDURE student_update_first_name(IN student_ssn INT, IN new_first_name VARCHAR(20))
+-- BEGIN
+--   UPDATE Students S
+--   SET S.first_name = new_first_name
+--   WHERE S.ssn = student_ssn;
+-- END //
 
+-- CREATE PROCEDURE student_update_last_name(IN student_ssn INT, IN new_last_name VARCHAR(20))
+-- BEGIN
+--   UPDATE Students S
+--   SET S.last_name = new_last_name
+--   WHERE S.ssn = student_ssn;
+-- END //
+
+-- CREATE PROCEDURE student_update_password(IN student_ssn INT, IN new_password VARCHAR(20))
+-- BEGIN
+--   UPDATE Students S
+--   SET S.password = new_password
+--   WHERE S.ssn = student_ssn;
+-- END //
+
+-- CREATE PROCEDURE student_update_birthdate(IN student_ssn INT, IN new_birthdate date)
+-- BEGIN
+--   UPDATE Students S
+--   SET S.birthdate = new_birthdate
+--   WHERE S.ssn = student_ssn;
+-- END //
+
+-- CREATE PROCEDURE student_update_grade(IN student_ssn INT, IN new_grade INT)
+-- BEGIN
+--   UPDATE Students S
+--   SET S.grade = new_grade
+--   WHERE S.ssn = student_ssn;
+-- END //
+
+-- CREATE PROCEDURE student_update_level(IN student_ssn INT, IN new_level VARCHAR(15))
+-- BEGIN
+--   UPDATE Students S
+--   SET S.level = new_level
+--   WHERE S.ssn = student_ssn;
+-- END //
+
+-- CREATE PROCEDURE get_student_school(IN student_ssn INT, OUT school_id INT)
+-- SELECT S.school_id INTO school_id
+-- FROM Students S
+-- WHERE S.ssn = student_ssn;
 
 DELIMITER ; 
 

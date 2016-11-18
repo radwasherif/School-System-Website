@@ -17,8 +17,7 @@ DELIMITER //
 --   INNER JOIN Courses C  ON C.code = CT.course_code
 --   WHERE T.id = teacher_id
 --   GROUP BY level AND grade;
-
--- END //
+-- END // 
 
 -- CREATE PROCEDURE teacher_post_assignment(IN teacher_id INT, IN course_code INT, IN post_date DATE, IN due_date DATE, IN content VARCHAR(1000), IN assignment_number INT)
 -- BEGIN
@@ -128,26 +127,28 @@ DELIMITER //
 -- END //
 
 
--- -- not sure
-CREATE PROCEDURE student_in_max_clubs(IN teacher_id INT)
-BEGIN
-  DECLARE school_id INT;
-  SELECT E.school_id INTO school_id
-  FROM Employees E
-  WHERE E.id = teacher_id;
+
+-- not sure
+-- CREATE PROCEDURE student_in_max_clubs(IN teacher_id INT)
+-- BEGIN
+--   DECLARE school_id INT;
+--   SELECT E.school_id INTO school_id
+--   FROM Employees E
+--   WHERE E.id = teacher_id;
    
-  SELECT S.first_name,S.last_name
-  FROM Students S 
-  INNER JOIN 
-  (
-    SELECT C.student_ssn, COUNT (C.club_name) as count
-    FROM Club_Member_Student C
-    WHERE C.school_id = school_id
-    GROUP BY student_ssn
-    ORDER BY count DESC LIMIT 1
-  ) AS X
-  ON S.ssn = X.student_ssn;
- END // 
+--   SELECT S.first_name,S.last_name
+--   FROM Students S 
+--   INNER JOIN 
+--   (
+--     SELECT C.student_ssn, COUNT (C.club_name) as count
+--     FROM Club_Member_Student C
+--     WHERE C.school_id = school_id
+--     GROUP BY student_ssn
+--     ORDER BY count DESC LIMIT 1
+--   ) Max
+--   ON S.ssn = Max.student_ssn;
+--  END // 
+ 
 
 -- CREATE PROCEDURE student_view_courses(IN student_ssn INT)
 -- BEGIN
@@ -225,19 +226,21 @@ BEGIN
 -- CREATE PROCEDURE student_view_activities(IN student_ssn INT)
 -- BEGIN
 --   DECLARE school_id INT;
---   SELECT S.school_id INTO school_id
---   FROM Students S
---   WHERE S.ssn = student_ssn;
+--   CALL get_student_school(student_ssn, school_id);
 
 --   SELECT A.activity_datetime, A.location, A.equipment, A.description, A.type, (T.first_name, T.middle_name, T.last_name) AS teacher_name
 --   FROM Activities A INNER JOIN Employees T ON A.teacher_id = T.q_id
---   WHERE T.school_id = school_id;
+--   WHERE A.school_id = school_id;
 -- END //
 
---not complete .. el student el mafrood yda5al datetime w location, msh kteer shwya :"D 
--- CREATE PROCEDURE student_apply_activity(IN student_ssn INT)
+-- not complete .. el student el mafrood yda5al datetime w location, msh kteer shwya
+-- CREATE PROCEDURE student_apply_activity(IN student_ssn INT, IN activity_name VARCHAR(70))
 -- BEGIN
-  
+--   DECLARE school_id INT;
+--   CALL get_student_school(student_ssn, school_id);
+--   IF EXISTS(SELECT * FROM Activities A WHERE A.name = activity_name AND A.school_id = school_id)
+--   THEN INSERT INTO Activities_JoinedBy_Students(student_ssn, school_id, activity_name) VALUES (student_ssn, school_id, activity_name);
+--   END IF;
 -- END //
 
 
@@ -274,4 +277,51 @@ BEGIN
 --     AND EXISTS (SELECT * FROM Courses_TaughtTo_Students_By_Teachers CT WHERE CT.student_ssn = student_ssn AND CT.course_code = C.course_code);
 -- END //
 
-DELIMITER ;
+-- CREATE PROCEDURE student_update_first_name(IN student_ssn INT, IN new_first_name VARCHAR(20))
+-- BEGIN
+--   UPDATE Students S
+--   SET S.first_name = new_first_name
+--   WHERE S.ssn = student_ssn;
+-- END //
+
+-- CREATE PROCEDURE student_update_last_name(IN student_ssn INT, IN new_last_name VARCHAR(20))
+-- BEGIN
+--   UPDATE Students S
+--   SET S.last_name = new_last_name
+--   WHERE S.ssn = student_ssn;
+-- END //
+
+-- CREATE PROCEDURE student_update_password(IN student_ssn INT, IN new_password VARCHAR(20))
+-- BEGIN
+--   UPDATE Students S
+--   SET S.password = new_password
+--   WHERE S.ssn = student_ssn;
+-- END //
+
+-- CREATE PROCEDURE student_update_birthdate(IN student_ssn INT, IN new_birthdate date)
+-- BEGIN
+--   UPDATE Students S
+--   SET S.birthdate = new_birthdate
+--   WHERE S.ssn = student_ssn;
+-- END //
+
+-- CREATE PROCEDURE student_update_grade(IN student_ssn INT, IN new_grade INT)
+-- BEGIN
+--   UPDATE Students S
+--   SET S.grade = new_grade
+--   WHERE S.ssn = student_ssn;
+-- END //
+
+CREATE PROCEDURE student_update_level(IN student_ssn INT, IN new_level VARCHAR(15))
+BEGIN
+  UPDATE Students S
+  SET S.level = new_level
+  WHERE S.ssn = student_ssn;
+END //
+
+-- CREATE PROCEDURE get_student_school(IN student_ssn INT, OUT school_id INT)
+-- SELECT S.school_id INTO school_id
+-- FROM Students S
+-- WHERE S.ssn = student_ssn;
+
+DELIMITER ; 

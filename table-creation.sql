@@ -168,7 +168,9 @@ CREATE TABLE Teachers_Supervising_Teachers
 
 CREATE TABLE Activities
 	(	
-		PRIMARY KEY (activity_datetime, location),
+		PRIMARY KEY (name, school_id),
+		name VARCHAR(70),
+		school_id INT,
 		activity_datetime datetime,
 		location varchar(100),
 		equipment varchar(100),
@@ -176,18 +178,18 @@ CREATE TABLE Activities
 		type varchar(40),
 		admin_id int,
 		teacher_id int,
+		FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE,
 		FOREIGN KEY (admin_id) REFERENCES Adminstrators(id) ON DELETE CASCADE,
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE,
 	);
 
 CREATE TABLE Activities_JoinedBy_Students
 	(	
-		PRIMARY KEY (student_ssn, activity_datetime, location),
+		PRIMARY KEY (student_ssn, activity_name, school_id),
 		student_ssn int,
-		activity_datetime datetime,
-		location varchar(100),
+		activity_name VARCHAR(70),
 		FOREIGN KEY (student_ssn) REFERENCES Students(ssn) ON DELETE CASCADE,
-		FOREIGN KEY (activity_datetime, location) REFERENCES Activities(activity_datetime, location) ON DELETE CASCADE
+		FOREIGN KEY (activity_name, school_id) REFERENCES Activities(name, school_id) ON DELETE CASCADE
 	);
 
 CREATE TABLE Announcements

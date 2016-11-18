@@ -65,6 +65,7 @@ CREATE TABLE Students (
 	age INT AS (YEAR('2016-1-1') - YEAR(birthdate)), 
 	grade INT, 
 	level VARCHAR(15), 
+	CHECK (level = 'elementary' or level = 'middle' or level = 'high'),
 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE SET NULL 
 ); 
 
@@ -142,7 +143,8 @@ CREATE TABLE Employees (
 ); 
 
 
-CREATE TABLE Adminstrators (
+CREATE TABLE Adminstrators
+	 (
 		id int PRIMARY KEY, 
 		FOREIGN KEY (id) REFERENCES Employees(id) ON DELETE CASCADE
 	);
@@ -175,7 +177,7 @@ CREATE TABLE Activities
 		admin_id int,
 		teacher_id int,
 		FOREIGN KEY (admin_id) REFERENCES Adminstrators(id) ON DELETE CASCADE,
-		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE
+		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE,
 	);
 
 CREATE TABLE Activities_JoinedBy_Students
@@ -196,9 +198,13 @@ CREATE TABLE Announcements
 		type varchar(50),
 		descriptoin varchar(500),
 		admin_id int,
+<<<<<<< HEAD
 		school_id INT, 
 		FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE,
 		FOREIGN KEY (admin_id) REFERENCES Adminstrators(id) ON DELETE SET NULL
+=======
+		FOREIGN KEY (admin_id) REFERENCES Adminstrators(id) ON DELETE SET NULL,
+>>>>>>> 770ea740d14edc35acaf1996f3c64d55f6e00e98
 	);
 
 CREATE TABLE Courses
@@ -209,8 +215,7 @@ CREATE TABLE Courses
 		description varchar(250),
 		grade int, 
 		level VARCHAR(20), 
-		CHECK (level = 'elementary' or level = 'middle' or level = 'high')
-		
+		CHECK (level = 'elementary' or level = 'middle' or level = 'high')	
 	);
 
 CREATE TABLE Courses_Prerequisite_Courses
@@ -243,7 +248,7 @@ CREATE TABLE Parents_Rate_Teachers
 
 CREATE TABLE Questions
 	(
-		PRIMARY KEY (q_id),
+		PRIMARY KEY (q_id, course_code),
 		q_id int,
 		content varchar(250),
 		student_ssn int,
@@ -254,13 +259,13 @@ CREATE TABLE Questions
 
 CREATE TABLE Answers
 	(
-		PRIMARY KEY (answer_sub_id, q_id),
+		PRIMARY KEY (answer_sub_id, q_id, course_code),
 		answer_sub_id int,
 		q_id int,
 		answer varchar(250),
 		teacher_id int,
-		
-		FOREIGN KEY (q_id) REFERENCES Questions(q_id) ON DELETE CASCADE,
+		course_code int,
+		FOREIGN KEY (q_id, course_code) REFERENCES Questions(q_id, course_code) ON DELETE CASCADE,
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE SET NULL
 	);
 

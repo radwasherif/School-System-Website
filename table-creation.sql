@@ -13,7 +13,7 @@ CREATE TABLE Schools (
 	fees INT, 
 	type VARCHAR(20), 
 	CHECK (type = 'national' OR type = 'international'),  
-	email VARCHAR(50), 
+	email VARCHAR(50) 
 );  
 
 
@@ -72,7 +72,7 @@ CREATE TABLE Students (
 CREATE TABLE Parents (
 	PRIMARY KEY (id),
 	id INT AUTO_INCREMENT, 
-	username VARCHAR(20), 
+	username VARCHAR(20) UNIQUE, 
 	first_name VARCHAR(20), 
 	last_name VARCHAR(20), 
 	email VARCHAR(20), 
@@ -117,6 +117,7 @@ CREATE TABLE School_Apply_Student(
  	school_id INT,
  	student_ssn INT,
  	parent_id INT, 
+ 	status VARCHAR(20),
  	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE, 
  	FOREIGN KEY (student_ssn) REFERENCES Students(ssn) ON DELETE CASCADE, 
  	FOREIGN KEY (parent_id) REFERENCES Parents(id) ON DELETE SET NULL 
@@ -197,7 +198,13 @@ CREATE TABLE Announcements
 		type varchar(50),
 		descriptoin varchar(500),
 		admin_id int,
+<<<<<<< HEAD
 		FOREIGN KEY (admin_id) REFERENCES Adminstrators(id) ON DELETE SET NULL,
+=======
+		school_id INT, 
+		FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE
+		FOREIGN KEY (admin_id) REFERENCES Adminstrators(id) ON DELETE SET NULL
+>>>>>>> f3acc89c400e6372836d075e4c23216abf550c90
 	);
 
 CREATE TABLE Courses
@@ -315,11 +322,11 @@ CREATE TABLE Teachers_Grade_Solutions
 
 CREATE TABLE Reports
 	(
+		PRIMARY KEY (report_date, student_ssn, teacher_id),
 		report_date date,
 		student_ssn int,
 		teacher_id int,
 		comment varchar(500),
-		PRIMARY KEY (report_date, student_ssn, teacher_id),
 		FOREIGN KEY (student_ssn) REFERENCES Students(ssn) ON DELETE CASCADE,
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE
 	);

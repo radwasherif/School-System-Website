@@ -71,7 +71,7 @@ CREATE TABLE Students (
 CREATE TABLE Parents (
 	PRIMARY KEY (id),
 	id INT AUTO_INCREMENT, 
-	username VARCHAR(20), 
+	username VARCHAR(20) UNIQUE, 
 	first_name VARCHAR(20), 
 	last_name VARCHAR(20), 
 	email VARCHAR(20), 
@@ -196,6 +196,8 @@ CREATE TABLE Announcements
 		type varchar(50),
 		descriptoin varchar(500),
 		admin_id int,
+		school_id INT, 
+		FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE
 		FOREIGN KEY (admin_id) REFERENCES Adminstrators(id) ON DELETE SET NULL
 	);
 
@@ -315,11 +317,11 @@ CREATE TABLE Teachers_Grade_Solutions
 
 CREATE TABLE Reports
 	(
+		PRIMARY KEY (report_date, student_ssn, teacher_id),
 		report_date date,
 		student_ssn int,
 		teacher_id int,
 		comment varchar(500),
-		PRIMARY KEY (report_date, student_ssn, teacher_id),
 		FOREIGN KEY (student_ssn) REFERENCES Students(ssn) ON DELETE CASCADE,
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE
 	);

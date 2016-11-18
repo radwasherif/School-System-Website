@@ -56,7 +56,7 @@ BEGIN
 	ORDER BY Sc.name; 
 END //
 
-CREATE PROCEDURE parent_view_accouncement(IN parent_id INT) 
+CREATE PROCEDURE parent_view_announcement(IN parent_id INT) 
 BEGIN
 	SELECT Sc.name, St.first_name, St.last_name
 	FROM Parent_Of_Student POS 

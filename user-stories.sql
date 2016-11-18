@@ -335,18 +335,16 @@ DELIMITER //
 -- 	CALL get_admin_school(admin_id, school_id); 
 -- 	IF EXISTS (SELECT * FROM Employees E WHERE E.id = supervisor_id AND E.school_id = admin_school_id)
 -- 		THEN IF EXISTS (SELECT * FROM Employees E WHERE E.id = teacher_id AND E.school_id = admin_school_id)
--- 		 	THEN INSERT INTO Teacher_Supervising_Teacher (supervisor_id, teacher_id) VALUES (supervisor_id, teacher_id); END IF; 
+-- 		 	THEN INSERT INTO Teachers_Supervising_Teachers (supervisor_id, teacher_id) VALUES (supervisor_id, teacher_id); END IF; 
 -- 	END IF; 
 -- END //
 
-
-
--- -- *****Alaa's stuff*****
 
 -- CREATE PROCEDURE get_admin_school(IN admin_id INT, OUT school_id INT)
 -- 	SELECT E.school_id INTO school_id
 -- 	FROM Administrators A INNER JOIN Employees E ON E.id = A.id; 
 -- //
+
 
 
 -- CREATE PROCEDURE teacher_sign_up(IN first_name VARCHAR(20), IN middle_name VARCHAR(20), IN last_name VARCHAR(20), IN birthdate DATE, IN address VARCHAR(100), IN email VARCHAR(50), IN gender VARCHAR(10))
@@ -623,6 +621,7 @@ DELIMITER //
 --   WHERE (C.name = keyword OR CONCAT(C.course_code,'') = keyword) 
 --     AND EXISTS (SELECT * FROM Courses_TaughtTo_Students_By_Teachers CT WHERE CT.student_ssn = student_ssn AND CT.course_code = C.course_code);
 -- END //
+
 
 
 DELIMITER ; 

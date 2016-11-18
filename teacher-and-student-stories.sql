@@ -128,26 +128,26 @@ DELIMITER //
 -- END //
 
 
--- not sure
--- CREATE PROCEDURE student_in_max_clubs(IN teacher_id INT)
--- BEGIN
---   DECLARE school_id INT;
---   SELECT E.school_id INTO school_id
---   FROM Employees E
---   WHERE E.id = teacher_id;
+-- -- not sure
+CREATE PROCEDURE student_in_max_clubs(IN teacher_id INT)
+BEGIN
+  DECLARE school_id INT;
+  SELECT E.school_id INTO school_id
+  FROM Employees E
+  WHERE E.id = teacher_id;
    
---   SELECT S.first_name,S.last_name
---   FROM Students S 
---   INNER JOIN 
---   (
---     SELECT C.student_ssn, COUNT (C.club_name) as count
---     FROM Club_Member_Student C
---     WHERE C.school_id = school_id
---     GROUP BY student_ssn
---     ORDER BY count DESC LIMIT 1
---   ) 
---   ON S.ssn = C.student_ssn;
---  END // 
+  SELECT S.first_name,S.last_name
+  FROM Students S 
+  INNER JOIN 
+  (
+    SELECT C.student_ssn, COUNT (C.club_name) as count
+    FROM Club_Member_Student C
+    WHERE C.school_id = school_id
+    GROUP BY student_ssn
+    ORDER BY count DESC LIMIT 1
+  ) AS X
+  ON S.ssn = X.student_ssn;
+ END // 
 
 -- CREATE PROCEDURE student_view_courses(IN student_ssn INT)
 -- BEGIN

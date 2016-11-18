@@ -198,13 +198,10 @@ CREATE TABLE Announcements
 		type varchar(50),
 		descriptoin varchar(500),
 		admin_id int,
-<<<<<<< HEAD
-		FOREIGN KEY (admin_id) REFERENCES Adminstrators(id) ON DELETE SET NULL,
-=======
 		school_id INT, 
-		FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE
+		FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE,
 		FOREIGN KEY (admin_id) REFERENCES Adminstrators(id) ON DELETE SET NULL
->>>>>>> f3acc89c400e6372836d075e4c23216abf550c90
+
 	);
 
 CREATE TABLE Courses

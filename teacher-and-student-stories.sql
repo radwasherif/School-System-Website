@@ -129,25 +129,25 @@ DELIMITER //
 
 
 -- -- not sure
-CREATE PROCEDURE student_in_max_clubs(IN teacher_id INT)
-BEGIN
-  DECLARE school_id INT;
-  SELECT E.school_id INTO school_id
-  FROM Employees E
-  WHERE E.id = teacher_id;
+-- CREATE PROCEDURE student_in_max_clubs(IN teacher_id INT)
+-- BEGIN
+--   DECLARE school_id INT;
+--   SELECT E.school_id INTO school_id
+--   FROM Employees E
+--   WHERE E.id = teacher_id;
    
-  SELECT S.first_name,S.last_name
-  FROM Students S 
-  INNER JOIN 
-  (
-    SELECT C.student_ssn, COUNT (C.club_name) as count
-    FROM Club_Member_Student C
-    WHERE C.school_id = school_id
-    GROUP BY student_ssn
-    ORDER BY count DESC LIMIT 1
-  ) AS X
-  ON S.ssn = X.student_ssn;
- END // 
+--   SELECT S.first_name,S.last_name
+--   FROM Students S 
+--   INNER JOIN 
+--   (
+--     SELECT C.student_ssn, COUNT (C.club_name) as count
+--     FROM Club_Member_Student C
+--     WHERE C.school_id = school_id
+--     GROUP BY student_ssn
+--     ORDER BY count DESC LIMIT 1
+--   ) AS Max
+--   ON S.ssn = Max.student_ssn;
+--  END // 
 
 -- CREATE PROCEDURE student_view_courses(IN student_ssn INT)
 -- BEGIN
@@ -234,7 +234,7 @@ BEGIN
 --   WHERE T.school_id = school_id;
 -- END //
 
---not complete .. el student el mafrood yda5al datetime w location, msh kteer shwya :"D 
+-- not complete .. el student el mafrood yda5al datetime w location, msh kteer shwya :"D 
 -- CREATE PROCEDURE student_apply_activity(IN student_ssn INT)
 -- BEGIN
   

@@ -312,12 +312,12 @@ DELIMITER //
 --   WHERE S.ssn = student_ssn;
 -- END //
 
-CREATE PROCEDURE student_update_level(IN student_ssn INT, IN new_level VARCHAR(15))
-BEGIN
-  UPDATE Students S
-  SET S.level = new_level
-  WHERE S.ssn = student_ssn;
-END //
+-- CREATE PROCEDURE student_update_level(IN student_ssn INT, IN new_level VARCHAR(15))
+-- BEGIN
+--   UPDATE Students S
+--   SET S.level = new_level
+--   WHERE S.ssn = student_ssn;
+-- END //
 
 -- CREATE PROCEDURE get_student_school(IN student_ssn INT, OUT school_id INT)
 -- SELECT S.school_id INTO school_id

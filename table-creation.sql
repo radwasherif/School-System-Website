@@ -195,7 +195,7 @@ CREATE TABLE Activities_JoinedBy_Students
 CREATE TABLE Announcements
 	(	
 		PRIMARY KEY (title, announcement_date),
-		title varchar(50),
+		title varchar(100),
 		announcement_date date,
 		type varchar(50),
 		descriptoin varchar(500),

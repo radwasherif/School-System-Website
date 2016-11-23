@@ -109,6 +109,7 @@ CREATE PROCEDURE view_applied_teacher (IN admin_id INT) -- needs revision. how d
   		WHERE E.username = NULL AND E.password = NULL AND E1.school_id = E2.school_id; 
   END //
 
+
 CREATE PROCEDURE verify_applied_teacher(IN teacher_id INT, IN password_in VARCHAR(20)) -- needs revision. how to view applied teachers
 BEGIN
 	DECLARE experience_years INT; 
@@ -148,7 +149,7 @@ BEGIN
 	FROM Students St INNER JOIN Schools Sc ON St.school_id = Sc.id; 
 
 	UPDATE Student S
-	SET S.username = CONCAT(first_name, '.', last_name, (last_id + 1)), S.id = (last_id + 1)
+	SET S.username = CONCAT(first_name, '.', last_name, (last_id + 1)), S.id = (last_id + 1), S.password = password
 	WHERE S.ssn = student_ssn AND S.school_id = school_id; 
 
 	END; 
@@ -274,7 +275,7 @@ END //
 
 
 
-CREATE PROCEDURE admin_post_announcement(IN title VARCHAR(50), IN announcement_date DATE, IN type VARCHAR(50), 
+CREATE PROCEDURE admin_post_announcement(IN title VARCHAR(100), IN announcement_date DATE, IN type VARCHAR(50), 
 	IN descriptoin VARCHAR(500), IN admin_id INT)
 BEGIN
 	DECLARE school_id INT; 
@@ -304,7 +305,7 @@ BEGIN
 	END IF; 
 END //
 
-CREATE PROCEDURE admin_accept_application(IN admin_id INT, student_ssn INT, password_in VARCHAR(30))
+CREATE PROCEDURE admin_accept_application(IN admin_id INT, student_ssn INT)
 BEGIN
 	DECLARE school_id INT; 
 	CALL get_admin_school(admin_id, school_id); 
@@ -351,11 +352,11 @@ CREATE PROCEDURE get_admin_school(IN admin_id INT, OUT school_id INT)
 
 -- ***PARENT USER STORY***
 
-CREATE PROCEDURE parent_signup ( IN username VARCHAR(20), first_name VARCHAR(20), last_name VARCHAR(20), email VARCHAR(20), 
+CREATE PROCEDURE parent_signup ( IN username VARCHAR(20), password VARCHAR(20), first_name VARCHAR(20), last_name VARCHAR(20), email VARCHAR(20), 
 address VARCHAR(120), home_phone VARCHAR(15))
 BEGIN
-  INSERt INTO Parents (username, first_name, last_name, email, address, home_phone) 
-  VALUES (username, first_name, last_name, email, address, home_phone); 
+  INSERt INTO Parents (username, password, first_name, last_name, email, address, home_phone) 
+  VALUES (username, password, first_name, last_name, email, address, home_phone); 
 END //
 
 CREATE PROCEDURE parent_add_mobile (IN parent_id INT, mobile VARCHAR(15))
@@ -651,21 +652,38 @@ END //
 CREATE PROCEDURE student_in_max_clubs(IN teacher_id INT)
 BEGIN
   DECLARE school_id INT;
+  DECLARE max INT;
+  
   SELECT E.school_id INTO school_id
   FROM Employees E
   WHERE E.id = teacher_id;
    
-  SELECT S.first_name,S.last_name
-  FROM Students S 
-  INNER JOIN 
-  (
-    SELECT C.student_ssn, COUNT (C.club_name) as count
+   CREATE TEMPORARY TABLE Count_Clubs
+	SELECT  C.student_ssn, COUNT (C.club_name) as count
     FROM Club_Member_Student C
     WHERE C.school_id = school_id
-    GROUP BY student_ssn
-    ORDER BY count DESC LIMIT 1
-  ) Max
-  ON S.ssn = Max.student_ssn;
+    GROUP BY student_ssn;
+     
+
+   SELECT MAX(count) INTO max
+   FROM Count_Clubs;
+
+  SELECT S.first_name, S.last_name
+  FROM Students S INNER JOIN Count_Clubs C ON S.ssn = C.student_ssn
+  WHERE C.count = max;
+
+
+  -- SELECT S.first_name,S.last_name
+  -- FROM Students S 
+  -- INNER JOIN 
+  -- (
+  --   SELECT C.student_ssn, COUNT (C.club_name) as count
+  --   FROM Club_Member_Student C
+  --   WHERE C.school_id = school_id
+  --   GROUP BY student_ssn
+  --   ORDER BY count DESC LIMIT 1
+  -- ) Max
+  -- ON S.ssn = Max.student_ssn;
  END // 
  
 
@@ -734,12 +752,10 @@ END //
 CREATE PROCEDURE student_view_announcement(IN student_ssn INT)
 BEGIN
   DECLARE school_id INT;
-  SELECT S.school_id INTO school_id
-  FROM Students S
-  WHERE S.ssn = student_ssn;
+  CALL get_student_school(student_ssn, school_id);
   SELECT A.title, A.announcement_date, A.type, A.description, (E.first_name, E.last_name) AS admin_name
   FROM Announcements A INNER JOIN Employees E ON E.id = A.admin_id
-  WHERE E.school_id = school_id AND A.announcement_date >= CURDATE() - 10;
+  WHERE E.school_id = school_id AND DAY(CURDATE() - A.announcement_date) <= 10;
 
 END //
 
@@ -754,7 +770,7 @@ BEGIN
   WHERE A.school_id = school_id;
 END //
 
-not complete .. el student el mafrood yda5al datetime w location, msh kteer shwya
+-- not complete .. el student el mafrood yda5al datetime w location, msh kteer shwya
 CREATE PROCEDURE student_apply_activity(IN student_ssn INT, IN activity_name VARCHAR(70))
 BEGIN
   DECLARE school_id INT;
@@ -841,9 +857,11 @@ BEGIN
 END //
 
 CREATE PROCEDURE get_student_school(IN student_ssn INT, OUT school_id INT)
-SELECT S.school_id INTO school_id
-FROM Students S
-WHERE S.ssn = student_ssn;
+BEGIN
+  SELECT S.school_id INTO school_id
+  FROM Students S
+  WHERE S.ssn = student_ssn;
+END //
 DELIMITER ; 
 
 

@@ -127,12 +127,7 @@ DELIMITER //
 -- END //
 
 
-<<<<<<< HEAD
--- -- not sure
-=======
 
--- not sure
->>>>>>> 725da9c313ebd16e94a33d994d8cc18eacc0435c
 -- CREATE PROCEDURE student_in_max_clubs(IN teacher_id INT)
 -- BEGIN
 --   DECLARE school_id INT;
@@ -149,16 +144,10 @@ DELIMITER //
 --     WHERE C.school_id = school_id
 --     GROUP BY student_ssn
 --     ORDER BY count DESC LIMIT 1
-<<<<<<< HEAD
+
 --   ) AS Max
 --   ON S.ssn = Max.student_ssn;
 --  END // 
-=======
---   ) Max
---   ON S.ssn = Max.student_ssn;
---  END // 
- 
->>>>>>> 725da9c313ebd16e94a33d994d8cc18eacc0435c
 
 -- CREATE PROCEDURE student_view_courses(IN student_ssn INT)
 -- BEGIN
@@ -243,13 +232,9 @@ DELIMITER //
 --   WHERE A.school_id = school_id;
 -- END //
 
-<<<<<<< HEAD
--- not complete .. el student el mafrood yda5al datetime w location, msh kteer shwya :"D 
--- CREATE PROCEDURE student_apply_activity(IN student_ssn INT)
-=======
+
 -- not complete .. el student el mafrood yda5al datetime w location, msh kteer shwya
 -- CREATE PROCEDURE student_apply_activity(IN student_ssn INT, IN activity_name VARCHAR(70))
->>>>>>> 725da9c313ebd16e94a33d994d8cc18eacc0435c
 -- BEGIN
 --   DECLARE school_id INT;
 --   CALL get_student_school(student_ssn, school_id);
@@ -327,12 +312,12 @@ DELIMITER //
 --   WHERE S.ssn = student_ssn;
 -- END //
 
-CREATE PROCEDURE student_update_level(IN student_ssn INT, IN new_level VARCHAR(15))
-BEGIN
-  UPDATE Students S
-  SET S.level = new_level
-  WHERE S.ssn = student_ssn;
-END //
+-- CREATE PROCEDURE student_update_level(IN student_ssn INT, IN new_level VARCHAR(15))
+-- BEGIN
+--   UPDATE Students S
+--   SET S.level = new_level
+--   WHERE S.ssn = student_ssn;
+-- END //
 
 -- CREATE PROCEDURE get_student_school(IN student_ssn INT, OUT school_id INT)
 -- SELECT S.school_id INTO school_id

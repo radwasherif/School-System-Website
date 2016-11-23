@@ -754,7 +754,7 @@ BEGIN
   WHERE A.school_id = school_id;
 END //
 
-not complete .. el student el mafrood yda5al datetime w location, msh kteer shwya
+-- -- not complete .. el student el mafrood yda5al datetime w location, msh kteer shwya
 CREATE PROCEDURE student_apply_activity(IN student_ssn INT, IN activity_name VARCHAR(70))
 BEGIN
   DECLARE school_id INT;
@@ -844,6 +844,7 @@ CREATE PROCEDURE get_student_school(IN student_ssn INT, OUT school_id INT)
 SELECT S.school_id INTO school_id
 FROM Students S
 WHERE S.ssn = student_ssn;
+//
 DELIMITER ; 
 
 

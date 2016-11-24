@@ -43,3 +43,42 @@
 -- CALL admin_accept_application(11, 623019);
 
 -- CALL parent_view_accepted(6); 
+
+-- CALL parent_enroll_child(6, 612065, 1); 
+-- CALL parent_enroll_child(6, 623019, 5); 
+
+-- CALL verify_applied_student(10, 612065, '12345password'); 
+-- CALL verify_applied_student(11, 623019, '123456password');  
+
+-- CALL delete_employee(11, 6); 
+
+CALL edit_school_fees(11, 11000); 
+
+CALL admin_post_announcement('Trip to the cinema', '2016-11-23', 'trip', 'Trip to see finding nemo on 11/23.', 11);
+
+CALL admin_post_announcement('Trip to the cinema', '2016-11-23', 'trip', 'Trip to see The Lego Movie on 11/23.', 10);
+
+CALL admin_create_activity('Painting lessons', '2016-11-27 10:00', 'Building B', 'Paint brushes and canvases', 'Oil painting classes for beginners.', 'Art', 10, 4);
+
+
+CALL admin_create_activity('Adnanced painting lessons', '2016-11-27 10:00', 'Building B', 'Paint brushes and canvases', 'Oil painting classes for experienced amateurs.', 'Art', 10, 3); 
+
+CALL change_activity_teacher('Painting lessons', 15,10 ); 
+
+CALL admin_reject_application(7, 6661239); 
+
+CALL admin_assign_teacher_to_course (10, 3, 801); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

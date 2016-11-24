@@ -128,7 +128,6 @@ DELIMITER //
 
 
 
--- not sure
 -- CREATE PROCEDURE student_in_max_clubs(IN teacher_id INT)
 -- BEGIN
 --   DECLARE school_id INT;
@@ -145,10 +144,10 @@ DELIMITER //
 --     WHERE C.school_id = school_id
 --     GROUP BY student_ssn
 --     ORDER BY count DESC LIMIT 1
---   ) Max
+
+--   ) AS Max
 --   ON S.ssn = Max.student_ssn;
 --  END // 
- 
 
 -- CREATE PROCEDURE student_view_courses(IN student_ssn INT)
 -- BEGIN
@@ -232,6 +231,7 @@ DELIMITER //
 --   FROM Activities A INNER JOIN Employees T ON A.teacher_id = T.q_id
 --   WHERE A.school_id = school_id;
 -- END //
+
 
 -- not complete .. el student el mafrood yda5al datetime w location, msh kteer shwya
 -- CREATE PROCEDURE student_apply_activity(IN student_ssn INT, IN activity_name VARCHAR(70))

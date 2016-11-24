@@ -1,4 +1,6 @@
-USE School_System; 
+
+
+-- USE School_System; 
 
 -- INSERT INTO Parents (id,username, first_name, last_name, email, address, home_phone)
 -- VALUES (1, 'ahmed.aly','Ahmed', 'Aly', 'ahmed.aly@gmail.com', 'building 22 - Nile St.- Cairo', '02-2544234');
@@ -51,118 +53,116 @@ USE School_System;
 --  -- ibn 1 brdo
 -- INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
 -- VALUES(323587, 'Iyad', 'Aly', 'male', '2002-4-14', 'middle');
--- bnt 2 w 9
--- music club
--- INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level, school_id, username, password, id)
--- VALUES(424875, 'Nour', 'Sherif', 'female', '2000-3-15', 'high', 5, 'Nour.Sherif1', 'Ns123456@' ,1); 
--- -- bnt 3
--- INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
--- VALUES(743812, 'Jana', 'Yehia', 'female', '2005-6-12','elementary');
--- -- bnt 4
--- INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
--- VALUES(761293,'Marwa', 'Gesrha', 'female', '2000-5-25', 'high');
--- -- bnt 5
--- -- f IEEE w bdaya
--- INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level, school_id, username, password, id)
--- VALUES(5339261,'Shaghaf', 'Tawfik', 'female', '2008-8-26', 'elementary', 2, 'Shaghaf.Tawfik1','St1124610', 1);
--- -- bnt 5 brdo
--- INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
--- VALUES(5420917, 'Shahd', 'Tawfik', 'female', '2003-3-30', 'middle');
--- -- ibn 6
--- INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
--- VALUES(612065, 'Ahmed', 'Hassan', 'male', '2003-2-11', 'middle');
--- -- bnt 6 brdo 
--- INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
--- VALUES(623019, 'Sarah', 'Hassan', 'female', '2007-7-7', 'elementary');
--- -- ibn 7
--- INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
--- VALUES(3296401, 'Mohannad', 'Radwan', 'male', '2001-9-30','middle');
--- -- ibn 8 
--- INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
--- VALUES(6712049, 'Mazen', 'Salman', 'male', '1999-6-30','high');
--- -- bnt 8 brdo
--- INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
--- VALUES(1308752, 'Malak', 'Salman', 'female', '2010-10-20', 'elementary');
--- -- ibn 2 w 9 
--- INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
--- VALUES(4309120, 'Ramy', 'Sherif', 'male', '2004-12-12', 'middle');
--- -- ibn 10 
--- INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
--- VALUES(6661239, 'Mohab', 'Helmy', 'male', '2006-2-26', 'elementary');
--- -- bnt 10 brdo
--- INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
--- VALUES(5532006, 'Haneen', 'Helmy', 'female', '2002-8-22', 'middle');
+-- -- bnt 2 w 9
+-- -- music club
+INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level, school_id, username, password, id)
+VALUES(424875, 'Nour', 'Sherif', 'female', '2000-3-15', 'high', 5, 'Nour.Sherif1', 'Ns123456@' ,1); 
+-- bnt 3
+INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
+VALUES(743812, 'Jana', 'Yehia', 'female', '2005-6-12','elementary');
+-- bnt 4
+INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
+VALUES(761293,'Marwa', 'Gesrha', 'female', '2000-5-25', 'high');
+-- bnt 5
+-- f IEEE w bdaya
+INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level, school_id, username, password, id)
+VALUES(5339261,'Shaghaf', 'Tawfik', 'female', '2008-8-26', 'elementary', 2, 'Shaghaf.Tawfik1','St1124610', 1);
+-- bnt 5 brdo
+INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
+VALUES(5420917, 'Shahd', 'Tawfik', 'female', '2003-3-30', 'middle');
+-- ibn 6
+INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
+VALUES(612065, 'Ahmed', 'Hassan', 'male', '2003-2-11', 'middle');
+-- bnt 6 brdo 
+INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
+VALUES(623019, 'Sarah', 'Hassan', 'female', '2007-7-7', 'elementary');
+-- ibn 7
+INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
+VALUES(3296401, 'Mohannad', 'Radwan', 'male', '2001-9-30','middle');
+-- ibn 8 
+INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
+VALUES(6712049, 'Mazen', 'Salman', 'male', '1999-6-30','high');
+-- bnt 8 brdo
+INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
+VALUES(1308752, 'Malak', 'Salman', 'female', '2010-10-20', 'elementary');
+-- ibn 2 w 9 
+INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level, school_id, username, password, id)
+VALUES(4309120, 'Ramy', 'Sherif', 'male', '2004-12-12', 'middle', 4, 'Ramy.Sherif1', 'Rs9871235', 1);
+-- ibn 10 
+INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
+VALUES(6661239, 'Mohab', 'Helmy', 'male', '2006-2-26', 'elementary');
+-- bnt 10 brdo
+INSERT INTO Students(ssn, first_name, last_name, gender, birthdate, level)
+VALUES(5532006, 'Haneen', 'Helmy', 'female', '2002-8-22', 'middle');
 
 
--- INSERT INTO Parent_Of_Student(parent_id, child_ssn)
--- VALUES(1, 123945);
--- INSERT INTO Parent_Of_Student(parent_id, child_ssn)
--- VALUES(1, 323587);
--- INSERT INTO Parent_Of_Student(parent_id, child_ssn)
--- VALUES(2, 424875);
--- INSERT INTO Parent_Of_Student(parent_id, child_ssn)
--- VALUES(9, 424875);
--- INSERT INTO Parent_Of_Student(parent_id, child_ssn)
--- VALUES(3, 743812);
--- INSERT INTO Parent_Of_Student(parent_id, child_ssn)
--- VALUES(4, 761293);
--- INSERT INTO Parent_Of_Student(parent_id, child_ssn)
--- VALUES(5, 5339261);
--- INSERT INTO Parent_Of_Student(parent_id, child_ssn)
--- VALUES(5, 5420917);
--- INSERT INTO Parent_Of_Student(parent_id, child_ssn)
--- VALUES(6, 612065);
--- INSERT INTO Parent_Of_Student(parent_id, child_ssn)
--- VALUES(6, 623019);
--- INSERT INTO Parent_Of_Student(parent_id, child_ssn)
--- VALUES(7, 3296401);
--- INSERT INTO Parent_Of_Student(parent_id, child_ssn)
--- VALUES(8, 6712049);
--- INSERT INTO Parent_Of_Student(parent_id, child_ssn)
--- VALUES(2, 4309120);
--- INSERT INTO Parent_Of_Student(parent_id, child_ssn)
--- VALUES(9, 4309120);
--- INSERT INTO Parent_Of_Student(parent_id, child_ssn)
--- VALUES(10, 6661239);
--- INSERT INTO Parent_Of_Student(parent_id, child_ssn)
--- VALUES(10, 5532006);
+INSERT INTO Parent_Of_Student(parent_id, child_ssn)
+VALUES(1, 123945);
+INSERT INTO Parent_Of_Student(parent_id, child_ssn)
+VALUES(1, 323587);
+INSERT INTO Parent_Of_Student(parent_id, child_ssn)
+VALUES(2, 424875);
+INSERT INTO Parent_Of_Student(parent_id, child_ssn)
+VALUES(9, 424875);
+INSERT INTO Parent_Of_Student(parent_id, child_ssn)
+VALUES(3, 743812);
+INSERT INTO Parent_Of_Student(parent_id, child_ssn)
+VALUES(4, 761293);
+INSERT INTO Parent_Of_Student(parent_id, child_ssn)
+VALUES(5, 5339261);
+INSERT INTO Parent_Of_Student(parent_id, child_ssn)
+VALUES(5, 5420917);
+INSERT INTO Parent_Of_Student(parent_id, child_ssn)
+VALUES(6, 612065);
+INSERT INTO Parent_Of_Student(parent_id, child_ssn)
+VALUES(6, 623019);
+INSERT INTO Parent_Of_Student(parent_id, child_ssn)
+VALUES(7, 3296401);
+INSERT INTO Parent_Of_Student(parent_id, child_ssn)
+VALUES(8, 6712049);
+INSERT INTO Parent_Of_Student(parent_id, child_ssn)
+VALUES(2, 4309120);
+INSERT INTO Parent_Of_Student(parent_id, child_ssn)
+VALUES(9, 4309120);
+INSERT INTO Parent_Of_Student(parent_id, child_ssn)
+VALUES(10, 6661239);
+INSERT INTO Parent_Of_Student(parent_id, child_ssn)
+VALUES(10, 5532006);
 
--- INSERT INTO School_Apply_Student(school_id, student_ssn, parent_id, status)
--- VALUES(1, 612065, 6, 'pending');
--- INSERT INTO School_Apply_Student(school_id, student_ssn, parent_id, status)
--- VALUES(1, 5339261, 5, 'accepted');
--- INSERT INTO School_Apply_Student(school_id, student_ssn, parent_id, status)
--- VALUES(5, 424875, 9, 'accepted');
--- INSERT INTO School_Apply_Student(school_id, student_ssn, parent_id, status)
--- VALUES(4, 4309120, 2, 'rejected');
--- INSERT INTO School_Apply_Student(school_id, student_ssn, parent_id, status)
--- VALUES(3, 123945, 1, 'pending');
--- INSERT INTO School_Apply_Student(school_id, student_ssn, parent_id, status)
--- VALUES(5, 623019, 6, 'pending');
--- INSERT INTO School_Apply_Student(school_id, student_ssn, parent_id, status)
--- VALUES(6, 6661239, 10, 'pending');
--- INSERT INTO School_Apply_Student(school_id, student_ssn, parent_id, status)
--- VALUES(7, 6712049, 8, 'rejected');
+INSERT INTO School_Apply_Student(school_id, student_ssn, parent_id, status)
+VALUES(1, 612065, 6, 'pending');
+INSERT INTO School_Apply_Student(school_id, student_ssn, parent_id, status)
+VALUES(1, 5339261, 5, 'accepted');
+INSERT INTO School_Apply_Student(school_id, student_ssn, parent_id, status)
+VALUES(5, 424875, 9, 'accepted');
+INSERT INTO School_Apply_Student(school_id, student_ssn, parent_id, status)
+VALUES(4, 4309120, 2, 'accepted');
+INSERT INTO School_Apply_Student(school_id, student_ssn, parent_id, status)
+VALUES(3, 123945, 1, 'pending');
+INSERT INTO School_Apply_Student(school_id, student_ssn, parent_id, status)
+VALUES(5, 623019, 6, 'pending');
+INSERT INTO School_Apply_Student(school_id, student_ssn, parent_id, status)
+VALUES(6, 6661239, 10, 'pending');
+INSERT INTO School_Apply_Student(school_id, student_ssn, parent_id, status)
+VALUES(7, 6712049, 8, 'rejected');
 
--- INSERT INTO Parent_Review_School(school_id, parent_id, review)
--- VALUES(1, 6, 'good');
--- INSERT INTO Parent_Review_School(school_id, parent_id, review)
--- VALUES(1, 5, 'great school');
--- INSERT INTO Parent_Review_School(school_id, parent_id, review)
--- VALUES(5, 9, 'bad');
--- INSERT INTO Parent_Review_School(school_id, parent_id, review)
--- VALUES(2, 4, 'highly recommended');
--- INSERT INTO Parent_Review_School(school_id, parent_id, review)
--- VALUES(7, 8, 'not recommended at all');
+INSERT INTO Parent_Review_School(school_id, parent_id, review)
+VALUES(1, 6, 'good');
+INSERT INTO Parent_Review_School(school_id, parent_id, review)
+VALUES(1, 5, 'great school');
+INSERT INTO Parent_Review_School(school_id, parent_id, review)
+VALUES(5, 9, 'bad');
+INSERT INTO Parent_Review_School(school_id, parent_id, review)
+VALUES(2, 4, 'highly recommended');
+INSERT INTO Parent_Review_School(school_id, parent_id, review)
+VALUES(7, 8, 'not recommended at all');
 
--- INSERT INTO Club_Member_Student(student_ssn, school_id, club_name)
--- VALUES(5339261, 1, 'IEEE');
--- INSERT INTO Club_Member_Student(student_ssn, school_id, club_name)
--- VALUES(5339261, 1, 'Bdaya');
--- INSERT INTO Club_Member_Student(student_ssn, school_id, club_name)
--- VALUES(424875,5,'Music Club');
-
-
+INSERT INTO Club_Member_Student(student_ssn, school_id, club_name)
+VALUES(5339261, 1, 'IEEE');
+INSERT INTO Club_Member_Student(student_ssn, school_id, club_name)
+VALUES(5339261, 1, 'Bdaya');
+INSERT INTO Club_Member_Student(student_ssn, school_id, club_name)
+VALUES(424875,5,'Music Club');
 
 
 INSERT INTO Activities(name, school_id, activity_datetime, location, equipment, description, type, admin_id, teacher_id)

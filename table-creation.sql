@@ -1,25 +1,25 @@
-CREATE DATABASE School_System;
+ CREATE DATABASE School_System;
 USE School_System; 
 
 
 CREATE TABLE Schools (
 	id INT PRIMARY KEY AUTO_INCREMENT, 
-	name VARCHAR(30),
-	address VARCHAR(100),  
-	mission VARCHAR(120), 
-	vision VARCHAR(120), 
+	name VARCHAR(200),
+	address VARCHAR(200),  
+	mission VARCHAR(500), 
+	vision VARCHAR(500), 
 	language VARCHAR(20), 
-	general_info VARCHAR(120), 
+	general_info VARCHAR(2000), 
 	fees INT, 
 	type VARCHAR(20), 
-	CHECK (type = 'national' OR type = 'international'),  
-	email VARCHAR(50) 
+	CHECK (type = 'national' OR type = 'National' OR type = 'international' OR type = 'International'),  
+	email VARCHAR(50) UNIQUE 
 );  
 
 
 CREATE TABLE Phone_School (
 	PRIMARY KEY (school_id, phone),
-	phone VARCHAR(15), 
+	phone VARCHAR(100) UNIQUE, 
 	school_id INT,
 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE 
 	
@@ -37,7 +37,7 @@ CREATE TABLE Level_School
 
 CREATE TABLE Supplies (
 	PRIMARY KEY (name, school_id, grade),
-	name VARCHAR(15), 
+	name VARCHAR(100), 
 	school_id INT, 
 	grade INT,
 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE
@@ -46,7 +46,7 @@ CREATE TABLE Supplies (
 
 CREATE TABLE Clubs (
 	PRIMARY KEY (name, school_id), 
-	name VARCHAR(20), 
+	name VARCHAR(100), 
 	school_id INT,
 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE
 ); 
@@ -54,17 +54,17 @@ CREATE TABLE Clubs (
 CREATE TABLE Students (
 	PRIMARY KEY (ssn), 
 	ssn INT, 
-	id INT,
-	school_id INT, 
-	first_name VARCHAR(20),
-	last_name VARCHAR(20), 
-	username VARCHAR(20),
-	password VARCHAR(20), 
-	gender VARCHAR(10), 
-	birthdate date, 
+	id INT DEFAULT NULL,
+	username VARCHAR(100),
+	password VARCHAR(20),
+	school_id INT DEFAULT NULL, 
+	first_name VARCHAR(100) NOT NULL,
+	last_name VARCHAR(100) NOT NULL, 
+	gender VARCHAR(100),
+	birthdate DATE,
 	age INT AS (YEAR('2016-1-1') - YEAR(birthdate)), 
-	grade INT, 
-	level VARCHAR(15), 
+	grade INT AS (age - 5), 
+	level VARCHAR(100), 
 	CHECK (level = 'elementary' or level = 'middle' or level = 'high'),
 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE SET NULL 
 ); 
@@ -72,18 +72,19 @@ CREATE TABLE Students (
 CREATE TABLE Parents (
 	PRIMARY KEY (id),
 	id INT AUTO_INCREMENT, 
-	username VARCHAR(20) UNIQUE, 
-	first_name VARCHAR(20), 
-	last_name VARCHAR(20), 
-	email VARCHAR(20), 
-	address VARCHAR(120), 
-	home_phone VARCHAR(15)
+	username VARCHAR(100) UNIQUE, 
+	password VARCHAR(20),
+	first_name VARCHAR(100), 
+	last_name VARCHAR(100), 
+	email VARCHAR(100), 
+	address VARCHAR(600), 
+	home_phone VARCHAR(100)
 ); 
 
 CREATE TABLE Mobile_Of_Parent (
 	PRIMARY KEY (mobile, parent_id), 
 	parent_id INT, 
-	mobile VARCHAR(15), 
+	mobile VARCHAR(20), 
 	FOREIGN KEY (parent_id) REFERENCES Parents(id) ON DELETE CASCADE
 );  
 
@@ -99,7 +100,7 @@ CREATE TABLE Club_Member_Student (
 	PRIMARY KEY (student_ssn, school_id, club_name), 
 	student_ssn INT, 
 	school_id INT, 
-	club_name VARCHAR(20), 
+	club_name VARCHAR(100), 
 	FOREIGN KEY (club_name, school_id) REFERENCES Clubs(name, school_id) ON DELETE CASCADE, 
 	FOREIGN KEY (student_ssn) REFERENCES Students(ssn) ON DELETE CASCADE
 );
@@ -117,7 +118,7 @@ CREATE TABLE School_Apply_Student(
  	school_id INT,
  	student_ssn INT,
  	parent_id INT, 
- 	status VARCHAR(20),
+ 	status VARCHAR(100),
  	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE, 
  	FOREIGN KEY (student_ssn) REFERENCES Students(ssn) ON DELETE CASCADE, 
  	FOREIGN KEY (parent_id) REFERENCES Parents(id) ON DELETE SET NULL 
@@ -128,14 +129,14 @@ CREATE TABLE Employees (
 	PRIMARY KEY(id), 
 	id INT AUTO_INCREMENT, 
 	school_id INT DEFAULT NULL, 
-	first_name VARCHAR(20), 
-	middle_name VARCHAR(20), 
-	last_name VARCHAR(20), 
-	username VARCHAR(20), 
-	password VARCHAR(20), 
-	email VARCHAR(50), 
-	gender VARCHAR(10), 
-	address VARCHAR(100), 
+	first_name VARCHAR(100) NOT NULL, 
+	middle_name VARCHAR(100), 
+	last_name VARCHAR(100) NOT NULL, 
+	username VARCHAR(100), 
+	password VARCHAR(100), 
+	email VARCHAR(100), 
+	gender VARCHAR(100), 
+	address VARCHAR(600), 
 	birthdate DATE, 
 	salary INT,  
 	age INT AS (YEAR('2016-1-1') - YEAR(birthdate)), 
@@ -169,38 +170,39 @@ CREATE TABLE Teachers_Supervising_Teachers
 CREATE TABLE Activities
 	(	
 		PRIMARY KEY (name, school_id),
-		name VARCHAR(70),
+		name VARCHAR(200),
 		school_id INT,
 		activity_datetime datetime,
-		location varchar(100),
-		equipment varchar(100),
-		description varchar(500),
-		type varchar(40),
+		location varchar(200),
+		equipment varchar(500),
+		description varchar(1000),
+		type varchar(100),
 		admin_id int,
 		teacher_id int,
 		FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE,
 		FOREIGN KEY (admin_id) REFERENCES Adminstrators(id) ON DELETE CASCADE,
-		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE,
+		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE
 	);
 
 CREATE TABLE Activities_JoinedBy_Students
 	(	
 		PRIMARY KEY (student_ssn, activity_name, school_id),
 		student_ssn int,
-		activity_name VARCHAR(70),
+		activity_name VARCHAR(200),
+		school_id INT, 
 		FOREIGN KEY (student_ssn) REFERENCES Students(ssn) ON DELETE CASCADE,
 		FOREIGN KEY (activity_name, school_id) REFERENCES Activities(name, school_id) ON DELETE CASCADE
 	);
 
 CREATE TABLE Announcements
 	(	
-		PRIMARY KEY (title, announcement_date),
-		title varchar(100),
+		PRIMARY KEY (title, announcement_date, school_id),
+		title varchar(200),
 		announcement_date date,
-		type varchar(50),
-		descriptoin varchar(500),
-		admin_id int,
-		school_id INT, 
+		school_id INT,
+		type varchar(200),
+		descriptoin varchar(1000),
+		admin_id int,	 
 		FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE,
 		FOREIGN KEY (admin_id) REFERENCES Adminstrators(id) ON DELETE SET NULL
 
@@ -210,10 +212,10 @@ CREATE TABLE Courses
 	(
 		PRIMARY KEY (code),
 		code int,
-		name varchar(50),
-		description varchar(250),
+		name varchar(100),
+		description varchar(600),
 		grade int, 
-		level VARCHAR(20), 
+		level VARCHAR(50), 
 		CHECK (level = 'elementary' or level = 'middle' or level = 'high')	
 	);
 
@@ -226,14 +228,14 @@ CREATE TABLE Courses_Prerequisite_Courses
 		FOREIGN KEY (code) REFERENCES Courses(code) ON DELETE CASCADE
 	);
 
-CREATE TABLE Courses_TaughtIn_Schools
-	(
-		PRIMARY KEY (course_code, school_id),
-		course_code int,
-		school_id int,
-		FOREIGN KEY (course_code) REFERENCES Courses(code) ON DELETE CASCADE,
-		FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE
-	);
+-- CREATE TABLE Courses_TaughtIn_Schools
+-- 	(
+-- 		PRIMARY KEY (course_code, school_id),
+-- 		course_code int,
+-- 		school_id int,
+-- 		FOREIGN KEY (course_code) REFERENCES Courses(code) ON DELETE CASCADE,
+-- 		FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE
+--	);
 
 CREATE TABLE Parents_Rate_Teachers
 	(
@@ -249,7 +251,7 @@ CREATE TABLE Questions
 	(
 		PRIMARY KEY (q_id, course_code),
 		q_id int,
-		content varchar(250),
+		content varchar(1000) NOT NULL,
 		student_ssn int,
 		course_code int,
 		FOREIGN KEY (student_ssn) REFERENCES Students(ssn) ON DELETE SET NULL,
@@ -261,7 +263,7 @@ CREATE TABLE Answers
 		PRIMARY KEY (answer_sub_id, q_id, course_code),
 		answer_sub_id int,
 		q_id int,
-		answer varchar(250),
+		answer varchar(2000) NOT NULL,
 		teacher_id int,
 		course_code int,
 		FOREIGN KEY (q_id, course_code) REFERENCES Questions(q_id, course_code) ON DELETE CASCADE,
@@ -287,7 +289,7 @@ CREATE TABLE Assignments
 		school_id int,
 		post_date date,
 		due_date date,
-		contenet varchar(1000),
+		contenet varchar(2000) NOT NULL,
 		teacher_id int,
 		FOREIGN KEY (course_code) REFERENCES Courses(code) ON DELETE CASCADE,
 		FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE,
@@ -301,7 +303,7 @@ CREATE TABLE Solutions
 		assignment_number int,
 		course_code int,
 		school_id int,
-		solution varchar(500),
+		solution varchar(2000),
 		FOREIGN KEY (student_ssn) REFERENCES Students(ssn) ON DELETE CASCADE,
 		FOREIGN KEY (assignment_number, course_code, school_id) REFERENCES Assignments(assignment_number, course_code, school_id) ON DELETE CASCADE
 	);
@@ -325,21 +327,21 @@ CREATE TABLE Reports
 		report_date date,
 		student_ssn int,
 		teacher_id int,
-		comment varchar(500),
+		comment varchar(1000),
 		FOREIGN KEY (student_ssn) REFERENCES Students(ssn) ON DELETE CASCADE,
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE
 	);
 
-CREATE TABLE Parents_View_Reports
-	(
-		parent_id INT,
-		report_date date,
-		student_ssn int,
-		teacher_id int,
-		PRIMARY KEY (parent_id, report_date, student_ssn, teacher_id),
-		FOREIGN KEY (parent_id) REFERENCES Parents(id) ON DELETE CASCADE,
-		FOREIGN KEY (report_date, student_ssn, teacher_id) REFERENCES Reports(report_date, student_ssn, teacher_id) ON DELETE CASCADE
-	);
+-- CREATE TABLE Parents_View_Reports
+-- 	(
+-- 		parent_id INT,
+-- 		report_date date,
+-- 		student_ssn int,
+-- 		teacher_id int,
+-- 		PRIMARY KEY (parent_id, report_date, student_ssn, teacher_id),
+-- 		FOREIGN KEY (parent_id) REFERENCES Parents(id) ON DELETE CASCADE,
+-- 		FOREIGN KEY (report_date, student_ssn, teacher_id) REFERENCES Reports(report_date, student_ssn, teacher_id) ON DELETE CASCADE
+-- 	);
 
 CREATE TABLE Parents_Reply_Reports
 	(
@@ -347,7 +349,7 @@ CREATE TABLE Parents_Reply_Reports
 		report_date date,
 		student_ssn int,
 		teacher_id int,
-		content varchar(250),
+		content varchar(1000),
 		PRIMARY KEY (parent_id, report_date, student_ssn, teacher_id),
 		FOREIGN KEY (parent_id) REFERENCES Parents(id) ON DELETE CASCADE,
 		FOREIGN KEY (report_date, student_ssn, teacher_id) REFERENCES Reports(report_date, student_ssn, teacher_id) ON DELETE CASCADE

@@ -251,9 +251,9 @@ CREATE TABLE Questions
 	(
 		PRIMARY KEY (q_id, course_code),
 		q_id int,
-		content varchar(1000) NOT NULL,
-		student_ssn int,
 		course_code int,
+		content varchar(1000) NOT NULL,
+		student_ssn int,	
 		FOREIGN KEY (student_ssn) REFERENCES Students(ssn) ON DELETE SET NULL,
 		FOREIGN KEY (course_code) REFERENCES Courses(code) ON DELETE CASCADE
 	);
@@ -263,9 +263,9 @@ CREATE TABLE Answers
 		PRIMARY KEY (answer_sub_id, q_id, course_code),
 		answer_sub_id int,
 		q_id int,
+		course_code int,
 		answer varchar(2000) NOT NULL,
 		teacher_id int,
-		course_code int,
 		FOREIGN KEY (q_id, course_code) REFERENCES Questions(q_id, course_code) ON DELETE CASCADE,
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE SET NULL
 	);
@@ -275,7 +275,7 @@ CREATE TABLE Courses_TaughtTo_Students_By_Teachers
 		PRIMARY KEY (course_code, student_ssn),
 		course_code int,
 		student_ssn int,
-		teacher_id int NOT NULL,
+		teacher_id int DEFAULT NULL,
 		FOREIGN KEY (course_code) REFERENCES Courses(code) ON DELETE CASCADE,
 		FOREIGN KEY (student_ssn) REFERENCES Students(ssn) ON DELETE CASCADE,
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE
@@ -290,10 +290,10 @@ CREATE TABLE Assignments
 		post_date date,
 		due_date date,
 		contenet varchar(2000) NOT NULL,
-		teacher_id int,
+		teacher_id int 4 DEFAULT NULL,
 		FOREIGN KEY (course_code) REFERENCES Courses(code) ON DELETE CASCADE,
 		FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE,
-		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE
+		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE SET NULL
 	);
 
 CREATE TABLE Solutions

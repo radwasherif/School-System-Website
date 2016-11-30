@@ -48,6 +48,7 @@ CREATE TABLE Clubs (
 	PRIMARY KEY (name, school_id), 
 	name VARCHAR(100), 
 	school_id INT,
+	purpose VARCHAR(500) DEFAULT 'ERROR 404 PURPOSE NOT FOUND :"D',
 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE
 ); 
 
@@ -92,8 +93,8 @@ CREATE TABLE Parent_Of_Student (
 	PRIMARY KEY (parent_id, child_ssn), 
 	parent_id INT, 
 	child_ssn INT, 
-	FOREIGN KEY (child_ssn) REFERENCES Students(ssn), 
-	FOREIGN KEY (parent_id) REFERENCES Parents(id)
+	FOREIGN KEY (child_ssn) REFERENCES Students(ssn)ON DELETE CASCADE, 
+	FOREIGN KEY (parent_id) REFERENCES Parents(id) ON DELETE CASCADE
 ); 
 
 CREATE TABLE Club_Member_Student (
@@ -144,7 +145,7 @@ CREATE TABLE Employees (
 ); 
 
 
-CREATE TABLE Adminstrators
+CREATE TABLE Administrators
 	 (
 		id int PRIMARY KEY, 
 		FOREIGN KEY (id) REFERENCES Employees(id) ON DELETE CASCADE
@@ -180,7 +181,7 @@ CREATE TABLE Activities
 		admin_id int,
 		teacher_id int,
 		FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE,
-		FOREIGN KEY (admin_id) REFERENCES Adminstrators(id) ON DELETE CASCADE,
+		FOREIGN KEY (admin_id) REFERENCES Administrators(id) ON DELETE CASCADE,
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE
 	);
 
@@ -201,10 +202,10 @@ CREATE TABLE Announcements
 		announcement_date date,
 		school_id INT,
 		type varchar(200),
-		descriptoin varchar(1000),
+		description varchar(1000),
 		admin_id int,	 
 		FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE,
-		FOREIGN KEY (admin_id) REFERENCES Adminstrators(id) ON DELETE SET NULL
+		FOREIGN KEY (admin_id) REFERENCES Administrators(id) ON DELETE SET NULL
 
 	);
 
@@ -289,7 +290,7 @@ CREATE TABLE Assignments
 		school_id int,
 		post_date date,
 		due_date date,
-		contenet varchar(2000) NOT NULL,
+		content varchar(2000) NOT NULL,
 		teacher_id int  DEFAULT NULL,
 		FOREIGN KEY (course_code) REFERENCES Courses(code) ON DELETE CASCADE,
 		FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE CASCADE,

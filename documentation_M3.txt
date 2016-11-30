@@ -1,6 +1,16 @@
-**DISCLAIMER: We've tried to stick to the description to the best of our abilities. This documentations explains our understanding and design decisions in detail. 
+**DISCLAIMER: We've tried to stick to the description to the best of our abilities. This documentations explains our understanding and design decisions. 
+
+Our code is implemented in MySQL and we ran our queries on MySQL 5.7 
+
+
+==> SYSTEM USER: 
+* search_school: selects any school with the given name or type or address. 
+* 
+
 ==> SYSTEM ADMINISTRATOR: 
 * create_school: create school with all given attributes
+
+* create_admin: we assume that this procedure can be used by both the system admin and school admin to create admins. 
 
 * add_level_school: adding level to a certain school since level is a multi-values attribute
 
@@ -22,7 +32,7 @@ N.B. The description is not clear on whether creating an admin and adding him/he
 
 * view_school_info: Selects all information about the school with the input id. 
 
-* 
+* admin_assign_teacher_to_course: assigns the teacher to the ternary relationship Course_Teacher_Student for which the student's school id matches the admin's school id
 
 ==> SCHOOL ADMINISTRATOR: 
 *view_school(school_id): takes school id, selects all relevent information about school from the database
@@ -41,19 +51,20 @@ N.B. The description is not clear on whether creating an admin and adding him/he
 
 *edit_school_[column]: this group of procedures take the admin id and the new value of column they are defined to change and change them. 
 
+* admin_accept_application: changes the status of a student's application from pending to accepted
+
+
 
 
 
 ==> TEACHER: 
-*teacher_signup: 
-
-*teacher_view_courses
-
-*teacher_post_assignment
+*teacher_signup: teacher signs up providing necessary info. We assume the school id provided is the school he/she want to apply in. 
 
 
 
 ==> Parent: 
+* parent_apply_child: this is how the student gets into the database. When a parent applies, we check whether his/her child have been added to the student table before. If not then we add them. Then we apply normally. 
+* international_school_with_higher_reputation_than_all_national: selects the internatonal school with number of reviews more than all national schools. 
 
-NEEDS TESTING--> parent_view_accepted
+
   

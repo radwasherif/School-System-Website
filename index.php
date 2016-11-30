@@ -42,23 +42,30 @@
 		$servername = 'localhost'; 
 		$password = '1tayswi3'; 
 		$dbname = 'School_System'; 
-		$conn = mysqli_connect($servername, $username, $password, $dbname, "88");
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-			echo "game over"; 
-		} 
-		$sql = "CALL parent_signup('radwa', 'password', 'Radwa', 'Sherif', 'radwa@radwa.com', 'ay 7eta', '1234')"; 
-		if(mysqli_query($conn, $sql))  {
-			echo "YEAAAHHH"; 
-		} else {
-			echo mysqli_error($conn); 
+		$conn = new mysqli($servername, $username, $password, $dbname, "88");
+		if($conn->connect_errno) {
+			die("An error in database connection has occured."); 
 		}
-		// mysqli_query($conn, "CALL teacher_sign_up($fname, $mname, $lname, $birthdate, $address, $email, $gender, NULL)") or die("Query fail: " . mysqli_error());
-		// echo "betengan";
-		// $school_id = 1; 
-		// $call = mysqli_prepare($conn, 'CALL teacher_sign_up(?, ? , ? , ?, ?, ?, ?, ?)');
-		// mysqli_stmt_bind_param($call, 'sssssssi', $fname, $mname, $lname, $birthdate, $address, $email, $gender, $school_id);
-		// mysqli_stmt_execute($call);
+		// $id_test = 3; 
+		// $str_test = 'foo'; 
+		// $call = $conn->prepare('CALL test(?, ?)');
+		// $call->bind_param(is, $id_test, $str); 
+		// $call->execute();  
+
+		// $bd = '2012-1-1'; 		
+		// $call = $conn->prepare('CALL test(?)');
+		// $call->bind_param(s, $bd); 
+		// $call->execute(); 
+		$school_id = 1; 
+		$call = $conn->prepare('CALL teacher_sign_up(?, ?, ?, ?, ?, ?, ?, ?)');
+		$call->bind_param(sssssssi, $fname, $mname, $lname, $birthdate, $address, $email, $gender, $school_id); 
+		if($call->execute()) {
+			echo "You have successfully signed up."; 
+		} else {
+			echo $call->error; 
+		}
+
+	}
 		?>
 		
 		<nav class="navbar navbar-inverse">

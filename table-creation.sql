@@ -140,7 +140,7 @@ CREATE TABLE Employees (
 	address VARCHAR(600), 
 	birthdate DATE, 
 	salary INT,  
-	age INT AS (YEAR('2016-1-1') - YEAR(birthdate)), 
+	age INT AS (2016 - YEAR(birthdate)), 
 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE SET NULL
 ); 
 

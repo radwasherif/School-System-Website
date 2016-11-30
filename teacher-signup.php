@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+
 <?php
 $fname = $mname = $lname = $email = $address = $gender = $birthdate = ""; 
 $fnameErr = $lnameErr = $emailErr = $genderErr = $birthdateErr = "";
@@ -31,4 +33,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	} 
 }
 // echo $fname . " " . $lname . " " . $email; 
-?>
+

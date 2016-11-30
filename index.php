@@ -1,50 +1,51 @@
 <!DOCTYPE html>
-	<html>
-	<link rel="stylesheet" type="text/css" href="bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="homepage.css">
-	<head>
-		<title>Radwa and Alaa's School Directory</title>
-	</head>
-	<body>
-		<?php
-		$fname = $mname = $lname = $email = $address = $gender = $birthdate = ""; 
-		$fnameErr = $lnameErr = $emailErr = $genderErr = $birthdateErr = "";
-		if($_SERVER["REQUEST_METHOD"] == "POST") {
-			if (empty($_POST["fname"])) {
-				$fnameErr = "First name is required";
-			} else {
-				$fname = $_POST['fname'];
-			}
-			$mname = $_POST['mname'];
-			if (empty($_POST["lname"])) {
-				$lnameErr = "Last name is required";
-			} else {
-				$lname = $_POST['lname'];
-			}
-			if (empty($_POST["email"])) {
-				$emailErr = "Email is required";
-			} else {
-				$email = $_POST['email'];
-			}
-			$address = $_POST['address'];
-			if (empty($_POST["gender"])) {
-				$genderErr = "Gender is required";
-			} else {
-				$gender = $_POST['gender'];
-			}
-			if (empty($_POST["birthdate"])) {
-				$birthdateErr = "Birthdate is required";
-			} else {
-				$birthdate = $_POST['birthdate'];
-			} 
+
+<html>
+<link rel="stylesheet" type="text/css" href="bootstrap.css">
+<link rel="stylesheet" type="text/css" href="homepage.css">
+<head>
+	<title>Radwa and Alaa's School Directory</title>
+</head>
+<body>
+	<?php
+	$fname = $mname = $lname = $email = $address = $gender = $birthdate = ""; 
+	$fnameErr = $lnameErr = $emailErr = $genderErr = $birthdateErr = "";
+	if($_SERVER["REQUEST_METHOD"] == "POST") {
+		if (empty($_POST["fname"])) {
+			$fnameErr = "First name is required";
+		} else {
+			$fname = $_POST['fname'];
+		}
+		$mname = $_POST['mname'];
+		if (empty($_POST["lname"])) {
+			$lnameErr = "Last name is required";
+		} else {
+			$lname = $_POST['lname'];
+		}
+		if (empty($_POST["email"])) {
+			$emailErr = "Email is required";
+		} else {
+			$email = $_POST['email'];
+		}
+		$address = $_POST['address'];
+		if (empty($_POST["gender"])) {
+			$genderErr = "Gender is required";
+		} else {
+			$gender = $_POST['gender'];
+		}
+		if (empty($_POST["birthdate"])) {
+			$birthdateErr = "Birthdate is required";
+		} else {
+			$birthdate = $_POST['birthdate'];
+		} 
 		$username = 'radwa'; 
 		$servername = 'localhost'; 
 		$password = '1tayswi3'; 
 		$dbname = 'School_System'; 
 		$conn = mysqli_connect($servername, $username, $password, $dbname, "88");
 		if ($conn->connect_error) {
-    	die("Connection failed: " . $conn->connect_error);
-    	echo "game over"; 
+			die("Connection failed: " . $conn->connect_error);
+			echo "game over"; 
 		} 
 		$sql = "CALL parent_signup('radwa', 'password', 'Radwa', 'Sherif', 'radwa@radwa.com', 'ay 7eta', '1234')"; 
 		if(mysqli_query($conn, $sql))  {
@@ -58,8 +59,8 @@
 		// $call = mysqli_prepare($conn, 'CALL teacher_sign_up(?, ? , ? , ?, ?, ?, ?, ?)');
 		// mysqli_stmt_bind_param($call, 'sssssssi', $fname, $mname, $lname, $birthdate, $address, $email, $gender, $school_id);
 		// mysqli_stmt_execute($call);
-	}
 		?>
+		
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
 				<div class="navbar-header">

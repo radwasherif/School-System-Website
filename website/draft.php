@@ -1,12 +1,4 @@
-<!DOCTYPE html>
 
-<html>
-<link rel="stylesheet" type="text/css" href="bootstrap.css">
-<link rel="stylesheet" type="text/css" href="homepage.css">
-<head>
-	<title>Radwa and Alaa's School Directory</title>
-</head>
-<body>
 	<?php
 	$fname = $mname = $lname = $email = $address = $gender = $birthdate = ""; 
 	$fnameErr = $lnameErr = $emailErr = $genderErr = $birthdateErr = "";
@@ -67,57 +59,10 @@
 
 	}
 		?>
-		
-		<nav class="navbar navbar-inverse">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">Radwa and Alaa</a>
-				</div>
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">View Schools</a></li>
-				</ul>
-				<form class="navbar-form navbar-left" action = "search.php">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search schools by name, address or type" name="school">
-					</div>
-					<button type="submit" class="btn btn-default">Search</button>
-				</form>
-			</div>
-		</nav>
 
-		<div class = "container">
-			<div class = "row" class = "center">
-				<div class = "col-md-4 col-md-offset-4">
-					<h1>Log in</h1>
-					<form method="post" action="">
-						<div class="form-group">
-							<label>Username: </label>
-							<input type="text" class="form-control" placeholder="username" name = "username">
-						</div>
 
-						<div class="form-group">
-							<label> Password: </label>
-							<input type="text" class="form-control" placeholder="password" name = "password">
-						</div>
 
-						<div class = "form-group">
-							<label>Sign in as </label>
-							<label class = "radio-inline">
-								<input type="radio" name = "usertype" value = "teacher"> teacher
-							</label>
-
-							<label class = "radio-inline">
-								<input type="radio" name = "usertype" value = "parent"> parent
-							</label>
-							<br>
-							<button type="submit" class="btn btn-default">Login</button>
-						</div>
-
-					</form>
-				</div>
-			</div>
-			<div class = "row" class = "center">
+<div class = "row" class = "center">
 				<div class = "col-md-4 col-md-offset-1">
 					<h1> Sign Up As A Teacher </h1> 
 					<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -212,9 +157,3 @@
 					</form>
 				</div>
 			</div>
-		</div>
-
-
-		
-	</body>
-	</html>

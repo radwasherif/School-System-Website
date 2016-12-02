@@ -1,19 +1,17 @@
-.center {
-	margin: auto; 
-	width: 50%;
-	padding: 10px;
+body {
+	font-family:  Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
 }
-
-.mynavbar {
-	background-color: #c51162 !important;
-	color: #ffffff;
+.col-centered{
+    float: none;
+    margin-left: auto;
+    margin-right: auto; 
 }
-
-.homepage-banner {
-	background-color: green !important; 
+.row {
+	padding-top: 50px; 
+	padding-bottom: 50px; 
 }
 .jumbotron {
-	background-color: 
+	background-color: white; 
 }
 
 .container-custom {
@@ -21,14 +19,26 @@
 }
 
 #logo {
-
+	background-color: white; 
 	margin-right: auto;
 	margin-left: auto;  
-	width: 30%;
+	width: 25%;
 }
 
 #login {
 	background-color: #e0f2f1;
-	border: 10px;
+	bord : 10px;
 	border-color: #00695c;  
 }
+
+#search-bar {
+	width: 50%;
+	margin-right: auto; 
+	margin-left: auto; 
+}
+
+.button {
+	background-color: #2BBBAD; 	
+	font-size: 40px; 
+}
+

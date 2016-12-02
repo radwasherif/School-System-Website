@@ -427,7 +427,7 @@
 
 DELIMITER // 
 	CREATE PROCEDURE search_parent(IN username VARCHAR(20)) 
-		SELECT P.id
+		SELECT P.id, P.password
 		FROM Parents P 
 		WHERE P.username = username;  
 	//

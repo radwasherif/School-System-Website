@@ -9,10 +9,6 @@
 	color: #ffffff;
 }
 
-.container-custom {
-	background-color: #c51162; 
-}
-
 .homepage-banner {
 	background-color: green !important; 
 }
@@ -20,11 +16,19 @@
 	background-color: 
 }
 
+.container-custom {
+	background-color: #2BBBAD; 
+}
+
 #logo {
 
-	border: auto; 
+	margin-right: auto;
+	margin-left: auto;  
+	width: 30%;
 }
 
 #login {
-	background-color: #ff00ff !important; 
+	background-color: #e0f2f1;
+	border: 10px;
+	border-color: #00695c;  
 }

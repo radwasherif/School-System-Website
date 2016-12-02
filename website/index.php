@@ -4,31 +4,27 @@
 <link rel="stylesheet" type="text/css" href="bootstrap.css">
 <link rel="stylesheet" type="text/css" href="homepage.css">
 <head>
-	<title>Radwa and Alaa's School Directory</title>
+	<title>R.A. Inc. </title>
 </head>
 <body>	
 	<?php
 	include 'connection-values.php'; 
-
 	$username = $password = $usertype = $loginError  = ""; 
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
 		if(!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['usertype'])) {
 			$username = $_POST['username']; 
 			$password = $_POST['password']; 
 			$usertype = $_POST['usertype'];  
-			// $servername = 'localhost'; 
-			// $dbusername = 'root'; 
-			// $dbpassword = '1tayswi3'; 
-			// $dbname = 'School_System'; 
-			// $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname, "3306");
-			// if($conn->connect_errno) {
-			// 	die($conn->connect_errno); 
-			// }
+			$userID; 
 			if($usertype == "parent") {
 				$call = $conn->prepare('CALL search_parent(?, ?)');
 				$call->bind_param(ss, $username, $password); 
 				if($call->execute()) {
 					echo "You have successfully logged in."; 
+					$result = $call->get_result(); 
+					$row = $result->fetch_array(MYSQLI_BOTH);
+					echo $row['id'];  
+					header("Location: parent/parent.php"); 
 				} else {
 					echo $call->error; 
 				}
@@ -36,6 +32,10 @@
 
 
 
+		}
+		else 
+		{
+			$loginError = "Please fill all required fields";
 		}
 
 	}
@@ -73,8 +73,8 @@
 		<br>
 		<br>
 		<div id = "homepage-banner"class="jumbotron">
-			<h1>Radwa and Alaa's School Directory</h1> 
-			<p>We help you choose the best for your children.</p> 
+			<h1>R.A. Inc. </h1> 
+			<h3>The Future of School Networking. </h3> 
 		</div>
 	</div>
 	<br>
@@ -95,7 +95,6 @@
 					</div>
 					<div class = "form-group">
 						<label>Log in as: </label>
-						<span class="error">* <?php echo $genderErr;?></span>
 						<label class = "radio-inline">
 							<input type="radio" name = "usertype" value = "parent"> parent
 						</label>

@@ -71,12 +71,12 @@
 
 -- -- ***SYSTEM USER*** 
 
--- CREATE PROCEDURE search_school(IN name VARCHAR(20), IN type VARCHAR(20), IN address VARCHAR(100))
--- BEGIN
--- 	SELECT * 
--- 	FROM Schools S 
--- 	WHERE S.name = name OR S.type = type OR S.address = address; 
--- END //
+CREATE PROCEDURE search_school(IN keyword VARCHAR(100))
+BEGIN
+	SELECT * 
+	FROM Schools S 
+	WHERE S.name = keyword OR S.type = keyword OR S.address = keyword; 
+END //
 
 -- CREATE PROCEDURE user_view_school_info(IN school_id INT) 
 -- BEGIN
@@ -427,7 +427,7 @@
 
 DELIMITER // 
 	CREATE PROCEDURE search_parent(IN username VARCHAR(100), password VARCHAR(20))
-		SELECT P.id
+		SELECT P.*
 		FROM Parents P 
 		WHERE P.username = username AND P.password = password;
 	//

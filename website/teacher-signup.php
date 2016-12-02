@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 <?php
 $fname = $mname = $lname = $email = $address = $gender = $birthdate = ""; 

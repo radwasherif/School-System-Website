@@ -8,7 +8,7 @@
 </head>
 <body>	
 	<?php
-	// include 'connection-values.php'; 
+	 include 'connection-values.php'; 
 
 	$username = $password = $usertype = $loginError  = ""; 
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -18,14 +18,7 @@
 			$usertype = $_POST['usertype']; 
 			echo "HIIIII"; 
 			echo $username . " " . $password; 
-			$servername = 'localhost'; 
-			$dbusername = 'root'; 
-			$dbpassword = '1tayswi3'; 
-			$dbname = 'School_System'; 
-			$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname, "3306");
-			if($conn->connect_errno) {
-				die($conn->connect_errno); 
-			}
+			
 			if($usertype == "parent") {
 				echo "gowaa"; 
 				$call = $conn->prepare('CALL search_parent(?)');
@@ -39,6 +32,10 @@
 			echo "barraa"; 
 
 
+		}
+		else 
+		{
+			$loginError = "Please fill all required fields";
 		}
 
 	}
@@ -89,7 +86,6 @@
 					</div>
 					<div class = "form-group">
 						<label>Log in as: </label>
-						<span class="error">* <?php echo $genderErr;?></span>
 						<label class = "radio-inline">
 							<input type="radio" name = "usertype" value = "parent"> parent
 						</label>

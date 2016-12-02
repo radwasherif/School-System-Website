@@ -426,10 +426,10 @@
 -- -- ***PARENT USER STORY***
 
 DELIMITER // 
-	CREATE PROCEDURE search_parent(IN username VARCHAR(20)) 
-		SELECT P.id, P.password
+	CREATE PROCEDURE search_parent(IN username VARCHAR(100), password VARCHAR(20))
+		SELECT P.id
 		FROM Parents P 
-		WHERE P.username = username;  
+		WHERE P.username = username AND P.password = password;
 	//
 
 	

@@ -1,5 +1,5 @@
---  DELIMITER //
-
+DELIMITER //
+USE School_System;
 -- *** SYSTEM ADMIN USER STORY*** 
 
 -- CREATE PROCEDURE create_school (IN name VARCHAR(30), IN address VARCHAR(100), IN phone VARCHAR(15),IN  mission VARCHAR(120), IN vision VARCHAR(120), IN language VARCHAR(20), IN general_info VARCHAR(120), IN fees INT, IN type VARCHAR(20), IN email VARCHAR(50)) DETERMINISTIC 
@@ -99,23 +99,13 @@ END //
 -- 	WHERE R.school_id = school_id; 
 -- END //
 
--- CREATE PROCEDURE view_school_by_level()
--- BEGIN
--- 	SELECT S.* , L.level
--- 	FROM Schools S 
--- 	INNER JOIN Level_School L ON L.school_id = S.id
--- 	WHERE L.level = 'elementary'; 
-
--- 	SELECT S.* , L.level
--- 	FROM Schools S 
--- 	INNER JOIN Level_School L ON L.school_id = S.id
--- 	WHERE L.level = 'middle';
-
--- 	SELECT S.* , L.level
--- 	FROM Schools S 
--- 	INNER JOIN Level_School L ON L.school_id = S.id
--- 	WHERE L.level = 'high';
--- END //
+CREATE PROCEDURE view_school_by_level(IN level VARCHAR(20))
+BEGIN
+	SELECT S.name, S.type, S.id 
+	FROM Schools S 
+	INNER JOIN Level_School L ON L.school_id = S.id
+	WHERE L.level = level; 
+END //
 
 -- -- ***SCHOOL ADMIN USER STORY***
 
@@ -956,4 +946,4 @@ DELIMITER ;
 --   FROM Students S
 --   WHERE S.ssn = student_ssn;
 -- END //
--- DELIMITER ; 
+ DELIMITER ; 

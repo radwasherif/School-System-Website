@@ -51,7 +51,7 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#">View Schools</a></li>
+				<li><a href="view-schools.php">View Schools</a></li>
 			</ul>
 			<form class="navbar-form navbar-right" action = "search.php">
 				<div class="form-group">

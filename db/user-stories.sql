@@ -78,25 +78,51 @@ BEGIN
 	WHERE S.name = keyword OR S.type = keyword OR S.address = keyword; 
 END //
 
+-- drop PROCEDURE user_view_school_info;
 CREATE PROCEDURE user_view_school_info(IN school_id INT) 
 BEGIN
-	SELECT S.name,  S.address, S.mission, S.vision, S.language, S.general_info, S.fees, S.type
+	SELECT S.name,  S.address, S.mission, S.vision, S.language, S.general_info, S.fees, S.type, S.email
 	FROM Schools S 
 	WHERE S.id = school_id; 
+END //
 
+CREATE PROCEDURE user_view_school_levels(IN school_id INT) 
+BEGIN
 	SELECT L.level 
 	FROM Level_School L 
-	WHERE L.school_id = school_id; 
+	WHERE L.school_id = school_id;
+END //
 
-	SELECT E.first_name, E.last_name
+CREATE PROCEDURE user_view_school_phones(IN school_id INT) 
+BEGIN
+	SELECT P.phone
+	FROM Phone_School P 
+	WHERE P.school_id = school_id;
+END //
+
+CREATE PROCEDURE user_view_school_teachers(IN school_id INT) 
+BEGIN
+	SELECT CONCAT_WS('',E.first_name, ' ',E.last_name) AS teacher_name
 	FROM Employees E 
 	INNER JOIN Teachers T ON E.id = T.id
 	WHERE E.school_id = school_id; 
+END //
 
-	SELECT P.first_name, P.last_name, R.review
+CREATE PROCEDURE user_view_school_reviews(IN school_id INT) 
+BEGIN
+	SELECT R.review, CONCAT_WS('',P.first_name, ' ',P.last_name) AS parent_name
 	FROM Parent_Review_School R
 	INNER JOIN Parents P ON P.id = R.parent_id
 	WHERE R.school_id = school_id; 
+END //
+
+CREATE PROCEDURE user_view_announcement(IN school_id INT) 
+BEGIN
+  SELECT A.title, A.type, A.description, A.announcement_date
+  FROM Announcements A
+
+  WHERE A.school_id = school_id ;
+ -- AND DAY(CURDATE() - A.announcement_date) <= 10; 
 END //
 
 -- drop procedure view_school_by_level;

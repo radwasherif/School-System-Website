@@ -1,0 +1,37 @@
+<?php
+$id = 0;
+$id = $_GET['id'];
+// echo $id;
+  $school_name = $address = $mission = $vision = $language = $general_info = $fees = $type = "";
+include  'connection-values.php';
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt, 'CALL user_view_school_info(?)'))
+{
+  print "Failed to prepare statement\n";
+}
+else
+{
+
+  mysqli_stmt_bind_param($stmt, "i", $id);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+      
+
+  while ($row = mysqli_fetch_array($result, MYSQLI_NUM))
+  {
+    $school_name = $row[0];
+    $address = $row[1];
+    $mission = $row[2];
+    $vision = $row[3];
+    $language = $row[4];
+    $general_info = $row[5];
+    $fees = $row[6];
+    $type = $row[7];
+  } 
+    mysqli_free_result($result);
+
+} 
+
+// echo $school_name ." ". $address ." ". $mission." ".$vision." ".$fees;
+
+?>

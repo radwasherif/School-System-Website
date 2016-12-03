@@ -189,7 +189,7 @@ CREATE TABLE Teachers
 	(
 		id int PRIMARY KEY,
 		start_date DATE,
-		exp_years INT AS (YEAR('2016-11-9') - YEAR(start_date)),
+		exp_years INT,
 		FOREIGN KEY (id) REFERENCES Employees(id) ON DELETE CASCADE
 	);
 

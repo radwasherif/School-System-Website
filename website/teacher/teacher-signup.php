@@ -37,7 +37,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	} else {
 		$birthdate = $_POST['birthdate'];
 	} 
+	
+	$school_id = $_POST['school']; 
+
+	$call = $conn->prepare('CALL teacher_sign_up(?, ?, ?, ?, ?, ?, ?, ?)'); 
+	$call->bind_param(sssssssi, $fname, $mname, $lname, $birthdate, $address, $email, $gender, $school_id); 
+	if($call->execute()){
+		echo "<h2> You have successfully signed up. Please wait for a confirmation email containing your username and password. </h2>"; 
+	} else {
+		echo $call->error; 
+	}
 }
+
+	
 ?>
 <body>
 	<div class="container">
@@ -87,19 +99,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 							<input type="radio" name = "gender" value = "male"> male
 						</label>
 						<br>
-
-						<button type="submit" class="btn btn-default">Sign up</button>
-					</div>
-					<form>
-						<select name="lang">
-							<option value="html">html</option>
+						<label>Apply in: </label>
+						<select name="school" >
+							<!-- <option value="html">html</option>
 							<option value="css">CSS</option>
 							<option value="javascript">JavaScript</option>
-							<option value="php">PHP</option>
+							<option value="php">PHP</option> -->
+
+							<?php
+								if($call = $conn->query("SELECT S.id, S.name FROM Schools S")) {
+									echo "WEEEE!!"; 
+									while($row = $call->fetch_array(MYSQLI_BOTH)) {
+										echo '<option value ="' . $row["id"] . '">' . $row["name"] . ' </option>'; 
+									} 	
+								} else {
+									echo $call->error; 
+								}
+								
+
+							?>
 						</select>
-						<br />
-						<input type="submit">
-					</form>
+						<br>
+						
+					</div>
+					<button type="submit" class="btn btn-default">Sign up</button>
 				</form>
 			</div>
 		</div>

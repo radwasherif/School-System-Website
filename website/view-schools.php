@@ -15,7 +15,7 @@
 
 <style type="text/css">
 		body{
-			background-color: #E0FFFF;
+			background-color: #F0FFFF;
 		}
 	</style>
 	

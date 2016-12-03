@@ -99,16 +99,16 @@
 				<h1>Log in</h1>
 				<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 					<div class="form-group">
-						<label>Username: *</label>
+						<label>Username: <font color='red'>*</font></label>
 						<input type="text" class="form-control" placeholder="username" name = "username">
 					</div>
 
 					<div class="form-group">
-						<label> Password: *</label>
+						<label> Password: <font color='red'>*</font></label>
 						<input type="text" class="form-control" placeholder="password" name = "password">
 					</div>
 					<div class = "form-group">
-						<label>Log in as: *</label>
+						<label>Log in as: <font color='red'>*</font></label>
 						<label class = "radio-inline">
 							<input type="radio" name = "usertype" value = "parent"> parent
 						</label>
@@ -120,7 +120,7 @@
 					</div>
 					<button type="submit" class="btn btn-default">Login</button>
 					<br>
-					<span class="error"> <?php echo $loginError;?></span>
+					<span class="error"> <?php echo "<font color='red'> $loginError </font>";?></span>
 
 					<br> 
 				</form>

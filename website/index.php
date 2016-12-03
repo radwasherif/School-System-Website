@@ -46,9 +46,6 @@
 					echo $call->error; 
 				}
 			}
-
-
-
 		}
 		else 
 		{
@@ -69,10 +66,10 @@
 			
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#">View Schools</a></li>
+				<li><a href="view-schools.php">View Schools</a></li>
 			</ul>
 			
-			<form id = "search-bar"  method = "post" class="navbar-form navbar-right" action = "search.php">
+			<form id = "search-bar"  method = "post" class="navbar-form navbar-right" action = "search-schools.php">
 				<div class="form-group">
 					<input  type="text" class="form-control" placeholder="Search schools by name, address or type" name="school">
 				</div>
@@ -111,7 +108,7 @@
 						<input type="text" class="form-control" placeholder="password" name = "password">
 					</div>
 					<div class = "form-group">
-						<label>Log in as: </label>
+						<label>Log in as: *</label>
 						<label class = "radio-inline">
 							<input type="radio" name = "usertype" value = "parent"> parent
 						</label>

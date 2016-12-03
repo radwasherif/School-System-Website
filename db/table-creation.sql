@@ -64,7 +64,7 @@ CREATE TABLE Students (
 	gender VARCHAR(10),
 	birthdate DATE,
 	age INT AS (YEAR('2016-1-1') - YEAR(birthdate)), 
-	grade INT AS (age - 5), 
+	grade INT AS (2016 - YEAR(birthdate) - 5), 
 	level VARCHAR(100), 
 	CHECK (level = 'elementary' or level = 'middle' or level = 'high'),
 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE SET NULL 

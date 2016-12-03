@@ -17,14 +17,31 @@
 			$usertype = $_POST['usertype'];  
 			$userID; 
 			if($usertype == "parent") {
+				// echo "HIIIII";
 				$call = $conn->prepare('CALL search_parent(?, ?)');
 				$call->bind_param(ss, $username, $password); 
 				if($call->execute()) {
-					echo "You have successfully logged in."; 
 					$result = $call->get_result(); 
-					$row = $result->fetch_array(MYSQLI_BOTH);
-					echo $row['id'];  
-					header("Location: parent/parent.php"); 
+					if($row = $result->fetch_array(MYSQLI_BOTH)) {
+						echo $row['id'];  
+						header("Location: parent/parent.php"); 
+					} else {
+					 $loginError =  "* Please enter a valid username-password combination."; 
+					}
+				} else {
+					echo $call->error; 
+				}
+			} elseif ($usertype == "teacher") {
+				$call = $conn->prepare('CALL search_teacher(?, ?)');
+				$call->bind_param(ss, $username, $password); 
+				if($call->execute()) {
+					$result = $call->get_result(); 
+					if($row = $result->fetch_array(MYSQLI_BOTH)) {
+						echo $row['id'];  
+						header("Location: teacher/teacher.php"); 
+					} else {
+					 $loginError =  "* Please enter a valid username-password combination."; 
+					}
 				} else {
 					echo $call->error; 
 				}
@@ -72,7 +89,7 @@
 		<img id = "logo" src="resources/school-icon.png" class="img-responsive img-circle margin" width = "300" height="300">	
 		<br>
 		<br>
-		<div id = "homepage-banner"class="jumbotron">
+		<div id = "homepage-banner" class="jumbotron">
 			<h1>R.A. Inc. </h1> 
 			<h3>The Future of School Networking. </h3> 
 		</div>

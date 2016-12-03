@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style>
@@ -312,9 +313,8 @@
         {
           $cur_level = $row[0];
           echo "<div class='col-sm-4'>";
-          echo  '<span class="glyphicon glyphicon-off logo-small"></span>';
+           echo  '<span class="glyphicon glyphicon-education logo-small"></span></p>';
           echo "<h4> $cur_level </h4>";
-    // echo '<p>Lorem ipsum dolor sit amet..</p>';
           echo '</div>';
         } 
         mysqli_free_result($result);

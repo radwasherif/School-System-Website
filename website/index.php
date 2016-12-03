@@ -26,7 +26,7 @@
 						echo $row['id'];  
 						header("Location: parent/parent.php"); 
 					} else {
-					 $loginError =  "* Please enter a valid username-password combination."; 
+						$loginError =  "* Please enter a valid username-password combination."; 
 					}
 				} else {
 					echo $call->error; 
@@ -40,7 +40,7 @@
 						echo $row['id'];  
 						header("Location: teacher/teacher.php"); 
 					} else {
-					 $loginError =  "* Please enter a valid username-password combination."; 
+						$loginError =  "* Please enter a valid username-password combination."; 
 					}
 				} else {
 					echo $call->error; 
@@ -75,7 +75,7 @@
 				</div>
 				<button type="submit" class="btn btn-default">Search</button>
 			</form>
-		
+
 		</div>
 	</nav>
 
@@ -126,7 +126,8 @@
 				</form>
 			</div>
 		</div>
-		<div class = "center row">
+		
+		<!-- <div class = "center row">
 			<div class = "col-md-4 col-md-offset-1">
 				<button class = "button btn btn-lg">TEACHER SIGNUP</button>	
 			</div>
@@ -135,9 +136,27 @@
 				<button class = "button btn btn-lg">PARENT SIGNUP </button>
 			</div>
 			
+		</div> -->
+
+		<div class="col-centered row">
+			<a href="teacher/teacher-signup.php">
+				<div class="rectangle col-md-4 col-md-offset-2">
+					TEACHER SIGNUP
+				</div>
+			</a>
+
+			<a href="parent/parent-signup.php">
+				<div class="rectangle col-md-4 col-md-offset-1">
+					PARENT SIGNUP
+				</div>
+	
+			</a>
 		</div>
 
 	</div>
+	
+	
+	
 
 
 

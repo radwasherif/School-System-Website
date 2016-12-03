@@ -1,3 +1,4 @@
+
 CREATE DATABASE School_System;
 USE School_System; 
 
@@ -58,13 +59,13 @@ CREATE TABLE Students (
 	id INT DEFAULT NULL,
 	username VARCHAR(100),
 	password VARCHAR(20),
-	school_id INT DEFAULT NULL, 
+	school_id INT DEFAULT NULL,
 	first_name VARCHAR(100) NOT NULL,
 	last_name VARCHAR(100) NOT NULL, 
 	gender VARCHAR(10),
 	birthdate DATE,
-	age INT AS (YEAR('2016-1-1') - YEAR(birthdate)), 
-	grade INT AS (2016 - YEAR(birthdate) - 5), 
+	age INT,
+	grade INT AS (2016 - YEAR(birthdate) - 5),
 	level VARCHAR(100), 
 	CHECK (level = 'elementary' or level = 'middle' or level = 'high'),
 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE SET NULL 
@@ -140,10 +141,43 @@ CREATE TABLE Employees (
 	address VARCHAR(600), 
 	birthdate DATE, 
 	salary INT,  
-	age INT AS (2016 - YEAR(birthdate)), 
+	age INT,
 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE SET NULL
 ); 
 
+DELIMITER  //
+
+CREATE TRIGGER EmployeesAge BEFORE INSERT
+	ON Employees
+	FOR EACH ROW BEGIN
+		SET New.age = YEAR(CURDATE()) - YEAR(New.birthdate);
+
+END//
+
+CREATE TRIGGER StudentsAge BEFORE INSERT
+	ON Students
+	FOR EACH ROW BEGIN
+		SET New.age = YEAR(CURDATE()) - YEAR(New.birthdate);
+
+END//
+
+CREATE TRIGGER TeachersExpYears BEFORE INSERT
+	ON Teachers
+	FOR EACH ROW BEGIN
+	IF(New.start_date IS NOT NULL ) THEN
+			SET New.exp_years = (YEAR(CURDATE()) - YEAR(New.start_date));
+	END IF;
+END //
+
+CREATE TRIGGER TeachersExpYearsUpdate BEFORE UPDATE
+	ON Teachers
+	FOR EACH ROW BEGIN
+	IF(New.start_date IS NOT NULL ) THEN
+			SET New.exp_years = (YEAR(CURDATE()) - YEAR(New.start_date));
+	END IF;
+END //
+
+DELIMITER ;
 
 CREATE TABLE Administrators
 	 (

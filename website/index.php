@@ -33,12 +33,12 @@
 				}
 			} elseif ($usertype == "teacher") {
 				$call = $conn->prepare('CALL search_teacher(?, ?)');
-				$call->bind_param(ss, $username, $password); 
+				$call->bind_param('ss', $username, $password); 
 				if($call->execute()) {
 					$result = $call->get_result(); 
 					if($row = $result->fetch_array(MYSQLI_BOTH)) {
-						echo $row['id'];  
-						header("Location: teacher/teacher.php"); 
+						$r = $row['id'];  
+						header("Location: teacher/teacher.php?id=$r"); 
 					} else {
 						$loginError =  "* Please enter a valid username-password combination."; 
 					}

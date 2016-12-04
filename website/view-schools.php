@@ -14,7 +14,9 @@
 <body>
 
 <style type="text/css">
-		
+		body{
+			background-color: #F0FFFF;
+		}
 	</style>
 	
 	<nav class="navbar navbar-inverse">

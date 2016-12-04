@@ -19,12 +19,12 @@
 			if($usertype == "parent") {
 				// echo "HIIIII";
 				$call = $conn->prepare('CALL search_parent(?, ?)');
-				$call->bind_param(ss, $username, $password); 
+				$call->bind_param('ss', $username, $password); 
 				if($call->execute()) {
 					$result = $call->get_result(); 
 					if($row = $result->fetch_array(MYSQLI_BOTH)) {
 						echo $row['id'];  
-						header("Location: parent/parent.php"); 
+						header("Location: parent/parent.php?id=" . $row['id']); 
 					} else {
 						$loginError =  "* Please enter a valid username-password combination."; 
 					}
@@ -33,12 +33,12 @@
 				}
 			} elseif ($usertype == "teacher") {
 				$call = $conn->prepare('CALL search_teacher(?, ?)');
-				$call->bind_param(ss, $username, $password); 
+				$call->bind_param('ss', $username, $password); 
 				if($call->execute()) {
 					$result = $call->get_result(); 
 					if($row = $result->fetch_array(MYSQLI_BOTH)) {
-						echo $row['id'];  
-						header("Location: teacher/teacher.php"); 
+						// echo $row['id'];  
+						header("Location: teacher/teacher.php?id=" . $row[id]); 
 					} else {
 						$loginError =  "* Please enter a valid username-password combination."; 
 					}
@@ -95,7 +95,7 @@
 	<br> 
 	<div class = "container">
 		<div class = "row">
-			<div  id = "login" class = "col-md-3 col-centered">
+			<div  id = "login" class = "col-md-3 col-md-offset-5">
 				<h1>Log in</h1>
 				<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 					<div class="form-group">

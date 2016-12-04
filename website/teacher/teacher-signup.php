@@ -52,6 +52,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	
 ?>
 <body>
+<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Radwa and Alaa</a>
+			</div>
+			
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="../index.php">Home</a></li>
+				<li><a href="../view-schools.php">View Schools</a></li>
+			</ul>
+			
+			<form id = "search-bar"  method = "post" class="navbar-form navbar-right" action = "search-schools.php">
+				<div class="form-group">
+					<input  type="text" class="form-control" placeholder="Search schools by name, address or type" name="school">
+				</div>
+				<button type="submit" class="btn btn-default">Search</button>
+			</form>
+
+		</div>
+	</nav>
 	<div class="container">
 		<div class = "row" class = "center">
 			<div id="sign-up" class = "col-md-4 col-centered">

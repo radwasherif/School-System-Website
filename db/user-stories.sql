@@ -796,6 +796,7 @@ BEGIN
   END //
 
 CREATE PROCEDURE search_teacher (IN username VARCHAR(100), password VARCHAR(20))
+BEGIN
   SELECT E.*, T.start_date, T.exp_years
 		FROM Employees E
       INNER JOIN Teachers T ON E.id = T.id

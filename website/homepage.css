@@ -5,6 +5,7 @@ body {
     float: none;
     margin-left: auto;
     margin-right: auto; 
+    /*text-align: center;*/
 }
 .row {
 	padding-top: 50px; 
@@ -34,11 +35,17 @@ body {
 #search-bar {
 	width: 50%;
 	margin-right: auto; 
-	margin-left: auto; 
+	margin-left: auto;    
 }
 
-.button {
-	background-color: #2BBBAD; 	
-	font-size: 40px; 
+.rectangle {
+	border-radius: 5px;
+	border: 2px solid #FFFFFF;
+	background-color: #2BBBAD;
+	/*height: 50px;
+	width: 120px;*/
+	/*margin: auto;*/
+	text-align: center;
+	font-size: 36px; 
 }
 

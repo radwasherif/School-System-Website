@@ -32,7 +32,7 @@
       margin-bottom: 30px;
     }  
     .jumbotron {
-      background-color: #E066FF;
+      background-color: #33A1C9;
       color: #fff;
       padding: 100px 25px;
       font-family: Montserrat, sans-serif;
@@ -44,11 +44,11 @@
       background-color: #f6f6f6;
     }
     .logo-small {
-      color: #E066FF;
+      color: #33A1C9;
       font-size: 50px;
     }
     .logo {
-      color: #E066FF;
+      color: #33A1C9;
       font-size: 200px;
     }
     .thumbnail {
@@ -63,13 +63,13 @@
     }
     .carousel-control.right, .carousel-control.left {
       background-image: none;
-      color: #E066FF;
+      color: #33A1C9;
     }
     .carousel-indicators li {
-      border-color: #E066FF;
+      border-color: #33A1C9;
     }
     .carousel-indicators li.active {
-      background-color: #E066FF;
+      background-color: #33A1C9;
     }
     .item h4 {
       font-size: 19px;
@@ -82,7 +82,7 @@
       font-style: normal;
     }
     .panel {
-      border: 1px solid #E066FF; 
+      border: 1px solid #33A1C9; 
       border-radius:0 !important;
       transition: box-shadow 0.5s;
     }
@@ -90,9 +90,9 @@
       box-shadow: 5px 0px 40px rgba(0,0,0, .2);
     }
     .panel-footer .btn:hover {
-      border: 1px solid #E066FF;
+      border: 1px solid #33A1C9;
       background-color: #fff !important;
-      color: #E066FF;
+      color: #33A1C9;
     }
     .panel-heading {
       color: #fff !important;
@@ -116,7 +116,7 @@
     }
     .panel-footer .btn {
       margin: 15px 0;
-      background-color: #E066FF;
+      background-color: #33A1C9;
       color: #fff;
     }
     .navbar {
@@ -137,7 +137,7 @@
       color: #fff !important;
     }
     .navbar-nav li a:hover, .navbar-nav li.active a {
-      color: #E066FF !important;
+      color: #33A1C9 !important;
       background-color: #fff !important;
     }
     .navbar-default .navbar-toggle {
@@ -147,7 +147,7 @@
     footer .glyphicon {
       font-size: 20px;
       margin-bottom: 20px;
-      color: #E066FF;
+      color: #33A1C9;
     }
     .slideanim {visibility:hidden;}
     .slide {

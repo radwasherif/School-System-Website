@@ -1,8 +1,5 @@
-
-.col-centered{
-    float: none;
-    margin-left: auto;
-    margin-right: auto; 
+body {
+	font-family:  Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
 }
 
 #sign-up {
@@ -10,4 +7,109 @@
 	padding: 10px; 
 	margin-top: auto; 
 	margin-bottom: auto; 
+}
+.col-centered{
+    float: none;
+    margin-left: auto;
+    margin-right: auto; 
+}
+.row {
+	padding-top: 50px; 
+	padding-bottom: 50px; 
+}
+.jumbotron {
+	background-color: white; 
+}
+
+.container-custom {
+	background-color: #2BBBAD; 
+}
+
+#logo {
+	background-color: white; 
+	/*margin-right: auto;
+	margin-left: auto;*/  
+	width: 25%;
+}
+
+#login {
+	background-color: #e0f2f1;
+	bord : 10px;
+	border-color: #00695c;  
+}
+
+#search-bar {
+	width: 50%;
+	margin-right: auto; 
+	margin-left: auto;    
+}
+
+.rectangle {
+	border-radius: 5px;
+	border: 2px solid #FFFFFF;
+	background-color: #2BBBAD;
+	/*height: 50px;
+	width: 120px;*/
+	/*margin: auto;*/
+	text-align: center;
+	font-size: 36px; 
+}
+
+.my-circle-button {
+	box-shadow: 2px 4px 0 2px rgba(0,0,0,0.1);
+	border: .5em solid #838B8B;
+	font-size: 4em;
+	line-height: 1.1em;
+	color: #000000;
+	background-color: #838B8B;
+	margin: auto;
+	border-radius: 50%;
+	height: 7em;
+	width: 7em;
+	position: relative;
+}
+.my-circle-button:hover {
+	color:#000000;
+    background-color: #838B8B;
+	text-decoration: none;
+	border-color: #C9C9C9;
+	
+}
+.my-circle-button:visited {
+	color:#000000;
+    background-color: #838B8B;
+	text-decoration: none;
+	
+}
+/*.orange-circle-link-greater-than {
+    font-size: 1em;
+}*/
+
+.divider1{
+    /*width:5px;*/
+    /*height:auto;*/
+    /*display:inline-block;*/
+    position: absolute;
+    left: -680px;
+    right: 0px;
+    bottom: 130px;
+}
+.divider2{
+   /* width:5px;
+    height:auto;
+    display:inline-block;*/
+   position: absolute;
+    /*right: : 30px;*/
+    /*left: 30px;*/
+
+}
+.divider3{
+    /*width:5px;
+    height:auto;
+    display:inline-block;*/
+     /*margin-left: : -100px;*/
+     
+     position: absolute;
+     bottom: 130px;
+    left: 800px;
 }

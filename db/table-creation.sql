@@ -78,7 +78,7 @@ CREATE TABLE Parents (
 	password VARCHAR(20),
 	first_name VARCHAR(100), 
 	last_name VARCHAR(100), 
-	email VARCHAR(100), 
+	email VARCHAR(100) UNIQUE,
 	address VARCHAR(600), 
 	home_phone VARCHAR(100)
 ); 

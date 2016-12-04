@@ -6,8 +6,7 @@
 <head>
 	<title>R.A. Inc. </title>
 </head>
-<body>	
-	<?php
+<?php
 	include 'connection-values.php'; 
 	$username = $password = $usertype = $loginError  = ""; 
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -19,12 +18,12 @@
 			if($usertype == "parent") {
 				// echo "HIIIII";
 				$call = $conn->prepare('CALL search_parent(?, ?)');
-				$call->bind_param(ss, $username, $password); 
+				$call->bind_param('ss', $username, $password); 
 				if($call->execute()) {
 					$result = $call->get_result(); 
 					if($row = $result->fetch_array(MYSQLI_BOTH)) {
 						echo $row['id'];  
-						header("Location: parent/parent.php"); 
+						header("Location: parent/parent.php?id=" . $row['id']); 
 					} else {
 						$loginError =  "* Please enter a valid username-password combination."; 
 					}
@@ -37,8 +36,10 @@
 				if($call->execute()) {
 					$result = $call->get_result(); 
 					if($row = $result->fetch_array(MYSQLI_BOTH)) {
+
 						$r = $row['id'];  
 						header("Location: teacher/teacher.php?id=$r"); 
+
 					} else {
 						$loginError =  "* Please enter a valid username-password combination."; 
 					}
@@ -53,11 +54,8 @@
 		}
 
 	}
-	?> 
-	<style type="text/css">
-		
-	</style>
-	
+	?>
+<body>
 	<nav class="navbar navbar-inverse ">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -71,7 +69,7 @@
 			
 			<form id = "search-bar"  method = "post" class="navbar-form navbar-right" action = "search-schools.php">
 				<div class="form-group">
-					<input  type="text" class="form-control" placeholder="Search schools by name, address or type" name="school">
+					<input type="text" class="form-control" placeholder="Search schools by name, address or type" name="school">
 				</div>
 				<button type="submit" class="btn btn-default">Search</button>
 			</form>
@@ -95,7 +93,7 @@
 	<br> 
 	<div class = "container">
 		<div class = "row">
-			<div  id = "login" class = "col-md-3 col-centered">
+			<div  id = "login" class = "col-md-3 col-md-offset-5">
 				<h1>Log in</h1>
 				<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 					<div class="form-group">
@@ -149,7 +147,7 @@
 				<div class="rectangle col-md-4 col-md-offset-1">
 					PARENT SIGNUP
 				</div>
-	
+
 			</a>
 		</div>
 

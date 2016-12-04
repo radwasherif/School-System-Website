@@ -36,7 +36,7 @@ BEGIN
  INSERT INTO Employees (first_name, middle_name, last_name, username, password, email, gender, address, birthdate) VALUES  
  (first_name, middle_name, last_name, username, password, email, gender, address, birthdate);
  SET @emp_id = LAST_INSERT_ID(); 
- INSERT INTO Administrators (id) VALUES (@emp_id); 
+ INSERT INTO Administrators (id) VALUES (@emp_id);
 END //
 
 
@@ -455,7 +455,8 @@ CREATE PROCEDURE parent_signup ( IN username VARCHAR(20), password VARCHAR(20), 
 address VARCHAR(120), home_phone VARCHAR(15))
 BEGIN
   INSERt INTO Parents (username, password, first_name, last_name, email, address, home_phone) 
-  VALUES (username, password, first_name, last_name, email, address, home_phone); 
+  VALUES (username, password, first_name, last_name, email, address, home_phone);
+  SELECT LAST_INSERT_ID();
 END //
 
 CREATE PROCEDURE parent_add_mobile (IN parent_id INT, mobile VARCHAR(15))

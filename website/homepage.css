@@ -5,6 +5,7 @@ body {
     float: none;
     margin-left: auto;
     margin-right: auto; 
+    /*text-align: center;*/
 }
 .row {
 	padding-top: 50px; 

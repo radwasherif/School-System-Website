@@ -1,0 +1,49 @@
+body {
+	font-family:  Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+}
+.col-centered{
+    float: none;
+    margin-left: auto;
+    margin-right: auto; 
+}
+
+#sign-up {
+	background-color: #e0f2f1; 
+	padding: 10px; 
+	margin-top: auto; 
+	margin-bottom: auto; 
+}
+
+.container-custom {
+	background-color: #2BBBAD; 
+}
+
+#logo {
+	background-color: white; 
+	margin-right: auto;
+	margin-bottom: auto; 
+	margin-top: 55px;   
+}
+
+#welcome-panel {
+	margin-top: 50px !important;
+	background-color:  #e0f2f1; 
+}
+
+#active-button {
+	background-color: #2BBBAD !important; 
+}
+
+.sidenav {
+      /*background-color: #e0f2f1;*/
+      height: 100%;
+ }
+ .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color: #fff;
+    background-color: #2BBBAD ;
+}
+
+a {
+    color: #000000;
+    text-decoration: none;
+}

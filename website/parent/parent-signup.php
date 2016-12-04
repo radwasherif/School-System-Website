@@ -120,9 +120,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 						</div>
 
 						<div class="form-group">
-							<label>Mobile number: </label>
+							<label>Mobile no.: </label>
 							<span class="error">* <?php echo $mobileErr;?></span>
-							<input type="text" class="form-control" placeholder="Middle name" name = "mobile">
+							<input type="text" class="form-control" placeholder="Mobile no." name = "mobile">
 						</div>
 						<div class="form-group">
 							<label>Email: </label>

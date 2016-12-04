@@ -7,6 +7,6 @@
 	if($conn->connect_errno) {
 		die($conn->connect_errno); 
 	} else {
-		// echo "CONNECTED\n"; 
+		echo "CONNECTED\n"; 
 	}
 ?>

@@ -55,12 +55,7 @@
 
 	}
 	?>
-<body>	
-	 
-	<style type="text/css">
-		
-	</style>
-	
+<body>
 	<nav class="navbar navbar-inverse ">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -74,7 +69,7 @@
 			
 			<form id = "search-bar"  method = "post" class="navbar-form navbar-right" action = "search-schools.php">
 				<div class="form-group">
-					<input  type="text" class="form-control" placeholder="Search schools by name, address or type" name="school">
+					<input type="text" class="form-control" placeholder="Search schools by name, address or type" name="school">
 				</div>
 				<button type="submit" class="btn btn-default">Search</button>
 			</form>

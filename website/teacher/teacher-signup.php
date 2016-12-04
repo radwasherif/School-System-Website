@@ -6,62 +6,47 @@
 	<title>Teacher Signup</title>
 </head>
 
-<nav class="navbar navbar-inverse ">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Radwa and Alaa</a>
-		</div>
-
-		<ul class="nav navbar-nav">
-			<li><a href="http://localhost/School-System-Website/website/index.php">Home</a></li>
-			<li><a href="http://localhost/School-System-Website/website/view-schools.php">View Schools</a></li>
-		</ul>
-
-		<form id = "search-bar"  method = "post" class="navbar-form navbar-right" action = "search-schools.php">
-			<div class="form-group">
-				<input  type="text" class="form-control" placeholder="Search schools by name, address or type" name="school">
-			</div>
-			<button type="submit" class="btn btn-default">Search</button>
-		</form>
-
-	</div>
-</nav>
-
 <?php
 include "../connection-values.php"; 
 $fname = $mname = $lname = $email = $address = $gender = $birthdate = ""; 
 $fnameErr = $lnameErr = $emailErr = $genderErr = $birthdateErr = "";
+$allRequired = true; 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (empty($_POST["fname"])) {
+		$allRequired = false; 
 		$fnameErr = "First name is required";
 	} else {
 		$fname = $_POST['fname'];
 	}
 	$mname = $_POST['mname'];
 	if (empty($_POST["lname"])) {
+		$allRequired = false;
 		$lnameErr = "Last name is required";
 	} else {
 		$lname = $_POST['lname'];
 	}
 	if (empty($_POST["email"])) {
+		$allRequired = false;
 		$emailErr = "Email is required";
 	} else {
 		$email = $_POST['email'];
 	}
 	$address = $_POST['address'];
 	if (empty($_POST["gender"])) {
+		$allRequired = false;
 		$genderErr = "Gender is required";
 	} else {
 		$gender = $_POST['gender'];
 	}
 	if (empty($_POST["birthdate"])) {
+		$allRequired = false;
 		$birthdateErr = "Birthdate is required";
 	} else {
 		$birthdate = $_POST['birthdate'];
 	} 
 	
 	$school_id = $_POST['school']; 
-	if($fnameErr == "" && $lnameErr = "" && $emailErr == "" && $genderErr == "" && $birthdateErr == "")
+	if($allRequired)
 	{
 		$call = $conn->prepare('CALL teacher_sign_up(?, ?, ?, ?, ?, ?, ?, ?)'); 
 		$call->bind_param('sssssssi', $fname, $mname, $lname, $birthdate, $address, $email, $gender, $school_id); 
@@ -70,7 +55,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 			echo "<div class='panel-heading'><h2>You have successfully signed up.<h2></div>";
 			echo "<div class='panel-body'> <h4>Please wait for a confirmation email containing your username and password. <h4></div>";
 			echo "</div>";
-		//echo "<h2> You have successfully signed up. Please wait for a confirmation email containing your username and password. </h2>"; 
 		} else {
 			echo $call->error; 
 		}
@@ -80,6 +64,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 ?>
 <body>
+<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Radwa and Alaa</a>
+			</div>
+			
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="../index.php">Home</a></li>
+				<li><a href="../view-schools.php">View Schools</a></li>
+			</ul>
+			
+			<form id = "search-bar"  method = "post" class="navbar-form navbar-right" action = "../search-schools.php">
+				<div class="form-group">
+					<input  type="text" class="form-control" placeholder="Search schools by name, address or type" name="school">
+				</div>
+				<button type="submit" class="btn btn-default">Search</button>
+			</form>
+
+		</div>
+	</nav>
 
 	<div class="container">
 		<div class = "row" class = "center">

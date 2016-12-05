@@ -492,13 +492,13 @@ BEGIN
 END // 
 
 
-CREATE PROCEDURE parent_enroll_child(IN parent_id INT, child_ssn INT, school_id INT) 
+CREATE PROCEDURE parent_enroll_child(IN parent_id INT, child_ssn INT, school_id INT)
 BEGIN
-   IF EXISTS (SELECT * FROM School_Apply_Student P WHERE P.parent_id = parent_id AND P.student_ssn = child_ssn AND P.school_id = school_id AND P.status = 'accepted') 
+   IF EXISTS (SELECT * FROM School_Apply_Student P WHERE P.parent_id = parent_id AND P.student_ssn = child_ssn AND P.school_id = school_id AND P.status = 'accepted')
    THEN
     UPDATE Students S
     SET S.school_id = school_id
-    WHERE S.ssn = child_ssn; 
+    WHERE S.ssn = child_ssn;
    END IF; 
 
 END //

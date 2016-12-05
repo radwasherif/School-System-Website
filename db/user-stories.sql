@@ -450,7 +450,6 @@ CREATE PROCEDURE get_admin_school(IN admin_id INT, OUT school_id INT)
 
 	
 -- DELIMITER ; 
-
 CREATE PROCEDURE parent_signup ( IN username VARCHAR(20), password VARCHAR(20), first_name VARCHAR(20), last_name VARCHAR(20), email VARCHAR(20), 
 address VARCHAR(120), home_phone VARCHAR(15))
 BEGIN
@@ -651,15 +650,17 @@ BEGIN
   SET @emp_id = LAST_INSERT_ID();
   INSERT INTO Teachers (id) VALUES (@emp_id);
 END //
-
+ -- drop procedure teacher_view_courses;
 CREATE PROCEDURE teacher_view_courses(IN teacher_id INT)
 BEGIN
-  SELECT C.name, C.level, C.grade
+  SELECT C.code, C.name, C.level, C.grade
   FROM Teachers T
   INNER JOIN Courses_TaughtTo_Students_By_Teachers CT ON T.id = CT.teacher_id  
   INNER JOIN Courses C  ON C.code = CT.course_code
   WHERE T.id = teacher_id
-  GROUP BY level AND grade;
+  ORDER BY C.grade;
+  -- ORDER BY C.grade;
+   
 END // 
 
 CREATE PROCEDURE teacher_post_assignment(IN teacher_id INT, IN course_code INT, IN post_date DATE, IN due_date DATE, IN content VARCHAR(1000), IN assignment_number INT)
@@ -750,11 +751,31 @@ END //
 
 CREATE PROCEDURE teacher_view_students(IN teacher_id INT)
 BEGIN
-  SELECT S.first_name, S.last_name, S.id, S.username, S.ssn, S.grade, S.level, S.gender, S.birthdate, S.age
+  SELECT S.ssn, S.first_name, S.last_name, S.id, S.grade, S.level, S.gender, S.birthdate, S.age
   FROM Students S
   WHERE EXISTS (SELECT * FROM Courses_TaughtTo_Students_By_Teachers CT WHERE CT.teacher_id = teacher_id AND CT.student_ssn = S.ssn)
   GROUP BY S.grade
   ORDER BY S.first_name, S.last_name;
+END //
+-- drop procedure teacher_view_students_in_grade;
+CREATE PROCEDURE teacher_view_students_in_grade(IN teacher_id INT, IN grade INT)
+BEGIN
+  SELECT S.ssn, CONCAT_WS('',S.first_name, ' ',S.last_name) AS student_name, S.id, S.gender, S.age
+  FROM Students S
+  WHERE EXISTS (SELECT * FROM Courses_TaughtTo_Students_By_Teachers CT WHERE CT.teacher_id = teacher_id AND CT.student_ssn = S.ssn) 
+  AND S.grade = grade
+  GROUP BY S.ssn
+  ORDER BY student_name;
+END //
+
+
+-- drop procedure teacher_grades;
+CREATE PROCEDURE teacher_grades(IN teacher_id INT)
+BEGIN
+SELECT DISTINCT C.grade AS grade
+FROM Courses C
+WHERE EXISTS (SELECT * FROM Courses_TaughtTo_Students_By_Teachers CT WHERE CT.teacher_id = teacher_id AND CT.course_code = C.code)
+ORDER BY C.grade;
 END //
 
 CREATE PROCEDURE teacher_view_students_without_activities(IN teacher_id INT)

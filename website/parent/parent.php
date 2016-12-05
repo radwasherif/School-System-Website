@@ -124,10 +124,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 					<li id="active-button" class="active"><a href="<?php echo 'parent.php?id=' . $id; ?>">Apply for your Children</a></li>
 					<!--     <li><a href="#section2">Friends</a></li> -->
 					<li><a href="<?php echo 'parent-accepted.php?id=' . $id; ?>">View Accepted Applications</a></li>
-					<li><a href="#section3">View Rerports</a></li>
-					<li><a href="#section3">View Teachers</a></li>
-					<li><a href="#section3">View and Review Schools</a></li>
-					<li><a href="#section3">All Your Reviews</a></li>
+					<li><a href="<?php echo 'parent-view-reports.php?id=' . $id; ?>">View Rerports</a></li>
+					<li><a href="<?php echo 'parent-view-teachers.php?id=' . $id; ?>">View Teachers</a></li>
+					<li><a href="<?php echo 'parent-view-schools.php?id=' . $id; ?>">View and Review Schools</a></li>
+					<li><a href="<?php echo 'parent-reviews.php?id=' . $id; ?>">All Your Reviews</a></li>
 				</ul><br>
 				<div class="input-group">
 					<input type="text" class="form-control" placeholder="Search Blog..">

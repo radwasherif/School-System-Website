@@ -3,51 +3,14 @@
 <link rel="stylesheet" type="text/css" href="../bootstrap.css">
 <link rel="stylesheet" type="text/css" href="parent.css">
 <head>
-	<title>Parent - Accepted Applications</title>
+	<title>Parent - View Reports</title>
 </head>
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 include "../connection-values.php";
 $id = $_GET['id']; 
-// echo $id; 
 
-//enrolling a child from previous call of enroll 
-if(!empty($_GET['enroll_id']) && !empty($_GET['child_ssn'])) {
-	$child_ssn = $_GET['child_ssn']; 
-	$enroll_id = $_GET['enroll_id']; 
-	$school_id; 
-	// echo $enroll_id . " " . $child_ssn;
-	$call = $conn->prepare('SELECT S.school_id FROM Students S WHERE S.ssn = ?'); 
-	$call->bind_param('i', $child_ssn); 
-	if($call->execute()) {
-		$result = $call->get_result(); 
-		if($row = $result->fetch_array(MYSQLI_BOTH)) {
-			$school_id = $row[0]; 
-			echo $school_id;
-		}
-	} else {
-		echo $call->error;
-	}
-	if($school_id === NULL) {
-		$call = $conn->prepare('CALL parent_enroll_child(?, ?, ?)');
-		$call->bind_param('iii', $id, $child_ssn, $enroll_id);
-		if($call->execute()) {
-			echo "<div class='panel panel-success'>";
-			echo "<div class='panel-heading'><h2>Your have have successfully enrolled your child.<h2></div>";
-			echo "</div>";
-		} else {
-			echo $call->error;
-		} 	
-	} else {
-		echo "<div class='panel panel-success'>";
-			// echo "<div class='panel-heading'><h2>You have successfully signed up.<h2></div>";
-			echo "<div class='panel-body'> <h4> This child is already enrolled in a school. <h4></div>";
-			echo "</div>";
-	}
-	
-}
-//getting parent's name for welcome sign
 $call = $conn->prepare('SELECT * FROM Parents WHERE id = ?'); 
 $call->bind_param('i', $id); 
 if($call->execute()) {
@@ -67,7 +30,15 @@ if($call->execute()) {
 	echo $call->error; 
 }
 
+//getting report reply 
 
+if(!empty($_GET['child_ssn']) && !empty($_GET['teacher_id']) && !empty('report_date')) {
+	$child_ssn = $_GET['child_ssn']; 
+	$teacher_id = $_GET['teacher_id']; 
+	$report_date = $_GET['report_date']; 
+	$reply = $_POST[$child_ssn.$teacher_id.$report_date]; 
+	echo $reply;
+}
 ?>
 <body>
 	<nav class="navbar navbar-inverse">
@@ -99,21 +70,20 @@ if($call->execute()) {
 			<div id = "welcome-panel" class="col-md-7 col-md-offset-1 jumbotron">
 				<h1>Welcome, <?php echo $parent['first_name']; ?>!</h1> 
 				<h3>We are here to help you take care of your children's education.</h3>
-				<p> Here you can view the schools who have accepted your children and enroll them in one of them. </p> 
+				<p> Here you can view all the reports written about your children by their teacher - <em>all in one place</em>! </p> 
 			</div>	
 		</div>
 
 		
 	</div>
 	<div class="container-fluid">
-		<div class="row content">
+		<div class="row">
 			<div class="col-sm-3 sidenav">
 				<h4>All You Need In One Place </h4>
 				<ul class="nav nav-pills nav-stacked">
 					<li><a href="<?php echo 'parent.php?id=' . $id; ?>">Apply for your Children</a></li>
-					<!--     <li><a href="#section2">Friends</a></li> -->
-					<li id="active-button" class="active"><a href="<?php echo 'parent-accepted.php?id=' . $id; ?>">View Accepted Applications</a></li>
-					<li><a href="<?php echo 'parent-view-reports.php?id=' . $id; ?>">View Rerports</a></li>
+					<li><a href="<?php echo 'parent-accepted.php?id=' . $id; ?>">View Accepted Applications</a></li>
+					<li id="active-button" class="active"><a href="<?php echo 'parent-view-reports.php?id=' . $id; ?>">View Rerports</a></li>
 					<li><a href="<?php echo 'parent-view-teachers.php?id=' . $id; ?>">View Teachers</a></li>
 					<li><a href="<?php echo 'parent-view-schools.php?id=' . $id; ?>">View and Review Schools</a></li>
 					<li><a href="<?php echo 'parent-reviews.php?id=' . $id; ?>">All Your Reviews</a></li>
@@ -127,58 +97,52 @@ if($call->execute()) {
 					</span>
 				</div>
 			</div>
-			<div class="col-md-7">
+
+			<div class="col-md-9">
 				<?php
-					while($row = $children->fetch_array(MYSQLI_BOTH)) {
+				while($row = $children->fetch_array(MYSQLI_BOTH)) {
 						// echo $row[0];
-						echo "
-						<div>
-						
-						<table class = 'table'> 
-						<h1> $row[1]  $row[2] </h1>
-								<thead>
-								<tr>
-        							<th>School Name</th>
-        							<th>School Type</th>
-        							<th>Fees</th>
-        							<th>Enroll </th>
-      							</tr>
-      							</thead>
-      							<tbody> 
+					echo "
+						<h1><span class='label label-default'>$row[1] $row[2] </span></h1>
 						"; 
-						if($call = $conn->prepare('CALL parent_view_accepted(?, ?)')) {
+						if($call = $conn->prepare('CALL parent_view_report(?, ?)')) {
 							$call->bind_param('ii', $id, $row[0]);	
-						 
-						 
-						if($call->execute()) {
+
+
+							if($call->execute()) {
 							// echo "CALLED PROCEDURE"; 
-						$result = $call->get_result(); 
-						while($record = $result->fetch_array(MYSQLI_BOTH)) {
-							echo 
-							"<tr> 
-        							<td>$record[0]</td>
-        							<td>$record[1]</td>
-        							<td>$record[2]</td>
-        							<td> <a href = 'parent-accepted.php?id=$id&child_ssn=$row[0]&enroll_id=$record[3]&school_id=$row[3]' class = 'btn btn-success' > Enroll </a>
-      						</tr>"; 
+								$result = $call->get_result(); 
+								while($record = $result->fetch_array(MYSQLI_BOTH)) {
+									
+									echo "<p> <h2><em> $record[2] </em> </h2> </p>"; 
+									echo "<h6> Post by $record[0] $record[1] on $record[3].</h6>";
+									// echo "
+									// <div class='form-group'>
+									//   <label>Reply: </label>
+									//   <textarea class='form-control' rows='3' name = '$row[0]$record[4]$record[3]'></textarea>
+									// </div>
+									// "; 
+									echo "<a href = 'parent-report.php?id=$id&child_ssn=$row[0]&first_name=$row[1]&last_name=$row[2]&teacher_id=$record[4]&teacher_fname=$record[0]&teacher_lname=$record[0]&report_date=$record[3]' class = 'btn btn-success'> Reply </a>";
+									echo "
+									<hr>";
+								}
+								$call->close(); 	
+							} else {
+								echo $call->error; 
 							}
-							$call->close(); 	
+
 						} else {
-							echo $call->error; 
-						}
-						
-					} else {
 						// echo "YA5TAAAAY\t";
 						// echo $id . " " . $row[0];  
-						echo $conn->error; 
+							echo $conn->error; 
+						}
+						echo "<br>"; 
+				 
 					}
-				}
-					echo "</table>
-						</div> 
-					"; 
+
 				?>
 			</div>
 		</div>
-	</div>
+	</div>	
 </body>
 </html>

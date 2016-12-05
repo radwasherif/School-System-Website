@@ -29,7 +29,7 @@ body {
 	background-color: white; 
 	/*margin-right: auto;
 	margin-left: auto;*/  
-	width: 25%;
+	width: 100%;
 }
 
 #login {
@@ -57,11 +57,11 @@ body {
 
 .my-circle-button {
 	box-shadow: 2px 4px 0 2px rgba(0,0,0,0.1);
-	border: .5em solid #838B8B;
+	border: .5em solid #2BBBAD;
 	font-size: 4em;
 	line-height: 1.1em;
 	color: #000000;
-	background-color: #838B8B;
+	background-color: #2BBBAD;
 	margin: auto;
 	border-radius: 50%;
 	height: 7em;
@@ -70,14 +70,14 @@ body {
 }
 .my-circle-button:hover {
 	color:#000000;
-    background-color: #838B8B;
+    background-color: #2BBBAD;
 	text-decoration: none;
-	border-color: #C9C9C9;
+	border-color: #8DEEEE;
 	
 }
 .my-circle-button:visited {
 	color:#000000;
-    background-color: #838B8B;
+    background-color: #2BBBAD;
 	text-decoration: none;
 	
 }
@@ -92,7 +92,7 @@ body {
     position: absolute;
     left: -680px;
     right: 0px;
-    bottom: 130px;
+    bottom: -350px;
 }
 .divider2{
    /* width:5px;
@@ -110,6 +110,6 @@ body {
      /*margin-left: : -100px;*/
      
      position: absolute;
-     bottom: 130px;
+     bottom: -350px;
     left: 800px;
 }

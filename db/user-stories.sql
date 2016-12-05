@@ -450,7 +450,6 @@ CREATE PROCEDURE get_admin_school(IN admin_id INT, OUT school_id INT)
 
 	
 -- DELIMITER ; 
-
 CREATE PROCEDURE parent_signup ( IN username VARCHAR(20), password VARCHAR(20), first_name VARCHAR(20), last_name VARCHAR(20), email VARCHAR(20), 
 address VARCHAR(120), home_phone VARCHAR(15))
 BEGIN

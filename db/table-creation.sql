@@ -65,7 +65,7 @@ CREATE TABLE Students (
 	gender VARCHAR(10),
 	birthdate DATE,
 	age INT,
-	grade INT AS (2016 - YEAR(birthdate) - 5),
+	grade INT,
 	level VARCHAR(100), 
 	CHECK (level = 'elementary' or level = 'middle' or level = 'high'),
 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE SET NULL 
@@ -160,6 +160,11 @@ CREATE TRIGGER StudentsAge BEFORE INSERT
 		SET New.age = YEAR(CURDATE()) - YEAR(New.birthdate);
 
 END//
+
+CREATE TRIGGER StudentGrade BEFORE INSERT
+	ON Students
+	FOR EACH ROW
+		SET New.grade = YEAR(CURDATE()) - YEAR(New.birthdate) - 5;
 
 CREATE TRIGGER TeachersExpYears BEFORE INSERT
 	ON Teachers

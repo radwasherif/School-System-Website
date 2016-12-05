@@ -450,9 +450,9 @@ CREATE PROCEDURE get_admin_school(IN admin_id INT, OUT school_id INT)
 
 	
 -- DELIMITER ; 
-
-CREATE PROCEDURE parent_signup ( IN username VARCHAR(20), password VARCHAR(20), first_name VARCHAR(20), last_name VARCHAR(20), email VARCHAR(20), 
-address VARCHAR(120), home_phone VARCHAR(15))
+# DROP PROCEDURE parent_signup;
+CREATE PROCEDURE parent_signup ( IN username VARCHAR(100), password VARCHAR(20), first_name VARCHAR(100), last_name VARCHAR(100), email VARCHAR(100),
+address VARCHAR(600), home_phone VARCHAR(100))
 BEGIN
   INSERt INTO Parents (username, password, first_name, last_name, email, address, home_phone) 
   VALUES (username, password, first_name, last_name, email, address, home_phone);
@@ -478,18 +478,17 @@ BEGIN
   END IF; 
   
 
-  INSERT INTO School_Apply_Student(school_id, student_ssn) VALUES (school_id, student_ssn); 
+  INSERT INTO School_Apply_Student(school_id, student_ssn, parent_id, status)
+  VALUES (school_id, student_ssn, parent_id, 'pending');
 END //
 
 
-CREATE PROCEDURE parent_view_accepted (IN parent_id INT) 
+CREATE PROCEDURE parent_view_accepted (IN parent_id INT, child_ssn INT)
 BEGIN
-  SELECT Sc.name, St.first_name, St.last_name
+  SELECT Sc.name, Sc.type, Sc.fees, Sc.id
   FROM Schools Sc 
   INNER JOIN School_Apply_Student A ON Sc.id = A.school_id
-  INNER JOIN Students St ON St.ssn = A.student_ssn
-  WHERE A.status = 'accepted' AND St.ssn IN (SELECT P.child_ssn FROM  Parent_Of_Student P WHERE P.parent_id = parent_id)
-  GROUP BY Sc.name, St.first_name, St.last_name; 
+  WHERE A.parent_id = parent_id AND  A.status = 'accepted' AND A.student_ssn = child_ssn;
 END // 
 
 

@@ -11,6 +11,41 @@ ini_set('display_errors', '1');
 include "../connection-values.php";
 $id = $_GET['id']; 
 // echo $id; 
+if(!empty($_GET['enroll_id']) && !empty($_GET['child_ssn'])) {
+	$child_ssn = $_GET['child_ssn']; 
+	$enroll_id = $_GET['enroll_id']; 
+	$school_id; 
+	// echo $enroll_id . " " . $child_ssn;
+	$call = $conn->prepare('SELECT S.school_id FROM Students S WHERE S.ssn = ?'); 
+	$call->bind_param('i', $child_ssn); 
+	if($call->execute()) {
+		$result = $call->get_result(); 
+		if($row = $result->fetch_array(MYSQLI_BOTH)) {
+			$school_id = $row[0]; 
+			echo $school_id;
+		}
+	} else {
+		echo $call->error;
+	}
+	if($school_id === NULL) {
+		$call = $conn->prepare('CALL parent_enroll_child(?, ?, ?)');
+		$call->bind_param('iii', $id, $child_ssn, $enroll_id);
+		if($call->execute()) {
+			echo "<div class='panel panel-success'>";
+			echo "<div class='panel-heading'><h2>Your have have successfully enrolled your child.<h2></div>";
+			echo "</div>";
+		} else {
+			echo $call->error;
+		} 	
+	} else {
+		echo "<div class='panel panel-success'>";
+			// echo "<div class='panel-heading'><h2>You have successfully signed up.<h2></div>";
+			echo "<div class='panel-body'> <h4> This child is already enrolled in a school. <h4></div>";
+			echo "</div>";
+	}
+	
+}
+
 $call = $conn->prepare('SELECT * FROM Parents WHERE id = ?'); 
 $call->bind_param('i', $id); 
 if($call->execute()) {
@@ -19,16 +54,15 @@ if($call->execute()) {
 } else {
 	echo $call->error; 
 } 
-$call->prepare('SELECT POS.child_ssn, S.first_name, S.last_name FROM Parent_Of_Student POS INNER JOIN Students S ON S.ssn = POS.child_ssn WHERE POS.parent_id = ?'); 
+$call->prepare('SELECT POS.child_ssn, S.first_name, S.last_name, S.school_id FROM Parent_Of_Student POS INNER JOIN Students S ON S.ssn = POS.child_ssn WHERE POS.parent_id = ?'); 
 $call->bind_param('i', $id); 
 if($call->execute()) {
 	$children = $call->get_result(); 
-	// while($row = $children->fetch_array(MYSQLI_BOTH)) {
-	// 	echo $row[0] . " " . $row[1] . " " . $row[2]; 
-	// }	
+	$call->close(); 	
 } else {
 	echo $call->error; 
 }
+
 
 ?>
 <body>
@@ -89,8 +123,12 @@ if($call->execute()) {
 			<div class="col-md-7">
 				<?php
 					while($row = $children->fetch_array(MYSQLI_BOTH)) {
-						echo "<h1>" . $row[1] . " " . $row[2] . "</h1>
+						// echo $row[0];
+						echo "
+						<div>
+						
 						<table class = 'table'> 
+						<h1> $row[1]  $row[2] </h1>
 								<thead>
 								<tr>
         							<th>School Name</th>
@@ -101,28 +139,36 @@ if($call->execute()) {
       							</thead>
       							<tbody> 
 						"; 
-						if($call2 = $conn->prepare('CALL parent_view_accepted(?, ?)')) {
-							$call2->bind_param('ii', $id, $row[0]);	
+						if($call = $conn->prepare('CALL parent_view_accepted(?, ?)')) {
+							$call->bind_param('ii', $id, $row[0]);	
 						 
 						 
-						if($call2->execute()) {
-						$result = $call2->get_result(); 
+						if($call->execute()) {
+							// echo "CALLED PROCEDURE"; 
+						$result = $call->get_result(); 
 						while($record = $result->fetch_array(MYSQLI_BOTH)) {
 							echo 
-							"<tr>
+							"<tr> 
         							<td>$record[0]</td>
         							<td>$record[1]</td>
         							<td>$record[2]</td>
-        							<td> <a href='#' class = 'btn btn-success'> Enroll </a>
+        							<td> <a href = 'parent-accepted.php?id=$id&child_ssn=$row[0]&enroll_id=$record[3]&school_id=$row[3]' class = 'btn btn-success' > Enroll </a>
       						</tr>"; 
-							}	
+							}
+							$call->close(); 	
 						} else {
 							echo $call->error; 
 						}
 						
+					} else {
+						// echo "YA5TAAAAY\t";
+						// echo $id . " " . $row[0];  
+						echo $conn->error; 
 					}
 				}
-					echo "</table>"; 
+					echo "</table>
+						</div> 
+					"; 
 				?>
 			</div>
 		</div>

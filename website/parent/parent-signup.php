@@ -29,13 +29,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	if(empty($_POST["mobile"])) {
 		$allRequired = false; 
 		$mobileErr = "Mobile no. is required."; 
+	} else {
+		$mobile = $_POST['mobile']; 
 	}
 	
 	if (empty($_POST["email"])) {
 		$allRequired = false; 
 		$emailErr = "Email is required";
 	} else {
-		$email = $_POST['email'];
+		$email = $_POST["email"];
+		echo $email;
+		echo strlen($email);
 	}
 	
 	$address = $_POST['address'];
@@ -66,16 +70,34 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	
 
 	if($allRequired) {
+		$id; 
 		$call = $conn->prepare('CALL parent_signup(?, ?, ?, ?, ?, ?, ?)'); 
 		$call->bind_param('sssssss', $username, $password, $fname, $lname, $email, $address, $homephone); 
 		if($call->execute()){
 			$result = $call->get_result(); 
 			$row = $result->fetch_array(MYSQLI_BOTH); 
-			header("Location: parent.php?id=" . $row[0]); 
+			$id = $row[0]; 
+			header("Location: parent.php?id=" . $id);  
+			
+			
 		} else 	{
 			echo $call->error; 
 			$loginError = "Please insert valid data."; 
-		}	
+		}
+		// if($call = $conn->prepare('CALL parent_add_mobile(?, ?)') {
+		// 	$call->bind_param('is', $id, $mobile); 
+		// if($call->execute()) {
+		// 	$result = $call->get_result(); 
+		// 	$parent = $result->fetch_array(MYSQLI_BOTH);
+		// 	header("Location: parent.php/id=$id"); 	
+		// } else {
+		// 	echo $call->error; 
+		// }	
+		// } else {
+		// 	echo $call->error;
+		// 	echo $conn->error; 
+		// } 
+		
 	}
 	
 }
@@ -124,12 +146,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 							<span class="error">* <?php echo $mobileErr;?></span>
 							<input type="text" class="form-control" placeholder="Mobile no." name = "mobile">
 						</div>
+						
 						<div class="form-group">
 							<label>Email: </label>
 							<span class="error">* <?php echo $emailErr;?></span>
 							<input type="text" class="form-control" placeholder="Email" name = "email">
 						</div>
 
+						
 						<div class="form-group">
 							<label>Address: </label>
 							<input type="text" class="form-control" placeholder="Address" name = "address">

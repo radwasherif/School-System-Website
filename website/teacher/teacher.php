@@ -72,7 +72,7 @@
 
 		<div class="container">
 		<?php
-		echo "<a href='teacher-courses.php?id=$id' class='btn btn-default my-circle-button col-md-4 col-md-offset-2 divider1'><br/>MY<br/>COURSES</a>";
+		echo "<a href='teacher-courses.php?id=$id' class='btn btn-default my-circle-button col-md-4 col-md-offset-2 divider1'><br/>MY<br/><br/>COURSES</a>";
 		?>
 
 	<!-- 	<a href='teacher-courses.php?id=$id'>
@@ -81,17 +81,13 @@
 			</div>
 		</a> -->
 		<?php
-		echo "<a href='teacher-students.php?id=$id' class='btn btn-default my-circle-button col-md-4 col-md-offset-2 divider3'><br/>MY<br/>STUDENTS</a>";
+		echo "<a href='teacher-students.php?id=$id' class='btn btn-default my-circle-button col-md-4 col-md-offset-2 divider3'><br/>MY<br/><br/>STUDENTS</a>";
 		?>
 		<!-- <button class="btn btn-default my-circle-button col-md-4 col-md-offset-2 divider1" href="teacher-courses.php?id=$id">MY<br/>COURSES<br /></button> -->
 		<!-- <button class="btn btn-default my-circle-button col-md-6 col-md-offset-2 divider3" href="teacher-students.php?id=$id">MY<br/>STUDENTS<br /></button> -->
 
 		</div>
 		<br>
-
-
-
-	</div>		
 
 
 </body>

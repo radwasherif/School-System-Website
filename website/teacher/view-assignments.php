@@ -19,7 +19,10 @@
 			background-color: #F0FFFF;
 		}
 	</style>
-	<?php $id = $_GET['id']; ?>
+	<?php
+$id = $_GET['id'];
+$code = $_GET['code'];
+?>
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -47,32 +50,37 @@
 	include '../connection-values.php'; 
 	 // mysqli_close($conn);
 	$stmt = mysqli_stmt_init($conn);
-	if(!mysqli_stmt_prepare($stmt, 'CALL teacher_grades(?)'))
+	if(!mysqli_stmt_prepare($stmt, 'CALL teacher_assignments(?,?)'))
 	{
 		print "Failed to prepare statement\n";
 	}
 	else
 	{
 		
-		mysqli_stmt_bind_param($stmt, "i", $id);
+		mysqli_stmt_bind_param($stmt, "ii", $id,$code);
 		mysqli_stmt_execute($stmt);
 		$result = mysqli_stmt_get_result($stmt);
 
 		echo "<div class='container'>";
-		echo	"<h2>My Students</h2>";
-		$grades;
+		 // echo	"<h1>Course: </h1>";
+		$grades ;
+		$due_dates;
+		$contents ;
 		$count = 0;
 		while ($row = mysqli_fetch_array($result, MYSQLI_NUM))
 		{
-			$grades[$count] = $row[0];
+			$assignments[$count] = $row[0];
+			$due_dates[$count] = $row[1];
+			$contents[$count] = $row[2];
 			$count = $count + 1;
 		}
 		mysqli_stmt_close($stmt);
-
-		foreach ($grades as $grade) 
+		$count2 = 0;
+		foreach ($assignments as $assignment) 
 		{
+			
 			$stmt2 = mysqli_stmt_init($conn);
-			if(!mysqli_stmt_prepare($stmt2, 'CALL teacher_view_students_in_grade(?,?)'))
+			if(!mysqli_stmt_prepare($stmt2, 'CALL teacher_view_solutions(?,?,?)'))
 			{
 				print "Failed to prepare statement\n";
 			}
@@ -81,48 +89,58 @@
 				echo	"<table class='table table-hover'>";
 				echo	"<thead>";
 				echo	"<tr>";
-				echo	"<th>Name</th>";
 				echo	"<th>ID</th>";
-				echo	"<th>Gender</th>";
-				echo	"<th>Age</th>";
-				echo	"<th>Report</th>";
+				echo	"<th>Name</th>";
+				echo	"<th>Soltion</th>";
+				echo	"<th>Grade</th>";
+				// echo	"<th>Report</th>";
 
 				echo			"</tr>";
 				echo		"</thead>";
 
-				mysqli_stmt_bind_param($stmt2, "ii", $id,$grade);
+				mysqli_stmt_bind_param($stmt2, "iii", $id,$assignment,$code);
 				mysqli_stmt_execute($stmt2);
 				$result2 = mysqli_stmt_get_result($stmt2);
 				
 				echo "<br>";
-				echo	"<h4>Students on grade $grade</h4>";
+				echo	"<h2>Assignment $assignment</h2> <h3> Due Date: $due_dates[$count2]</h3>";
+				echo "<h4>Content: $contents[$count2]</h4>";
 				echo		"<tbody>";
 				
 
 				while ($row = mysqli_fetch_array($result2, MYSQLI_NUM))
 				{
 					$count = 0;
-					$ssn;
+					$student_name;
+					$student_id;
+					$solution;
 					echo "<tr>";
 
 					foreach ($row as $r)
 					{
 						if($count == 0)
 						{
-							$ssn = $r;
+							$student_name = $r;
 						}
 						else if($count == 1)
 						{
-							$student_name = $r;
-							echo "<td>$r</td>";
+							$student_id = $r;
+							
 						}
 						else
 						{
-							echo "<td>$r</td>";
+							$solution = $r;
+							
 						}
 						$count = $count + 1;
 					}
-					echo "<td><li><a href='write-report.php?ssn=$ssn&id=$id&student_name=$student_name'>Write Report</a></li></td>";
+					echo "<td>$student_id</td>";
+					echo "<td>$student_name</td>";
+					echo "<td>$solution</td>";
+					// echo "<td><li><a href='grade-assignment.php?ssn=$ssn&id=$id&student_name=$student_name'>Write Report</a></li></td>";
+					// action= \"htmlspecialchars($_SERVER["PHP_SELF\"])?id=$id&code=$code&assignmentnumber=$assignment&student_id=$student_id&grade=$grade\">
+					// <textarea class='form-control' rows='1' name = 'grade'></textarea><button type='submit' class='btn btn-default'>SUBMIT</button></td>";
+					// echo "<td><li><a href='write-report.php?ssn=$ssn&id=$id&student_name=$student_name'>Write Report</a></li></td>";
 					echo "</tr>";	
 				}
 				echo		"</tbody>";
@@ -132,7 +150,7 @@
 
 			}
 
-
+			$count2 = $count2 + 1;
 		}
 		echo "</div>";
 	}
@@ -143,3 +161,14 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

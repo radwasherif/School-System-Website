@@ -34,7 +34,7 @@ if(!empty($_GET['enroll_id']) && !empty($_GET['child_ssn'])) {
 		$call->bind_param('iii', $id, $child_ssn, $enroll_id);
 		if($call->execute()) {
 			echo "<div class='panel panel-success'>";
-			echo "<div class='panel-heading'><h2>Your have have successfully enrolled your child.<h2></div>";
+			echo "<div class='panel-heading'><h2>Your have successfully enrolled your child.<h2></div>";
 			echo "</div>";
 		} else {
 			echo $call->error;

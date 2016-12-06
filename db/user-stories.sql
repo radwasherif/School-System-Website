@@ -505,13 +505,20 @@ END //
 
 CREATE PROCEDURE view_children_schools (IN parent_id INT) 
 BEGIN
-  SELECT Sc.name, St.first_name, St.last_name
+  SELECT Sc.id, Sc.name, St.first_name, St.last_name
   FROM Parent_Of_Student POS 
   INNER JOIN Students St ON St.ssn = POS.child_ssn
   INNER JOIN Schools Sc ON St.school_id = Sc.id
   WHERE POS.parent_id = parent_id
   ORDER BY Sc.name; 
 END //
+
+CREATE PROCEDURE parent_view_reviews(IN parent_id INT )
+  SELECT PRS.school_id, S.name, PRS.review
+  FROM Parent_Review_School PRS
+  INNER JOIN Schools S ON PRS.school_id = S.id
+  WHERE PRS.parent_id = parent_id;
+//
 
 CREATE PROCEDURE parent_view_announcement(IN parent_id INT) 
 BEGIN

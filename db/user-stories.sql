@@ -450,8 +450,10 @@ CREATE PROCEDURE get_admin_school(IN admin_id INT, OUT school_id INT)
 
 	
 -- DELIMITER ; 
-CREATE PROCEDURE parent_signup ( IN username VARCHAR(20), password VARCHAR(20), first_name VARCHAR(20), last_name VARCHAR(20), email VARCHAR(20), 
-address VARCHAR(120), home_phone VARCHAR(15))
+
+# DROP PROCEDURE parent_signup;
+CREATE PROCEDURE parent_signup ( IN username VARCHAR(100), password VARCHAR(20), first_name VARCHAR(100), last_name VARCHAR(100), email VARCHAR(100),
+address VARCHAR(600), home_phone VARCHAR(100))
 BEGIN
   INSERt INTO Parents (username, password, first_name, last_name, email, address, home_phone) 
   VALUES (username, password, first_name, last_name, email, address, home_phone);
@@ -477,28 +479,27 @@ BEGIN
   END IF; 
   
 
-  INSERT INTO School_Apply_Student(school_id, student_ssn) VALUES (school_id, student_ssn); 
+  INSERT INTO School_Apply_Student(school_id, student_ssn, parent_id, status)
+  VALUES (school_id, student_ssn, parent_id, 'pending');
 END //
 
 
-CREATE PROCEDURE parent_view_accepted (IN parent_id INT) 
+CREATE PROCEDURE parent_view_accepted (IN parent_id INT, child_ssn INT)
 BEGIN
-  SELECT Sc.name, St.first_name, St.last_name
+  SELECT Sc.name, Sc.type, Sc.fees, Sc.id
   FROM Schools Sc 
   INNER JOIN School_Apply_Student A ON Sc.id = A.school_id
-  INNER JOIN Students St ON St.ssn = A.student_ssn
-  WHERE A.status = 'accepted' AND St.ssn IN (SELECT P.child_ssn FROM  Parent_Of_Student P WHERE P.parent_id = parent_id)
-  GROUP BY Sc.name, St.first_name, St.last_name; 
+  WHERE A.parent_id = parent_id AND  A.status = 'accepted' AND A.student_ssn = child_ssn;
 END // 
 
 
-CREATE PROCEDURE parent_enroll_child(IN parent_id INT, child_ssn INT, school_id INT) 
+CREATE PROCEDURE parent_enroll_child(IN parent_id INT, child_ssn INT, school_id INT)
 BEGIN
-   IF EXISTS (SELECT * FROM School_Apply_Student P WHERE P.parent_id = parent_id AND P.student_ssn = child_ssn AND P.school_id = school_id AND P.status = 'accepted') 
+   IF EXISTS (SELECT * FROM School_Apply_Student P WHERE P.parent_id = parent_id AND P.student_ssn = child_ssn AND P.school_id = school_id AND P.status = 'accepted')
    THEN
     UPDATE Students S
     SET S.school_id = school_id
-    WHERE S.ssn = child_ssn; 
+    WHERE S.ssn = child_ssn;
    END IF; 
 
 END //
@@ -523,10 +524,10 @@ BEGIN
   WHERE POS.parent_id = parent_id AND DAY(CURDATE() - A.announcement_date) <= 10; 
 END //
 
-
+# DROP PROCEDURE parent_view_report;
 CREATE PROCEDURE parent_view_report(IN parent_id INT, IN child_ssn INT)
 BEGIN
-  SELECT E.first_name, E.last_name, S.first_name, S.last_name, R.comment
+  SELECT E.first_name, E.last_name, R.comment, R.report_date, E.id
   FROM Reports R 
   INNER JOIN Employees E ON E.id = R.teacher_id 
   INNER JOIN Parent_Of_Student P ON R.student_ssn = P.child_ssn
@@ -546,6 +547,14 @@ BEGIN
     VALUES (parent_id, report_date, child_ssn, teacher_id, reply); 
   END IF; 
 END //
+
+CREATE PROCEDURE parent_view_child_teachers(IN child_ssn INT)
+  SELECT CT.teacher_id, E.first_name, E.last_name, CT.course_code, C.name, C.grade
+  FROM Courses_TaughtTo_Students_By_Teachers CT
+  INNER JOIN Employees E ON CT.teacher_id = E.id
+  INNER JOIN Courses C ON CT.course_code = C.code
+  WHERE CT.student_ssn = child_ssn;
+//
 
 CREATE PROCEDURE parent_rate_teacher (IN parent_id INT, teacher_id INT, rating INT)
 BEGIN

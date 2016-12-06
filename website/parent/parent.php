@@ -10,6 +10,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 include "../connection-values.php"; 
 $id = $_GET['id']; 
+// echo $id; 
 $call = $conn->prepare('SELECT * FROM Parents WHERE id = ?'); 
 $call->bind_param('i', $id); 
 if($call->execute()) {
@@ -18,7 +19,64 @@ if($call->execute()) {
 } else {
 	echo $call->error; 
 }
+$fname = $lname = $birthdate = $gender = $school_id = $ssn = "";  
+$fnameErr = $lnameErr = $birthdateErr = $genderErr = $loginError = $ssnErr = "";
+$allRequired = true; 
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+	// echo $fname . $lname . $birthdate . $gender $school_id . $ssn; 
+	echo $fname; 
+	if (empty($_POST["fname"])) {
+		$allRequired = false; 
+		$fnameErr = "First name is required";
+	} else {
+		$fname = $_POST['fname'];
+	}
 
+	if (empty($_POST["lname"])) {
+		$allRequired = false; 
+		$lnameErr = "Last name is required";
+	} else {
+		$lname = $_POST['lname'];
+	}
+	
+	if(empty($_POST["birthdate"])) {
+		$allRequired = false; 
+		$birthdateErr = "Birthdate is required."; 
+	} else {
+		$birthdate = $_POST['birthdate']; 
+	}
+	
+	if (empty($_POST["gender"])) {
+		$allRequired = false; 
+		$genderErr = "Gender is required";
+	} else {
+		$gender = $_POST['gender'];
+	}
+	
+	$school_id = $_POST["school"]; 
+
+	if (empty($_POST["ssn"])) {
+		$allRequired = false; 
+		$ssnErr = "SSN is required";
+	} else {
+		$ssn = $_POST['ssn'];
+	}
+	 
+	if($allRequired) {
+		// echo "YAAAY";
+		$call = $conn->prepare('CALL parent_apply_child(?, ?, ?, ?, ?, ?, ?)'); 
+		$call->bind_param('iisssss', $id, $ssn, $fname, $lname, $gender, $birthdate, $school_id); 
+		if($call->execute()){ 
+			echo "<div class='panel panel-success'>";
+			echo "<div class='panel-heading'><h2>Your application has been posted successfully.<h2></div>";
+			echo "</div>";
+		} else 	{
+			echo $call->error; 
+			$loginError = "Please insert valid data."; 
+		}	
+	}
+	
+}
 
 
 ?>
@@ -63,10 +121,13 @@ if($call->execute()) {
 			<div class="col-sm-3 sidenav">
 				<h4>All You Need In One Place </h4>
 				<ul class="nav nav-pills nav-stacked">
-					<li id="active-button" class="active"><a href="#section1">Apply for your Children</a></li>
+					<li id="active-button" class="active"><a href="<?php echo 'parent.php?id=' . $id; ?>">Apply for your Children</a></li>
 					<!--     <li><a href="#section2">Friends</a></li> -->
-					<li><a href="#section3">Family</a></li>
-					<li><a href="#section3">Photos</a></li>
+					<li><a href="<?php echo 'parent-accepted.php?id=' . $id; ?>">View Accepted Applications</a></li>
+					<li><a href="<?php echo 'parent-view-reports.php?id=' . $id; ?>">View Reports</a></li>
+					<li><a href="<?php echo 'parent-view-teachers.php?id=' . $id; ?>">View Teachers</a></li>
+					<li><a href="<?php echo 'parent-view-schools.php?id=' . $id; ?>">View and Review Schools</a></li>
+					<li><a href="<?php echo 'parent-reviews.php?id=' . $id; ?>">All Your Reviews</a></li>
 				</ul><br>
 				<div class="input-group">
 					<input type="text" class="form-control" placeholder="Search Blog..">
@@ -79,36 +140,34 @@ if($call->execute()) {
 			</div>
 			<div class="col-sm-4 col-md-offset-2">
 			 <h1> Apply Now! </h1> 
-			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?id=' . $id;?>">
+					<!-- <input type="hidden" name="id" value = '<?php echo  "value =$id"; ?>' > -->
 					<div class="form-group">
 						<label>First name: </label>
-						<!-- <span class="error"><?php echo"<font color='red'>* $fnameErr </font>";?></span> -->
+						<span class="error"><?php echo"<font color='red'>* $fnameErr </font>";?></span>
 						<input type="text" class="form-control" placeholder="First name" name = "fname">
 					</div>
 
 					<div class="form-group">
-						<label>Middle name: </label>
-						<input type="text" class="form-control" placeholder="Middle name" name = "mname">
-					</div>
-					<div class="form-group">
 						<label>Last name: </label>
-						<!-- <span class="error"><?php echo"<font color='red'>* $lnameErr </font>";?></span> -->
+						<span class="error"><?php echo"<font color='red'>* $lnameErr </font>";?></span>
 						<input type="text" class="form-control" placeholder="Last name" name = "lname">		
 					</div>
+
 					<div class="form-group">
 						<label>Child Social Security Number: </label>
-						<!-- <span class="error"><?php echo "<font color='red'>* $emailErr </font>";?></span> -->
+						<span class="error"><?php echo "<font color='red'>* $ssnErr </font>";?></span>
 						<input type="text" class="form-control" placeholder="Child's SSN" name = "ssn">
 					</div>
 					<div class="form-group">
 						<label>Birthdate: </label>
-						<!-- <span class="error"><?php echo "<font color='red'>* $birthdateErr </font>";?></span> -->
+						<span class="error"><?php echo "<font color='red'>* $birthdateErr </font>";?></span>
 						<input type="date" class="form-control" name = "birthdate">
 
 					</div>
 					<div class = "form-group">
 						<label>Gender: </label>
-						<!-- <span class="error"><?php echo "<font color='red'>* $genderErr </font>";?></span> -->
+						<span class="error"><?php echo "<font color='red'>* $genderErr </font>";?></span>
 						<label class = "radio-inline">
 							<input type="radio" name = "gender" value = "female"> female
 						</label>
@@ -126,7 +185,6 @@ if($call->execute()) {
 
 							<?php
 							if($call = $conn->query("SELECT S.id, S.name FROM Schools S")) {
-								echo "WEEEE!!"; 
 								while($row = $call->fetch_array(MYSQLI_BOTH)) {
 									echo '<option value ="' . $row["id"] . '">' . $row["name"] . ' </option>'; 
 								} 	

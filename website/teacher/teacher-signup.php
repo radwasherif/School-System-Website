@@ -51,6 +51,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		$call = $conn->prepare('CALL teacher_sign_up(?, ?, ?, ?, ?, ?, ?, ?)'); 
 		$call->bind_param('sssssssi', $fname, $mname, $lname, $birthdate, $address, $email, $gender, $school_id); 
 		if($call->execute()){
+			echo "<br>";
+			echo "<br>";
 			echo "<div class='panel panel-success'>";
 			echo "<div class='panel-heading'><h2>You have successfully signed up.<h2></div>";
 			echo "<div class='panel-body'> <h4>Please wait for a confirmation email containing your username and password. <h4></div>";
@@ -64,7 +66,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 ?>
 <body>
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#">Radwa and Alaa</a>

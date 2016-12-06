@@ -83,7 +83,7 @@
 				}
 				else if($count == 1)
 				{
-					echo "<td><li><a href='course-info.php?code=$code'>$r</a></li></td>";
+					echo "<td><li><a href='course-info.php?code=$code&id=$id'>$r</a></li></td>";
 				}
 				else
 				{

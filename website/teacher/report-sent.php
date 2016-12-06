@@ -4,11 +4,24 @@
 <link rel="stylesheet" type="text/css" href="../bootstrap.css">
 <link rel="stylesheet" type="text/css" href="teacher.css">
 
-	<head>
-		<title>R.A. Inc. </title>
-	</head>
-	<body>
-		<?php
+<head>
+	<title>R.A. Inc. </title>
+</head>
+<body>
+
+
+<?php
+echo "hiiiiii";
+
+?>
+
+
+
+
+
+
+
+	<!-- 	<?php
 		include '../connection-values.php'; 
 		$id = $_GET['id'];
 		$ssn = $_GET['ssn'];
@@ -25,7 +38,7 @@
 						echo "<br>";
 						echo "<div class='panel panel-success'>";
 						echo "<div class='panel-heading'><h2>You have successfully posted the report.<h2></div>";
-
+						echo "<div class='panel-heading'><h3>Thank you for involving the parents of $student_name effectively in the educational proccess.<h3></div>";
 						echo "</div>";
 					} else {
 						echo $call2->error; 
@@ -33,9 +46,9 @@
 
 		}	
 
-		?>
+		?> -->
 		
-		<nav class="navbar navbar-inverse navbar-fixed-top">
+		<!-- <nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="#">Radwa and Alaa</a>
@@ -67,14 +80,13 @@
 				</div>	
 			</div>
 
-		</div>
+		</div> -->
 
-		<div class="container">
+<!-- 		<div class="container">
 			<div class = "row" class = "center">
 				<div id="post-assignment" class = "col-md-6 col-centered">
 					<h1> Write A Report</h1> 
-					<form method ="post" action = '<?php"teacher-students.php?id= $id"?>'>
-					<!-- <form method="post" action='<?php "teacher-students.php?id=$id&ssn=$ssn&comment=$comment&date=$date&student_name=$student_name";?>'> -->
+					<form method="post" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?id=$id&ssn=$ssn&comment=$comment&date=$date&student_name=$student_name";?>'>
 						<div class="form-group">
 							<label>Report Date: </label>
 
@@ -90,10 +102,10 @@
 					
 				</form>
 			</div>
-		</div>
+		</div> -->
 
 
 	</body>
-</html>
+	</html>
 
 

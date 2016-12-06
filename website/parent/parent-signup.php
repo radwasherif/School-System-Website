@@ -30,6 +30,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		$allRequired = false; 
 		$mobileErr = "Mobile no. is required."; 
 	}
+	else
+	{
+		$mobile = $_POST['mobile'];
+	}
 	
 	if (empty($_POST["email"])) {
 		$allRequired = false; 
@@ -70,12 +74,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		$call->bind_param('sssssss', $username, $password, $fname, $lname, $email, $address, $homephone); 
 		if($call->execute()){
 			$result = $call->get_result(); 
-			$row = $result->fetch_array(MYSQLI_BOTH); 
+			$row = $result->fetch_array(MYSQLI_BOTH);
+			$id = $row[0]; 
+
 			header("Location: parent.php?id=" . $row[0]); 
 		} else 	{
 			echo $call->error; 
 			$loginError = "Please insert valid data."; 
-		}	
+		}
+		// $call2 = $conn->prepare('CALL parent_add_mobile(?,?)');
+		// 	$call2->bind_param('is',$id,$mobile);
+		// 	if($call2->execute())
+		// 	{
+		// 		echo "success";
+		// 	}
+		// 	else
+		// 	{
+		// 		echo $call2->error; 
+			// }	
 	}
 	
 }

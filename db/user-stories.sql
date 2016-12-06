@@ -523,10 +523,10 @@ BEGIN
   WHERE POS.parent_id = parent_id AND DAY(CURDATE() - A.announcement_date) <= 10; 
 END //
 
-
+# DROP PROCEDURE parent_view_report;
 CREATE PROCEDURE parent_view_report(IN parent_id INT, IN child_ssn INT)
 BEGIN
-  SELECT E.first_name, E.last_name, S.first_name, S.last_name, R.comment
+  SELECT E.first_name, E.last_name, R.comment, R.report_date, E.id
   FROM Reports R 
   INNER JOIN Employees E ON E.id = R.teacher_id 
   INNER JOIN Parent_Of_Student P ON R.student_ssn = P.child_ssn
@@ -546,6 +546,14 @@ BEGIN
     VALUES (parent_id, report_date, child_ssn, teacher_id, reply); 
   END IF; 
 END //
+
+CREATE PROCEDURE parent_view_child_teachers(IN child_ssn INT)
+  SELECT CT.teacher_id, E.first_name, E.last_name, CT.course_code, C.name, C.grade
+  FROM Courses_TaughtTo_Students_By_Teachers CT
+  INNER JOIN Employees E ON CT.teacher_id = E.id
+  INNER JOIN Courses C ON CT.course_code = C.code
+  WHERE CT.student_ssn = child_ssn;
+//
 
 CREATE PROCEDURE parent_rate_teacher (IN parent_id INT, teacher_id INT, rating INT)
 BEGIN

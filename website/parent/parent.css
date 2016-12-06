@@ -1,6 +1,13 @@
 body {
 	font-family:  Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
 }
+.table {
+	table-layout: fixed !important;
+	width: 900px !important; 
+}
+thead {
+	color: #2BBBAD;
+}
 .col-centered{
     float: none;
     margin-left: auto;

@@ -83,7 +83,7 @@ if(!empty($_GET['child_ssn']) && !empty($_GET['teacher_id']) && !empty('report_d
 				<ul class="nav nav-pills nav-stacked">
 					<li><a href="<?php echo 'parent.php?id=' . $id; ?>">Apply for your Children</a></li>
 					<li><a href="<?php echo 'parent-accepted.php?id=' . $id; ?>">View Accepted Applications</a></li>
-					<li id="active-button" class="active"><a href="<?php echo 'parent-view-reports.php?id=' . $id; ?>">View Rerports</a></li>
+					<li id="active-button" class="active"><a href="<?php echo 'parent-view-reports.php?id=' . $id; ?>">View Reports</a></li>
 					<li><a href="<?php echo 'parent-view-teachers.php?id=' . $id; ?>">View Teachers</a></li>
 					<li><a href="<?php echo 'parent-view-schools.php?id=' . $id; ?>">View and Review Schools</a></li>
 					<li><a href="<?php echo 'parent-reviews.php?id=' . $id; ?>">All Your Reviews</a></li>

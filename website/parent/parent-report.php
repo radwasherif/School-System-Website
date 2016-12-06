@@ -40,9 +40,13 @@ if(!empty($_GET['child_ssn']) && !empty($_GET['teacher_id']) && !empty('report_d
 				echo "<div class='panel-heading'><h2>Your reply has been sent.<h2></div>";
 				echo "</div>";
 			} else {
+				echo "<div class='panel panel-success'>";
+			// echo "<div class='panel-heading'><h2>You have successfully signed up.<h2></div>";
+			echo "<div class='panel-body'> <h4> You have already replied to this report. <h4></div>";
+			echo "</div>";
 				echo $call->error;
 			} 	
-		
+
 	}
 	
 }
@@ -90,7 +94,7 @@ if(!empty($_GET['child_ssn']) && !empty($_GET['teacher_id']) && !empty('report_d
 				<ul class="nav nav-pills nav-stacked">
 					<li><a href="<?php echo 'parent.php?id=' . $id; ?>">Apply for your Children</a></li>
 					<li><a href="<?php echo 'parent-accepted.php?id=' . $id; ?>">View Accepted Applications</a></li>
-					<li id="active-button" class="active"><a href="<?php echo 'parent-view-reports.php?id=' . $id; ?>">View Rerports</a></li>
+					<li id="active-button" class="active"><a href="<?php echo 'parent-view-reports.php?id=' . $id; ?>">View Reports</a></li>
 					<li><a href="<?php echo 'parent-view-teachers.php?id=' . $id; ?>">View Teachers</a></li>
 					<li><a href="<?php echo 'parent-view-schools.php?id=' . $id; ?>">View and Review Schools</a></li>
 					<li><a href="<?php echo 'parent-reviews.php?id=' . $id; ?>">All Your Reviews</a></li>

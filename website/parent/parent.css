@@ -24,7 +24,9 @@ thead {
 .container-custom {
 	background-color: #2BBBAD; 
 }
-
+.colored-text {
+	color: #2BBBAD !important;
+}
 #logo {
 	background-color: white; 
 	margin-right: auto;

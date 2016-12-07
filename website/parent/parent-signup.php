@@ -33,7 +33,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		$mobile = $_POST['mobile']; 
 	}
 	
-	
 	if (empty($_POST["email"])) {
 		$allRequired = false; 
 		$emailErr = "Email is required";

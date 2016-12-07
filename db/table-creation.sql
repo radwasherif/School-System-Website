@@ -367,7 +367,7 @@ CREATE TABLE Reports
 		report_date date,
 		student_ssn int,
 		teacher_id int,
-		comment varchar(1000),
+		teacher_comment varchar(1000),
 		FOREIGN KEY (student_ssn) REFERENCES Students(ssn) ON DELETE CASCADE,
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE
 	);

@@ -744,8 +744,7 @@ BEGIN
   WHERE assignment_number = assignment_num AND course_code = courseCode AND school_id = schoolID;
 END //
 
-
-CREATE PROCEDURE teacher_write_report(IN teacher_id INT, IN student_ssn INT, IN report_date DATE, IN comment VARCHAR(500))
+CREATE PROCEDURE teacher_write_report(IN teacher_id INT, IN student_ssn INT, IN report_date DATE, IN teacher_comment VARCHAR(500))
 BEGIN
   DECLARE school_id INT;
   SELECT E.school_id INTO school_id
@@ -754,14 +753,14 @@ BEGIN
 
   IF EXISTS (SELECT * FROM Courses_TaughtTo_Students_By_Teachers CT WHERE CT.student_ssn = student_ssn AND CT.teacher_id = teacher_id)
   THEN 
-  INSERT INTO Reports (report_date, student_ssn, teacher_id, comment) 
-  VALUES (report_date, student_ssn, teacher_id, comment);
+  INSERT INTO Reports (report_date, student_ssn, teacher_id, teacher_comment) 
+  VALUES (report_date, student_ssn, teacher_id, teacher_comment);
   END IF;
 END //
 
 CREATE PROCEDURE teacher_view_questions(IN teacher_id INT, IN course_code INT)
 BEGIN 
-  SELECT S.id, S.first_name, S.last_name, Q.q_id, Q.content, Q.course_code
+  SELECT Q.q_id, Q.content, CONCAT_WS('',S.first_name, ' ',S.last_name) AS student_name
   FROM Questions Q INNER JOIN Students S ON Q.student_ssn = S.ssn
   WHERE Q.course_code = course_code
    AND EXISTS (SELECT * FROM Courses_TaughtTo_Students_By_Teachers CT WHERE CT.teacher_id = teacher_id AND CT.course_code = course_code);

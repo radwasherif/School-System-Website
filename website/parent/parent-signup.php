@@ -32,10 +32,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	} else {
 		$mobile = $_POST['mobile']; 
 	}
-	else
-	{
-		$mobile = $_POST['mobile'];
-	}
+	
 	
 	if (empty($_POST["email"])) {
 		$allRequired = false; 

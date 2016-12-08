@@ -20,41 +20,26 @@
 			$postdate = $_POST['postdate'];
 			$duedate = $_POST['duedate'];
 			$content = $_POST['content'];
-			// unique_assignment(IN teacher_id INT, IN course_code INT, IN assignment_number INT, OUT is_unique BIT)
-			// $call = $conn->prepare('CALL unique_assignment(?, ?, ?, @is_unique)'); 
-			// $call->bind_param('iii', $id, $code, $assignmentnumber); 
-			// if($call->execute())
-			// {
-			// 	$select = $conn->query('SELECT @is_unique');
-			// 	$result1 = $select->fetch_assoc();
-			// 	$is_unique = $result1['is_unique'];
-			// 	if()
-			// 	echo $is_unique;
-			// 	// if($is_unique)
-			// 	// {
-			// 	// 	$call2 = $conn->prepare('CALL teacher_post_assignment(?, ?, ?, ?, ?, ?)'); 
-			// 	// 	$call2->bind_param('iisssi', $id, $code, $postdate, $duedate, $content, $assignmentnumber); 
-			// 	// 	if($call2->execute()){
-			// 	// 		echo "<br>";
-			// 	// 		echo "<br>";
-			// 	// 		echo "<div class='panel panel-success'>";
-			// 	// 		echo "<div class='panel-heading'><h2>You have successfully posted the assignment.<h2></div>";
 
-			// 	// 		echo "</div>";
-			// 	// 	} else {
-			// 	// 		echo $call2->error; 
-			// 	// 	}
-			// 	// }
-			// 	// else
-			// 	// {
-			// 	// 	echo "<br>";
-			// 	// 	echo "<br>";
-			// 	// 	echo "<div class='panel panel-danger'>";
-			// 	// 	echo "<div class='panel-heading'><h2>Assignemnt with the same number already exists in this course.<h2></div>";
-			// 	// 	echo "<div class='panel-body'> <h4>Please enter valid assignment number. <h4></div>";
-			// 	// 	echo "</div>";	
-			// 	// }
-			// }
+			if($postdate < date("Y-m-d"))
+			{
+				echo "<br>";
+					echo "<br>";
+					echo "<div class='panel panel-danger'>";
+					echo "<div class='panel-heading'><h2>You can not post assignment with this post date.<h2></div>";
+					echo "<div class='panel-body'> <h4>Please choose current or upcoming date for posting this assignment. <h4></div>";
+					echo "</div>";	
+			}
+			else if($duedate < date("Y-m-d"))
+			{
+				echo "<br>";
+					echo "<div class='panel panel-danger'>";
+					echo "<div class='panel-heading'><h2>You can not post assignment with this due date.<h2></div>";
+					echo "<div class='panel-body'> <h4>Please choose current or upcoming date for submitting this assignment. <h4></div>";
+					echo "</div>";	
+			}
+			else
+			{
 
 								$call2 = $conn->prepare('CALL teacher_post_assignment(?, ?, ?, ?, ?, ?)'); 
 					$call2->bind_param('iisssi', $id, $code, $postdate, $duedate, $content, $assignmentnumber); 
@@ -67,9 +52,15 @@
 
 						echo "</div>";
 					} else {
-						echo $call2->error; 
+					echo "<br>";
+					echo "<br>";
+					echo "<div class='panel panel-danger'>";
+					echo "<div class='panel-heading'><h2>Assignemnt with the same number already exists in this course.<h2></div>";
+					echo "<div class='panel-body'> <h4>Please enter a valid assignment number. <h4></div>";
+					echo "</div>";	
 					}
 
+		}
 		}	
 
 		?>
@@ -111,7 +102,7 @@
 			<div class = "row" class = "center">
 				<div id="post-assignment" class = "col-md-6 col-centered">
 					<h1> Post An Assignment </h1> 
-					<form method="post" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?id=$id&code=$code&assignmentnumber=$assignmentnumber&postdate=$postdate&duedate=$duedate&content=$content&name=$name&grade=$grade";?>'>
+					<form method="post" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?id=$id&code=$code&name=$name&grade=$grade";?>'>
 						<div class="form-group">
 							<label>Assignemnt Number: </label>
 							<input type="text" class="form-control" required  placeholder="Assignemnt No." name = "assignmentnumber">

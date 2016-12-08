@@ -483,7 +483,6 @@ BEGIN
   VALUES (school_id, student_ssn, parent_id, 'pending');
 END //
 
-
 CREATE PROCEDURE parent_view_accepted (IN parent_id INT, child_ssn INT)
 BEGIN
   SELECT Sc.name, Sc.type, Sc.fees, Sc.id
@@ -703,14 +702,14 @@ SET is_unique = 0;
 END IF;
 
 END //
-
+-- drop procedure teacher_assignments;
 CREATE PROCEDURE teacher_assignments(IN teacher_id INT, IN course_code INT)
 BEGIN
 DECLARE school_id INT;
   SELECT E.school_id INTO school_id
   FROM Employees E
   WHERE E.id = teacher_id;
-SELECT A.assignment_number,A.due_date,A.content
+SELECT A.assignment_number,A.due_date,A.content,A.post_date
 FROM Assignments A
 WHERE A.course_code = course_code AND A.school_id = school_id;
 END //
@@ -724,7 +723,7 @@ BEGIN
   WHERE A.teacher_id = teacher_id AND A.assignment_number = assignment_number AND A.course_code = course_code
   ORDER BY S.id;
 END //
-
+-- drop procedure teacher_grade_solutions;
 CREATE PROCEDURE teacher_grade_solutions(IN teacher_id INT, IN student_id INT, IN assignment_number INT, IN course_code INT, IN grade INT)
 BEGIN
   DECLARE school_id INT;
@@ -737,8 +736,11 @@ BEGIN
   FROM Students S 
   WHERE S.school_id = school_id AND S.id = student_id;  
 
-  INSERT INTO Teachers_Grade_Solutions (student_ssn, assignment_number, course_code, school_id, grade, teacher_id) 
-  VALUES (student_ssn, assignment_number, course_code, school_id, grade, teacher_id);
+  UPDATE Solutions S
+  SET S.grade = grade 
+  WHERE S.student_ssn = student_ssn AND S.assignment_number = assignment_number AND S.course_code = course_code;
+  -- INSERT INTO Teachers_Grade_Solutions (student_ssn, assignment_number, course_code, school_id, grade, teacher_id) 
+  -- VALUES (student_ssn, assignment_number, course_code, school_id, grade, teacher_id);
 END //
 
 CREATE PROCEDURE teacher_delete_assignment(IN teacher_id INT, IN courseCode INT, IN assignment_num INT)
@@ -751,7 +753,6 @@ BEGIN
   DELETE FROM Assignments 
   WHERE assignment_number = assignment_num AND course_code = courseCode AND school_id = schoolID;
 END //
-
 
 CREATE PROCEDURE teacher_write_report(IN teacher_id INT, IN student_ssn INT, IN report_date DATE, IN comment VARCHAR(500))
 BEGIN
@@ -769,7 +770,7 @@ END //
 
 CREATE PROCEDURE teacher_view_questions(IN teacher_id INT, IN course_code INT)
 BEGIN 
-  SELECT S.id, S.first_name, S.last_name, Q.q_id, Q.content, Q.course_code
+  SELECT Q.q_id, Q.content, CONCAT_WS('',S.first_name, ' ',S.last_name) AS student_name
   FROM Questions Q INNER JOIN Students S ON Q.student_ssn = S.ssn
   WHERE Q.course_code = course_code
    AND EXISTS (SELECT * FROM Courses_TaughtTo_Students_By_Teachers CT WHERE CT.teacher_id = teacher_id AND CT.course_code = course_code);
@@ -778,7 +779,7 @@ END //
 CREATE PROCEDURE teacher_answer_questions(IN teacher_id INT, IN course_code INT, IN q_id INT, IN answer VARCHAR(250))
 BEGIN
   DECLARE count INT DEFAULT 0;
-  SELECT COUNT DISTINCIT INTO count
+  SELECT COUNT(DISTINCT A.answer_sub_id) INTO count
   FROM Answers A
   WHERE A.course_code = course_code AND A.q_id = q_id;
 

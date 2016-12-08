@@ -36,8 +36,8 @@
 
 		<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Radwa and Alaa</a>
+			<div class="navbar-header navbar-brand">
+				 Radwa and Alaa
 			</div>
 			
 			<ul class="nav navbar-nav">
@@ -80,10 +80,10 @@
 		?>
 
 		<?php
-		echo "<a href='view-assignments.php?id=$teacher_id&code=$code' class='btn btn-default my-circle-button2 col-md-4 col-md-offset-2 divider5'><br/>VIEW<br/><br/>ASSIGNMENTS</a>";
+		echo "<a href='view-assignments.php?id=$teacher_id&code=$code&student_id=\"\"&grade=\"\"' class='btn btn-default my-circle-button2 col-md-4 col-md-offset-2 divider5'><br/>VIEW<br/><br/>ASSIGNMENTS</a>";
 		?>
 		<?php
-		echo "<a href='view-questions.php?id=$teacher_id&code=$code' class='btn btn-default my-circle-button2 col-md-4 col-md-offset-2 divider4'><br/>VIEW<br/><br/>QUESTIONS</a>";
+		echo "<a href='view-questions.php?id=$teacher_id&code=$code&q_id=\"\"' class='btn btn-default my-circle-button2 col-md-4 col-md-offset-2 divider4'><br/>VIEW<br/><br/>QUESTIONS</a>";
 		?>
 		
 

@@ -344,10 +344,12 @@ CREATE TABLE Solutions
 		course_code int,
 		school_id int,
 		solution varchar(2000),
+        grade int default null,
 		FOREIGN KEY (student_ssn) REFERENCES Students(ssn) ON DELETE CASCADE,
 		FOREIGN KEY (assignment_number, course_code, school_id) REFERENCES Assignments(assignment_number, course_code, school_id) ON DELETE CASCADE
 	);
 
+-- call teacher_grade_solutions(6,1,1107,);
 CREATE TABLE Teachers_Grade_Solutions
 	(
 		PRIMARY KEY (student_ssn, assignment_number, course_code, school_id),
@@ -367,7 +369,7 @@ CREATE TABLE Reports
 		report_date date,
 		student_ssn int,
 		teacher_id int,
-		teacher_comment varchar(1000),
+		comment varchar(1000),
 		FOREIGN KEY (student_ssn) REFERENCES Students(ssn) ON DELETE CASCADE,
 		FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE
 	);

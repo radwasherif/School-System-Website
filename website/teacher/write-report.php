@@ -29,7 +29,11 @@
 
 			echo "</div>";
 		} else {
-			echo $call->error; 
+			echo "<div class='panel panel-danger'>";
+			echo "<div class='panel-heading'><h2>You have already wrote a report about this student on the same day.<h2></div>";
+
+			echo "</div>";
+			// echo $call->error; 
 		}
 
 	}	

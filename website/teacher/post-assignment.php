@@ -20,41 +20,8 @@
 			$postdate = $_POST['postdate'];
 			$duedate = $_POST['duedate'];
 			$content = $_POST['content'];
-			// unique_assignment(IN teacher_id INT, IN course_code INT, IN assignment_number INT, OUT is_unique BIT)
-			// $call = $conn->prepare('CALL unique_assignment(?, ?, ?, @is_unique)'); 
-			// $call->bind_param('iii', $id, $code, $assignmentnumber); 
-			// if($call->execute())
-			// {
-			// 	$select = $conn->query('SELECT @is_unique');
-			// 	$result1 = $select->fetch_assoc();
-			// 	$is_unique = $result1['is_unique'];
-			// 	if()
-			// 	echo $is_unique;
-			// 	// if($is_unique)
-			// 	// {
-			// 	// 	$call2 = $conn->prepare('CALL teacher_post_assignment(?, ?, ?, ?, ?, ?)'); 
-			// 	// 	$call2->bind_param('iisssi', $id, $code, $postdate, $duedate, $content, $assignmentnumber); 
-			// 	// 	if($call2->execute()){
-			// 	// 		echo "<br>";
-			// 	// 		echo "<br>";
-			// 	// 		echo "<div class='panel panel-success'>";
-			// 	// 		echo "<div class='panel-heading'><h2>You have successfully posted the assignment.<h2></div>";
 
-			// 	// 		echo "</div>";
-			// 	// 	} else {
-			// 	// 		echo $call2->error; 
-			// 	// 	}
-			// 	// }
-			// 	// else
-			// 	// {
-			// 	// 	echo "<br>";
-			// 	// 	echo "<br>";
-			// 	// 	echo "<div class='panel panel-danger'>";
-			// 	// 	echo "<div class='panel-heading'><h2>Assignemnt with the same number already exists in this course.<h2></div>";
-			// 	// 	echo "<div class='panel-body'> <h4>Please enter valid assignment number. <h4></div>";
-			// 	// 	echo "</div>";	
-			// 	// }
-			// }
+
 
 								$call2 = $conn->prepare('CALL teacher_post_assignment(?, ?, ?, ?, ?, ?)'); 
 					$call2->bind_param('iisssi', $id, $code, $postdate, $duedate, $content, $assignmentnumber); 
@@ -67,7 +34,12 @@
 
 						echo "</div>";
 					} else {
-						echo $call2->error; 
+					echo "<br>";
+					echo "<br>";
+					echo "<div class='panel panel-danger'>";
+					echo "<div class='panel-heading'><h2>Assignemnt with the same number already exists in this course.<h2></div>";
+					echo "<div class='panel-body'> <h4>Please enter a valid assignment number. <h4></div>";
+					echo "</div>";	
 					}
 
 		}	

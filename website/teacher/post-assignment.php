@@ -21,7 +21,25 @@
 			$duedate = $_POST['duedate'];
 			$content = $_POST['content'];
 
-
+			if($postdate < date("Y-m-d"))
+			{
+				echo "<br>";
+					echo "<br>";
+					echo "<div class='panel panel-danger'>";
+					echo "<div class='panel-heading'><h2>You can not post assignment with this post date.<h2></div>";
+					echo "<div class='panel-body'> <h4>Please choose current or upcoming date for posting this assignment. <h4></div>";
+					echo "</div>";	
+			}
+			else if($duedate < date("Y-m-d"))
+			{
+				echo "<br>";
+					echo "<div class='panel panel-danger'>";
+					echo "<div class='panel-heading'><h2>You can not post assignment with this due date.<h2></div>";
+					echo "<div class='panel-body'> <h4>Please choose current or upcoming date for submitting this assignment. <h4></div>";
+					echo "</div>";	
+			}
+			else
+			{
 
 								$call2 = $conn->prepare('CALL teacher_post_assignment(?, ?, ?, ?, ?, ?)'); 
 					$call2->bind_param('iisssi', $id, $code, $postdate, $duedate, $content, $assignmentnumber); 
@@ -42,6 +60,7 @@
 					echo "</div>";	
 					}
 
+		}
 		}	
 
 		?>
@@ -83,7 +102,7 @@
 			<div class = "row" class = "center">
 				<div id="post-assignment" class = "col-md-6 col-centered">
 					<h1> Post An Assignment </h1> 
-					<form method="post" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?id=$id&code=$code&assignmentnumber=$assignmentnumber&postdate=$postdate&duedate=$duedate&content=$content&name=$name&grade=$grade";?>'>
+					<form method="post" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?id=$id&code=$code&name=$name&grade=$grade";?>'>
 						<div class="form-group">
 							<label>Assignemnt Number: </label>
 							<input type="text" class="form-control" required  placeholder="Assignemnt No." name = "assignmentnumber">

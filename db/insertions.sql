@@ -2,50 +2,46 @@ USE School_System;
 
 -- **SCHOOLS**
 
-INSERT INTO Schools (name, address, mission, vision, language, general_info, fees, type, email)
-VALUES ('Manor House International School', '67 Hussein Ahmed Rashad, Ad Doqi, Giza Governorate',
+INSERT INTO Schools (id, name, address, mission, vision, language, general_info, fees, type, email)
+VALUES (1, 'Manor House International School', '67 Hussein Ahmed Rashad, Ad Doqi, Giza Governorate',
         'Manor House American School thrives to provide a holistic learning experience that provides individuals the opportunity to learn and discover who they are in a culturally attuned environment that fosters pride in one’s identity. We instill the basic foundation of respect for the other.',
         'Manor House American School is a learning institution that provides the opportunity for self discovery. The premise of “Know Thy Self” is our main belief.',
         'English', 'Both American and IGCSE sections.', 30000, 'International', 'manorhouse@schools.com');
 
 -- SET @school = (LAST_INSERT_ID());  
-INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '+20 26 17 21 33');
-INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '+20 26 17 21 34');
-INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '+20 26 17 21 36');
-INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '+20 26 17 21 37');
-INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'middle');
-INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'high');
+INSERT INTO Phone_School (school_id, phone) VALUES (1, '+20 26 17 21 33');
+INSERT INTO Phone_School (school_id, phone) VALUES (1, '+20 26 17 21 34');
+INSERT INTO Phone_School (school_id, phone) VALUES (1, '+20 26 17 21 36');
+INSERT INTO Phone_School (school_id, phone) VALUES (1, '+20 26 17 21 37');
+INSERT INTO Level_School (school_id, level) VALUES (1, 'elementary');
+INSERT INTO Level_School (school_id, level) VALUES (1, 'middle');
+INSERT INTO Level_School (school_id, level) VALUES (1, 'high');
 
-INSERT INTO Schools (name, address, mission, vision, language, general_info, fees, type, email)
-VALUES ('Al Bashaer', ' Zahraa Al Maadi, El-Basatin Sharkeya, Al Maadi, Cairo Governorate',
+INSERT INTO Schools (id, name, address, mission, vision, language, general_info, fees, type, email)
+VALUES (2, 'Al Bashaer', ' Zahraa Al Maadi, El-Basatin Sharkeya, Al Maadi, Cairo Governorate',
         'To build a generation who :\nBelieves in God and obeying Him lovingly and choosingly .\nUpdated with the latest scientific developments and technology. \n Well exposed to the entire world and well – rounded enough to cope with people from different cultures and backgrounds. \n Loving nature and proactively interacting with  surroundings.',
         'To remain as one of the most prominent, moderate Islamic schools in Egypt. (current mission).\nCompete at the global level from the educational perspective. (within 3 years).\nExpansion and transfer of expertise, opening new schools in other Islamic or non Islamic countries (within 10 years).\nEstablishing a university or institutes, having the same mission, in the future (within the coming 10 years).',
         'English',
         'Al Bashaer Schools,  were founded in 1994, and cover five educational levels starting from Preschool & Kindergarten up to Secondary.',
         200000, 'International', 'albashaer@schools.com');
 SET @school_id = LAST_INSERT_ID();
-INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '+201011108241');
-INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '+201000024687');
-INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '+2-029706625-6');
-INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'elementary');
-INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'middle');
-INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'high');
+INSERT INTO Phone_School (school_id, phone) VALUES (2, '+201011108241');
+INSERT INTO Phone_School (school_id, phone) VALUES (2, '+201000024687');
+INSERT INTO Phone_School (school_id, phone) VALUES (2, '+2-029706625-6');
+INSERT INTO Level_School (school_id, level) VALUES (2, 'elementary');
+INSERT INTO Level_School (school_id, level) VALUES (2, 'middle');
+INSERT INTO Level_School (school_id, level) VALUES (2, 'high');
 
 
-INSERT INTO Schools (name, address, mission, vision, language, general_info, fees, type, email)
-VALUES ('Futures Languages Schools', 'El Meerag City, Ring Road, Near Carrefour Maadi, Cairo.',
+INSERT INTO Schools (id, name, address, mission, vision, language, general_info, fees, type, email)
+VALUES (3, 'Futures Languages Schools', 'El Meerag City, Ring Road, Near Carrefour Maadi, Cairo.',
         'We are set to create a unique educational and cultural model that contributes to narrowing Egypt’s chronic growth gap through raising a critical mass of our graduates.',
         'Futures Educational Systems (FES) was initiated with a mission to help enhance quality and equity of education in Egypt by establishing an educational model that would be replicable.',
         'English',
         'Commencing in 1993, Futures Language Schools (FLS) are now the largest chain of private schools in Egypt.',
         70000, 'National', 'info@futuresnet.net');
 SET @school_id = LAST_INSERT_ID();
-INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '(202) 2520 4592');
-INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '(202) 2520 4596');
 
-INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'elementary');
-INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'middle');
-INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'high');
 
 INSERT INTO Schools (name, address, mission, vision, language, general_info, fees, type, email)
 VALUES
@@ -71,11 +67,7 @@ VALUES ('Dar El Tarbiah National School', '12 Mahmoud Azmy Str.,Zamalek – Cair
         'Dar El Tarbiah Schools is an Egyptian educational institution founded in 1958 by Dr. Nawal El Degwi. Dar El Tarbiah was the first English-language instruction medium institution founded by Egyptians.',
         14000, 'National', 'national.bh@dareltarbiah.edu.eg');
 SET @school_id = LAST_INSERT_ID();
-INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '27368145');
-INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '27384152');
-INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'elementary');
-INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'middle');
-INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'high');
+
 
 
 INSERT INTO Schools (name, address, mission, vision, language, general_info, fees, type, email)
@@ -86,11 +78,7 @@ VALUES ('Dar El Tarbiah IGCSE School', '24 Ismail Mohamed St., Zamalek  – Cair
         'Dar El Tarbiah Schools is an Egyptian educational institution founded in 1958 by Dr. Nawal El Degwi. Dar El Tarbiah was the first English-language instruction medium institution founded by Egyptians.',
         24000, 'International', 'ig.agouza@dareltarbiah.edu.eg');
 SET @school_id = LAST_INSERT_ID();
-INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '33443231');
--- INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '33443231');  
-INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'elementary');
-INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'middle');
-INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'high');
+
 
 INSERT INTO Schools (name, address, mission, vision, language, general_info, fees, type, email)
 VALUES ('Dar El Tarbiah American High School', '24 Ismail Mohamed St., Zamalek  – Cairo- Egypt',
@@ -302,13 +290,12 @@ INSERT INTO Clubs (name, school_id)
 VALUES ('Cinema Club', 5);
 
 -- **EMPLOYEES** 
+-- school 1:
+INSERT INTO Employees (id, first_name, last_name, email, gender, address, birthdate, school_id)
+VALUES (1, 'Hossam', 'Hassan', 'hossamhassan@gmail.com', 'male', '21, Zamalek st., Cairo, Egypt', '1967-3-11', 1);
 
-INSERT INTO Employees (id, first_name, last_name, email, gender, address, birthdate)
-VALUES (1, 'Hossam', 'Hassan', 'hossamhassan@gmail.com', 'male', '21, Zamalek st., Cairo, Egypt', '1967-3-11');
-
-
-INSERT INTO Employees (id, first_name, last_name, email, gender, address, birthdate)
-VALUES (2, 'Ibrahim', 'Hassan', 'ibrahimhassan@gmail.com', 'male', '21, Zamalek st., Cairo, Egypt', '1967-3-11');
+INSERT INTO Employees (id, first_name, last_name, email, gender, address, birthdate, school_id)
+VALUES (2, 'Ibrahim', 'Hassan', 'ibrahimhassan@gmail.com', 'male', '21, Zamalek st., Cairo, Egypt', '1967-3-11', 1);
 
 INSERT INTO Employees (id, first_name, last_name, email, gender, address, birthdate, school_id)
 VALUES (3, 'Nelly', 'Karim', 'nellykarim@gmail.com', 'female', '34 El Horreya st. Cairo, Egypt', '1966-1-1', 1);
@@ -316,54 +303,56 @@ VALUES (3, 'Nelly', 'Karim', 'nellykarim@gmail.com', 'female', '34 El Horreya st
 INSERT INTO Employees (id, first_name, last_name, email, gender, address, birthdate, school_id)
 VALUES (4, 'Ensherah', 'Mohsen', 'missensherah@gmail.com', 'male', '12 El Baroon st. Cairo, Egypt', '1970-3-4', 1);
 
+
+-- school 2:
+
 INSERT INTO Employees (id, first_name, last_name, email, gender, address, birthdate, school_id)
 VALUES
   (5, 'Abdelmonein', 'Madbouly', 'madbouly@gmail.com', 'male', '32 El Horreya st., Nasr City, Cairo, Egypt', '1934-2-3',
-   4);
+   2);
 
 INSERT INTO Employees (id, first_name, last_name, email, gender, address, birthdate, school_id)
 VALUES
   (6, 'Abdelsalam', 'Elnabolsy', 'abdelsalamelnaboulsy@hotmail.com', 'male', '32 El Fann st, Downtown, Cairo, Egypt',
-   '1950-2-2', 5);
+   '1950-2-2', 2);
 
 INSERT INTO Employees (id, first_name, last_name, email, gender, address, birthdate, school_id)
 VALUES
-  (7, 'Youssef', 'Wahby', 'yaalalhaawl@gmail.com', 'male', '25 Sudan st, El Mohandseen, Cairo, Egypt', '1980-2-2', 6);
+  (7, 'Youssef', 'Wahby', 'yaalalhaawl@gmail.com', 'male', '25 Sudan st, El Mohandseen, Cairo, Egypt', '1980-2-2', 2);
 
 INSERT INTO Employees (id, first_name, middle_name, last_name, email, gender, address, birthdate, school_id)
 VALUES (8, 'Ramadan', 'Mabrouk', 'Aboulalamein', 'ramadanmabrouk@hotmail.com', 'male',
-        '12 El Bohooth st, Dokki, Cairo, Egypt', '1988-2-3', 7);
+        '12 El Bohooth st, Dokki, Cairo, Egypt', '1988-2-3', 2);
 
+-- school 3:
 
 INSERT INTO Employees (id, first_name, last_name, email, gender, address, birthdate, school_id)
 VALUES (9, 'Effat', 'Abdelkereem', 'effat@gmail.com', 'female', '31 Dokki st, Dokki, Cairo, Egypt', '1987-3-3', 3);
 
 INSERT INTO Employees (id, first_name, last_name, email, gender, address, birthdate, school_id)
-VALUES (10, 'Abdelmo3ty', 'Abdelmo3ty', 'mo3ty@gmail.com', 'male', '11 Manial st, Manial, Cairo, Egypt', '1966-2-3', 1);
+VALUES (10, 'Abdelmo3ty', 'Abdelmo3ty', 'mo3ty@gmail.com', 'male', '11 Manial st, Manial, Cairo, Egypt', '1966-2-3', 3);
 
 INSERT INTO Employees (id, first_name, last_name, email, gender, address, birthdate, school_id)
-VALUES (11, 'Elnazer', 'Salaheldeen', 'elnazer@hotmail.com', 'male', '23 Lebnan st, Cairo, Egypt', '1960-6-6', 5);
+VALUES (11, 'Elnazer', 'Salaheldeen', 'elnazer@hotmail.com', 'male', '23 Lebnan st, Cairo, Egypt', '1960-6-6', 3);
 
 INSERT INTO Employees (id, first_name, last_name, email, gender, address, birthdate, school_id)
-VALUES (12, 'Zenat', 'Sedky', 'zenat@gmail.com', 'female', '12 Dokki st, Dokki, Cairo, Egypt', '1990-2-3', 2);
+VALUES (12, 'Zenat', 'Sedky', 'zenat@gmail.com', 'female', '12 Dokki st, Dokki, Cairo, Egypt', '1990-2-3', 3);
 
-INSERT INTO Employees (id, first_name, last_name, email, gender, address, birthdate)
+INSERT INTO Employees (id, first_name, last_name, email, gender, address, birthdate, school_id)
 VALUES
-  (13, 'Faten', 'Hamama', 'fatenhamama@gmail.com', 'female', '32 Mosaddak st., Mohandseen, Cairo, Egypt', '1970-2-2');
+  (13, 'Faten', 'Hamama', 'fatenhamama@gmail.com', 'female', '32 Mosaddak st., Mohandseen, Cairo, Egypt', '1970-2-2', 3);
 
 -- **ADMIN** 
 INSERT INTO Administrators (id)
-VALUES (10);
+VALUES (1);
 INSERT INTO Administrators (id)
-VALUES (11);
+VALUES (5);
 INSERT INTO Administrators (id)
-VALUES (7);
-INSERT INTO Administrators (id)
-VALUES (13);
+VALUES (9);
+# INSERT INTO Administrators (id)
+# VALUES (13);
 
 -- **TEACHERS** 
-INSERT INTO Teachers (id)
-VALUES (1);
 INSERT INTO Teachers (id)
 VALUES (2);
 INSERT INTO Teachers (id)
@@ -371,15 +360,19 @@ VALUES (3);
 INSERT INTO Teachers (id)
 VALUES (4);
 INSERT INTO Teachers (id)
-VALUES (5);
-INSERT INTO Teachers (id)
 VALUES (6);
+INSERT INTO Teachers (id)
+VALUES (7);
 INSERT INTO Teachers (id)
 VALUES (8);
 INSERT INTO Teachers (id)
-VALUES (9);
+VALUES (10);
+INSERT INTO Teachers (id)
+VALUES (11);
 INSERT INTO Teachers (id)
 VALUES (12);
+INSERT INTO Teachers (id)
+VALUES (13);
 
 -- **SUPERVISORS** 
 INSERT INTO Teachers_Supervising_Teachers (supervisor_id, teacher_id)
@@ -389,22 +382,28 @@ VALUES (3, 4);
 
 INSERT INTO Parents (id, username, first_name, last_name, email, address, home_phone)
 VALUES (1, 'ahmed.aly', 'Ahmed', 'Aly', 'ahmed.aly@gmail.com', 'building 22 - Nile St.- Cairo', '02-2544234');
-INSERT INTO Parents (id, username, first_name, last_name, email, address, home_phone)
-VALUES (2, 'mohamed.Malek', 'Mohamed', 'Malek', 'mohamed.malek12@gmail.com', 'building 12-horreya St-Nasr City-Cairo',
-        '02-12345678');
+
 INSERT INTO Parents (id, username, first_name, last_name, email, address, home_phone)
 VALUES
-  (3, 'rania.ramy', 'Rania', 'Ramy', 'ranya.ramy52@gmail.com', 'building 43 - Khalid Ibn Elwaleed St.- Tagamoa - Cairo',
+  (2, 'rania.ramy', 'Rania', 'Ramy', 'ranya.ramy52@gmail.com', 'building 43 - Khalid Ibn Elwaleed St.- Tagamoa - Cairo',
    '02-32467425');
+
+INSERT INTO Parents (id, username, first_name, last_name, email, address, home_phone)
+VALUES (3, 'mohamed.Malek', 'Mohamed', 'Malek', 'mohamed.malek12@gmail.com', 'building 12-horreya St-Nasr City-Cairo',
+        '02-12345678');
+
+INSERT INTO Parents (id, username, first_name, last_name, email, address, home_phone)
+VALUES (4, 'hanaa.samir', 'Hanaa', 'Samir', 'hanaa.samir7@yahoo.com',
+        'building 54 - Tawfik Elhakeem St.- Rehab City - Cairo', '02-23456526');
+
 INSERT INTO Parents (id, username, first_name, last_name, email, address, home_phone)
 VALUES
-  (4, 'hosny.gserha', 'Hosny', 'Gesrha', 'hosny.gesrha19970@gmail.com', 'building 31 - Galaa St.- Giza', '02-54309954');
+  (5, 'hosny.gserha', 'Hosny', 'Gesrha', 'hosny.gesrha19970@gmail.com', 'building 31 - Galaa St.- Giza', '02-54309954');
+
 INSERT INTO Parents (id, username, first_name, last_name, email, address, home_phone)
-VALUES (5, 'amr.tawfik', 'Amr', 'Tawfik', 'amr.tawfik26@gmail.com',
+VALUES (6, 'amr.tawfik', 'Amr', 'Tawfik', 'amr.tawfik26@gmail.com',
         'building 50 - AbouBakr ElSeddek St.- Rehab City - Cairo', '02-23457532');
-INSERT INTO Parents (id, username, first_name, last_name, email, address, home_phone)
-VALUES (6, 'khalid.hassan', 'Khalid', 'Hassan', 'khalid.hassan20@gmail.com', 'building 23 - Ramsees St.- Cairo',
-        '02-25761274');
+
 INSERT INTO Parents (id, username, first_name, last_name, email, address, home_phone)
 VALUES (7, 'mahmoud.radwan', 'Mahmoud', 'Radwan', 'mahmoud.radwan34@yahoo.com',
         'building 22 - Salah Salem St.- Nasr City - Cairo', '02-25432156');
@@ -412,9 +411,11 @@ INSERT INTO Parents (id, username, first_name, last_name, email, address, home_p
 VALUES
   (8, 'omar.salman', 'Omar', 'Salman', 'omar.salman29@yahoo.com', 'building 22 - Abbas El-Akkad St.- Nasr City - Cairo',
    '02-287542097');
+
 INSERT INTO Parents (id, username, first_name, last_name, email, address, home_phone)
-VALUES (9, 'hanaa.samir', 'Hanaa', 'Samir', 'hanaa.samir7@yahoo.com',
-        'building 54 - Tawfik Elhakeem St.- Rehab City - Cairo', '02-23456526');
+VALUES (9, 'khalid.hassan', 'Khalid', 'Hassan', 'khalid.hassan20@gmail.com', 'building 23 - Ramsees St.- Cairo',
+        '02-25761274');
+
 INSERT INTO Parents (id, username, first_name, last_name, email, address, home_phone)
 VALUES (10, 'hossam.helmy', 'Hossam', 'Helmy', 'hossam.helmy5@yahoo.com',
         'building 22 - Makram Ebeid St.- Nasr City - Cairo', '02-2346656');
@@ -446,88 +447,104 @@ VALUES (10, '01173312987');
 
 -- **STUDENTS**
 
--- ibn 1
+-- ibn 1 w 2
 INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level)
-VALUES (123945, 'Zyiad', 'Aly', 'male', '2009-1-15', 'elementary');
+VALUES (1122, 'Zyiad', 'Aly', 'male', '2009-1-15', 'elementary');
 -- ibn 1 brdo
 INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level)
-VALUES (323587, 'Iyad', 'Aly', 'male', '2002-4-14', 'middle');
--- bnt 2 w 9
--- music club
+VALUES (2211, 'Iyad', 'Aly', 'male', '2002-4-14', 'middle');
+
+-- children of 3 and 4
 INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level, school_id, username, password, id)
-VALUES (424875, 'Nour', 'Malek', 'female', '2000-3-15', 'high', 5, 'Nour.Malek1', 'Ns123456@', 1);
--- bnt 3
+VALUES (3344, 'Nour', 'Malek', 'female', '2000-3-15', 'high', 5, 'Nour.Malek1', 'Ns123456@', 1);
 INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level)
-VALUES (743812, 'Jana', 'Yehia', 'female', '2005-6-12', 'elementary');
--- bnt 4
-INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level)
-VALUES (761293, 'Marwa', 'Gesrha', 'female', '2000-5-25', 'high');
--- bnt 5
--- f IEEE w bdaya
+VALUES (4433, 'Jana', 'Malek', 'female', '2005-6-12', 'elementary');
 INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level, school_id, username, password, id)
-VALUES (5339261, 'Shaghaf', 'Tawfik', 'female', '2008-8-26', 'elementary', 2, 'Shaghaf.Tawfik1', 'St1124610', 1);
--- bnt 5 brdo
+VALUES (4444, 'Ramy', 'Malek', 'male', '2004-12-12', 'middle', 4, 'Ramy.Malek1', 'Rs9871235', 1);
+
+-- children of 5
 INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level)
-VALUES (5420917, 'Shahd', 'Tawfik', 'female', '2003-3-30', 'middle');
--- ibn 6
+VALUES (5555, 'Marwa', 'Gesrha', 'female', '2000-5-25', 'high');
+
+-- chilren of 6
+INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level, school_id, username, password, id)
+VALUES (6666, 'Shaghaf', 'Tawfik', 'female', '2008-8-26', 'elementary', 2, 'Shaghaf.Tawfik1', 'St1124610', 1);
 INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level)
-VALUES (612065, 'Ahmed', 'Hassan', 'male', '2003-2-11', 'middle');
--- bnt 6 brdo 
+VALUES (6666, 'Shahd', 'Tawfik', 'female', '2003-3-30', 'middle');
+
+-- child of 7
 INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level)
-VALUES (623019, 'Sarah', 'Hassan', 'female', '2007-7-7', 'elementary');
+VALUES (7777, 'Mohannad', 'Radwan', 'male', '2001-9-30', 'middle');
+
+-- children of 8
+INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level)
+VALUES (888, 'Mazen', 'Salman', 'male', '1999-6-30', 'high');
+INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level)
+VALUES (8888, 'Malak', 'Salman', 'female', '2010-10-20', 'elementary');
+
+
+
+-- children of 9
+INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level)
+VALUES (999, 'Ahmed', 'Hassan', 'male', '2003-2-11', 'middle');
+INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level)
+VALUES (9999, 'Sarah', 'Hassan', 'female', '2007-7-7', 'elementary');
 -- ibn 7
-INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level)
-VALUES (3296401, 'Mohannad', 'Radwan', 'male', '2001-9-30', 'middle');
--- ibn 8 
-INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level)
-VALUES (6712049, 'Mazen', 'Salman', 'male', '1999-6-30', 'high');
--- bnt 8 brdo
-INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level)
-VALUES (1308752, 'Malak', 'Salman', 'female', '2010-10-20', 'elementary');
--- ibn 2 w 9 
-INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level, school_id, username, password, id)
-VALUES (4309120, 'Ramy', 'Malek', 'male', '2004-12-12', 'middle', 4, 'Ramy.Malek1', 'Rs9871235', 1);
--- ibn 10 
-INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level)
-VALUES (6661239, 'Mohab', 'Helmy', 'male', '2006-2-26', 'elementary');
+
+
+-- children of 10
+INSERT INTO Students (ssn, first_name, last_name, gender, birthdate)
+VALUES (1010, 'Mohab', 'Helmy', 'male', '2006-2-26');
 -- bnt 10 brdo
-INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level)
-VALUES (5532006, 'Haneen', 'Helmy', 'female', '2002-8-22', 'middle');
+INSERT INTO Students (ssn, first_name, last_name, gender, birthdate)
+VALUES (101010, 'Haneen', 'Helmy', 'female', '2002-8-22');
 
 -- **PARENT OF STUDENT**
 
 INSERT INTO Parent_Of_Student (parent_id, child_ssn)
-VALUES (1, 123945);
+VALUES (1, 1122);
 INSERT INTO Parent_Of_Student (parent_id, child_ssn)
-VALUES (1, 323587);
+VALUES (1, 2211);
 INSERT INTO Parent_Of_Student (parent_id, child_ssn)
-VALUES (2, 424875);
+VALUES (2, 1122);
 INSERT INTO Parent_Of_Student (parent_id, child_ssn)
-VALUES (9, 424875);
+VALUES (2, 2211);
+
 INSERT INTO Parent_Of_Student (parent_id, child_ssn)
-VALUES (3, 743812);
+VALUES (3, 3344);
 INSERT INTO Parent_Of_Student (parent_id, child_ssn)
-VALUES (4, 761293);
+VALUES (3, 4433);
 INSERT INTO Parent_Of_Student (parent_id, child_ssn)
-VALUES (5, 5339261);
+VALUES (4, 3344);
 INSERT INTO Parent_Of_Student (parent_id, child_ssn)
-VALUES (5, 5420917);
+VALUES (4, 4433);
 INSERT INTO Parent_Of_Student (parent_id, child_ssn)
-VALUES (6, 612065);
+VALUES (4, 4444);
+
 INSERT INTO Parent_Of_Student (parent_id, child_ssn)
-VALUES (6, 623019);
+VALUES (5, 5555);
+
 INSERT INTO Parent_Of_Student (parent_id, child_ssn)
-VALUES (7, 3296401);
+VALUES (6, 6666);
+
 INSERT INTO Parent_Of_Student (parent_id, child_ssn)
-VALUES (8, 6712049);
+VALUES (7, 7777);
+
 INSERT INTO Parent_Of_Student (parent_id, child_ssn)
-VALUES (2, 4309120);
+VALUES (8, 888);
 INSERT INTO Parent_Of_Student (parent_id, child_ssn)
-VALUES (9, 4309120);
+VALUES (8, 8888);
+
 INSERT INTO Parent_Of_Student (parent_id, child_ssn)
-VALUES (10, 6661239);
+VALUES (9, 999);
 INSERT INTO Parent_Of_Student (parent_id, child_ssn)
-VALUES (10, 5532006);
+VALUES (9, 9999);
+
+
+INSERT INTO Parent_Of_Student (parent_id, child_ssn)
+VALUES (10, 1010);
+INSERT INTO Parent_Of_Student (parent_id, child_ssn)
+VALUES (10, 101010);
 
 -- **SCHOOL APPLY STUDENT**
 

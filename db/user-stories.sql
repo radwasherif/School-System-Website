@@ -666,6 +666,7 @@ BEGIN
   INSERT INTO Teachers (id) VALUES (@emp_id);
 END //
 
+# DROP  PROCEDURE teacher_view_courses;
 CREATE PROCEDURE teacher_view_courses(IN teacher_id INT)
 BEGIN
   SELECT C.name, C.level, C.grade

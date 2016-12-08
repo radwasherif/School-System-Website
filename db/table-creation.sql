@@ -182,6 +182,18 @@ CREATE TRIGGER TeachersExpYearsUpdate BEFORE UPDATE
 	END IF;
 END //
 
+CREATE TRIGGER StudentLevel BEFORE INSERT
+	ON Students
+	FOR EACH ROW BEGIN
+	IF(New.grade >= 1 AND NEW.grade <= 6)
+		THEN SET New.level = 'elementary';
+		ELSEIF (New.grade <= 9)
+			THEN SET New.level = 'middle';
+		ELSE
+			SET New.level = 'high';
+	END IF;
+END //
+
 DELIMITER ;
 
 CREATE TABLE Administrators

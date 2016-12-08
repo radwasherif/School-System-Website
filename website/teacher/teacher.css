@@ -1,13 +1,167 @@
+body {
+	font-family:  Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+}
 
+#post-assignment {
+	background-color: #e0f2f1; 
+	padding: 10px; 
+	margin-top: auto; 
+	margin-bottom: auto; 
+}
 .col-centered{
     float: none;
     margin-left: auto;
     margin-right: auto; 
 }
+.row {
+	padding-top: 50px; 
+	padding-bottom: 50px; 
+}
+.jumbotron {
+	background-color: white; 
+}
 
-#sign-up {
-	background-color: #e0f2f1; 
-	padding: 10px; 
-	margin-top: auto; 
-	margin-bottom: auto; 
+.container-custom {
+	background-color: #2BBBAD; 
+}
+
+#logo {
+	background-color: white; 
+	margin-right: auto;
+	margin-left: auto;  
+	width: 100%;
+}
+
+#login {
+	background-color: #e0f2f1;
+	bord : 10px;
+	border-color: #00695c;  
+}
+
+#search-bar {
+	width: 50%;
+	margin-right: auto; 
+	margin-left: auto;    
+}
+
+.rectangle {
+	border-radius: 5px;
+	border: 2px solid #FFFFFF;
+	background-color: #2BBBAD;
+	/*height: 50px;
+	width: 120px;*/
+	/*margin: auto;*/
+	text-align: center;
+	font-size: 36px; 
+}
+
+.my-circle-button {
+	box-shadow: 2px 4px 0 2px rgba(0,0,0,0.1);
+	border: .5em solid #2BBBAD;
+	font-size: 4em;
+	line-height: 1.1em;
+	color: #000000;
+	background-color: #2BBBAD;
+	margin: auto;
+	border-radius: 50%;
+	height: 7em;
+	width: 7em;
+	position: relative;
+}
+.my-circle-button:hover {
+	color:#000000;
+    background-color: #2BBBAD;
+	text-decoration: none;
+	border-color: #8DEEEE;
+	
+}
+.my-circle-button:visited {
+	color:#000000;
+    background-color: #2BBBAD;
+	text-decoration: none;
+	
+}
+/*.orange-circle-link-greater-than {
+    font-size: 1em;
+}*/
+
+.divider1{
+    /*width:5px;*/
+    /*height:auto;*/
+    /*display:inline-block;*/
+    position: absolute;
+    left: -680px;
+    right: 0px;
+    bottom: -300px;
+}
+
+.divider3{
+    /*width:5px;
+    height:auto;
+    display:inline-block;*/
+     /*margin-left: : -100px;*/
+     
+     position: absolute;
+     bottom: -300px;
+    left: 800px;
+}
+
+.divider4{
+    /*width:5px;
+    height:auto;
+    display:inline-block;*/
+     /*margin-left: : -100px;*/
+     
+     position: absolute;
+     bottom: 0px;
+    left: 490px;
+}
+
+.divider5{
+    /*width:5px;
+    height:auto;
+    display:inline-block;*/
+     /*margin-left: : -100px;*/
+     
+     position: absolute;
+     bottom: 0px;
+    left: 250px;
+}
+
+.divider6{
+    /*width:5px;
+    height:auto;
+    display:inline-block;*/
+     /*margin-left: : -100px;*/
+     
+     position: absolute;
+     bottom: 0px;
+    left: -30px;
+}
+
+.my-circle-button2 {
+	box-shadow: 2px 4px 0 2px rgba(0,0,0,0.1);
+	border: .3em solid #2BBBAD;
+	font-size: 2em;
+	line-height: 1.1em;
+	color: #000000;
+	background-color: #2BBBAD;
+	margin: auto;
+	border-radius: 50%;
+	height: 7em;
+	width: 8em;
+	position: relative;
+}
+.my-circle-button2:hover {
+	color:#000000;
+    background-color: #2BBBAD;
+	text-decoration: none;
+	border-color: #8DEEEE;
+	
+}
+.my-circle-button2:visited {
+	color:#000000;
+    background-color: #2BBBAD;
+	text-decoration: none;
+	
 }

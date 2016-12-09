@@ -688,20 +688,20 @@ BEGIN
   INSERT INTO Assignments (assignment_number, course_code, school_id, post_date, due_date, content, teacher_id)
    VALUES (assignment_number, course_code, school_id, post_date, due_date, content, teacher_id);
 END //
-CREATE PROCEDURE unique_assignment(IN teacher_id INT, IN course_code INT, IN assignment_number INT, OUT is_unique BIT)
-BEGIN
-DECLARE school_id INT;
-  SELECT E.school_id INTO school_id
-  FROM Employees E
-  WHERE id = teacher_id;
-IF(NOT EXISTS (SELECT * FROM Assignments A WHERE (A.assignment_number = assignment_number AND A.course_code = course_code AND A.school_id = school_id)))
-THEN 
-SET is_unique = 1; 
-ELSE
-SET is_unique = 0;
-END IF;
+-- CREATE PROCEDURE unique_assignment(IN teacher_id INT, IN course_code INT, IN assignment_number INT, OUT is_unique BIT)
+-- BEGIN
+-- DECLARE school_id INT;
+--   SELECT E.school_id INTO school_id
+--   FROM Employees E
+--   WHERE id = teacher_id;
+-- IF(NOT EXISTS (SELECT * FROM Assignments A WHERE (A.assignment_number = assignment_number AND A.course_code = course_code AND A.school_id = school_id)))
+-- THEN 
+-- SET is_unique = 1; 
+-- ELSE
+-- SET is_unique = 0;
+-- END IF;
 
-END //
+-- END //
 -- drop procedure teacher_assignments;
 CREATE PROCEDURE teacher_assignments(IN teacher_id INT, IN course_code INT)
 BEGIN
@@ -786,16 +786,22 @@ BEGIN
   INSERT INTO Answers (answer_sub_id, course_code, q_id, answer, teacher_id) VALUES (count + 1, course_code, q_id, answer, teacher_id);
 
 END //
-# drop PROCEDURE teacher_view_students;
-CREATE PROCEDURE teacher_view_students(IN teacher_id INT)
-BEGIN
-  SELECT S.ssn, S.first_name, S.last_name, S.id, S.grade, S.level, S.gender, S.birthdate, S.age
-  FROM Students S
-  WHERE EXISTS (SELECT * FROM Courses_TaughtTo_Students_By_Teachers CT WHERE CT.teacher_id = teacher_id AND CT.student_ssn = S.ssn)
-  GROUP BY S.grade
-  ORDER BY S.first_name, S.last_name;
-END //
+
 # drop procedure teacher_view_students_in_grade;
+
+
+-- CREATE PROCEDURE teacher_view_students(IN teacher_id INT)
+-- BEGIN
+--   SELECT S.ssn, S.first_name, S.last_name, S.id, S.grade, S.level, S.gender, S.birthdate, S.age
+--   FROM Students S
+--   WHERE EXISTS (SELECT * FROM Courses_TaughtTo_Students_By_Teachers CT WHERE CT.teacher_id = teacher_id AND CT.student_ssn = S.ssn)
+--   GROUP BY S.grade
+--   ORDER BY S.first_name, S.last_name;
+-- END //
+
+-- drop procedure teacher_view_students_in_grade;
+
+
 CREATE PROCEDURE teacher_view_students_in_grade(IN teacher_id INT, IN grade INT)
 BEGIN
   SELECT S.ssn, CONCAT_WS('',S.first_name, ' ',S.last_name) AS student_name, S.id, S.gender, S.age

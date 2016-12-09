@@ -214,80 +214,80 @@ INSERT INTO Courses_Prerequisite_Courses (pre_code, code)
 VALUES (1107, 1207);
 
 -- **SUPPLIES** 
-INSERT INTO Supplies (name, school_id, grade)
-VALUES ('Scissors', 2, 1);
-INSERT INTO Supplies (name, school_id, grade)
-VALUES ('Scissors', 3, 1);
-INSERT INTO Supplies (name, school_id, grade)
-VALUES ('Scissors', 4, 1);
-INSERT INTO Supplies (name, school_id, grade)
-VALUES ('Scissors', 4, 2);
-INSERT INTO Supplies (name, school_id, grade)
-VALUES ('Scissors', 3, 2);
-INSERT INTO Supplies (name, school_id, grade)
-VALUES ('Pencils', 5, 1);
-INSERT INTO Supplies (name, school_id, grade)
-VALUES ('Pencils', 6, 1);
-INSERT INTO Supplies (name, school_id, grade)
-VALUES ('Pencils', 3, 2);
-INSERT INTO Supplies (name, school_id, grade)
-VALUES ('Pencils', 5, 2);
-INSERT INTO Supplies (name, school_id, grade)
-VALUES ('Pencils', 7, 1);
-INSERT INTO Supplies (name, school_id, grade)
-VALUES ('Notebooks', 2, 1);
-INSERT INTO Supplies (name, school_id, grade)
-VALUES ('Notebooks', 3, 1);
-INSERT INTO Supplies (name, school_id, grade)
-VALUES ('Notebooks', 4, 1);
-INSERT INTO Supplies (name, school_id, grade)
-VALUES ('Notebooks', 5, 2);
-INSERT INTO Supplies (name, school_id, grade)
-VALUES ('Notebooks', 7, 3);
-INSERT INTO Supplies (name, school_id, grade)
-VALUES ('Notebooks', 2, 2);
-INSERT INTO Supplies (name, school_id, grade)
-VALUES ('Notebooks', 2, 4);
+-- INSERT INTO Supplies (name, school_id, grade)
+-- VALUES ('Scissors', 2, 1);
+-- INSERT INTO Supplies (name, school_id, grade)
+-- VALUES ('Scissors', 3, 1);
+-- INSERT INTO Supplies (name, school_id, grade)
+-- VALUES ('Scissors', 4, 1);
+-- INSERT INTO Supplies (name, school_id, grade)
+-- VALUES ('Scissors', 4, 2);
+-- INSERT INTO Supplies (name, school_id, grade)
+-- VALUES ('Scissors', 3, 2);
+-- INSERT INTO Supplies (name, school_id, grade)
+-- VALUES ('Pencils', 5, 1);
+-- INSERT INTO Supplies (name, school_id, grade)
+-- VALUES ('Pencils', 6, 1);
+-- INSERT INTO Supplies (name, school_id, grade)
+-- VALUES ('Pencils', 3, 2);
+-- INSERT INTO Supplies (name, school_id, grade)
+-- VALUES ('Pencils', 5, 2);
+-- INSERT INTO Supplies (name, school_id, grade)
+-- VALUES ('Pencils', 7, 1);
+-- INSERT INTO Supplies (name, school_id, grade)
+-- VALUES ('Notebooks', 2, 1);
+-- INSERT INTO Supplies (name, school_id, grade)
+-- VALUES ('Notebooks', 3, 1);
+-- INSERT INTO Supplies (name, school_id, grade)
+-- VALUES ('Notebooks', 4, 1);
+-- INSERT INTO Supplies (name, school_id, grade)
+-- VALUES ('Notebooks', 5, 2);
+-- INSERT INTO Supplies (name, school_id, grade)
+-- VALUES ('Notebooks', 7, 3);
+-- INSERT INTO Supplies (name, school_id, grade)
+-- VALUES ('Notebooks', 2, 2);
+-- INSERT INTO Supplies (name, school_id, grade)
+-- VALUES ('Notebooks', 2, 4);
 
--- **CLUBS** 
-INSERT INTO Clubs (name, school_id)
-VALUES ('IEEE', 1);
+-- -- **CLUBS** 
+-- INSERT INTO Clubs (name, school_id)
+-- VALUES ('IEEE', 1);
 
-INSERT INTO Clubs (name, school_id)
-VALUES ('IEEE', 2);
+-- INSERT INTO Clubs (name, school_id)
+-- VALUES ('IEEE', 2);
 
-INSERT INTO Clubs (name, school_id)
-VALUES ('IEEE', 3);
+-- INSERT INTO Clubs (name, school_id)
+-- VALUES ('IEEE', 3);
 
-INSERT INTO Clubs (name, school_id)
-VALUES ('Bdaya', 1);
+-- INSERT INTO Clubs (name, school_id)
+-- VALUES ('Bdaya', 1);
 
-INSERT INTO Clubs (name, school_id)
-VALUES ('Bdaya', 4);
+-- INSERT INTO Clubs (name, school_id)
+-- VALUES ('Bdaya', 4);
 
-INSERT INTO Clubs (name, school_id)
-VALUES ('Music Club', 5);
+-- INSERT INTO Clubs (name, school_id)
+-- VALUES ('Music Club', 5);
 
-INSERT INTO Clubs (name, school_id)
-VALUES ('Music Club', 6);
+-- INSERT INTO Clubs (name, school_id)
+-- VALUES ('Music Club', 6);
 
-INSERT INTO Clubs (name, school_id)
-VALUES ('Art Club', 1);
+-- INSERT INTO Clubs (name, school_id)
+-- VALUES ('Art Club', 1);
 
-INSERT INTO Clubs (name, school_id)
-VALUES ('Art Club', 2);
+-- INSERT INTO Clubs (name, school_id)
+-- VALUES ('Art Club', 2);
 
-INSERT INTO Clubs (name, school_id)
-VALUES ('Art Club', 7);
+-- INSERT INTO Clubs (name, school_id)
+-- VALUES ('Art Club', 7);
 
-INSERT INTO Clubs (name, school_id)
-VALUES ('Cinema Club', 2);
+-- INSERT INTO Clubs (name, school_id)
+-- VALUES ('Cinema Club', 2);
 
-INSERT INTO Clubs (name, school_id)
-VALUES ('Cinema Club', 3);
+-- INSERT INTO Clubs (name, school_id)
+-- VALUES ('Cinema Club', 3);
 
-INSERT INTO Clubs (name, school_id)
-VALUES ('Cinema Club', 5);
+-- INSERT INTO Clubs (name, school_id)
+-- VALUES ('Cinema Club', 5);
 
 -- **EMPLOYEES** 
 -- school 1:
@@ -374,9 +374,9 @@ VALUES (12);
 INSERT INTO Teachers (id)
 VALUES (13);
 
--- **SUPERVISORS** 
-INSERT INTO Teachers_Supervising_Teachers (supervisor_id, teacher_id)
-VALUES (3, 4);
+-- -- **SUPERVISORS** 
+-- INSERT INTO Teachers_Supervising_Teachers (supervisor_id, teacher_id)
+-- VALUES (3, 4);
 
 -- **PARENTS**
 
@@ -470,7 +470,7 @@ VALUES (5555, 'Marwa', 'Gesrha', 'female', '2000-5-25', 'high');
 INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level, school_id, username, password, id)
 VALUES (666, 'Shaghaf', 'Tawfik', 'female', '2008-8-26', 'elementary', 2, 'Shaghaf.Tawfik1', 'St1124610', 1);
 INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level)
-VALUES (6666, 'Shahd', 'Tawfik', 'female', '2003-3-30', 'middle');
+VALUES (66666, 'Shahd', 'Tawfik', 'female', '2003-3-30', 'middle');
 
 -- child of 7
 INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level)
@@ -548,108 +548,86 @@ VALUES (10, 101010);
 
 -- **SCHOOL APPLY STUDENT**
 
-INSERT INTO School_Apply_Student (school_id, student_ssn, parent_id, status)
-VALUES (1, 612065, 6, 'pending');
-INSERT INTO School_Apply_Student (school_id, student_ssn, parent_id, status)
-VALUES (1, 5339261, 5, 'accepted');
-INSERT INTO School_Apply_Student (school_id, student_ssn, parent_id, status)
-VALUES (5, 424875, 9, 'accepted');
-INSERT INTO School_Apply_Student (school_id, student_ssn, parent_id, status)
-VALUES (4, 4309120, 2, 'accepted');
-INSERT INTO School_Apply_Student (school_id, student_ssn, parent_id, status)
-VALUES (3, 123945, 1, 'pending');
-INSERT INTO School_Apply_Student (school_id, student_ssn, parent_id, status)
-VALUES (5, 623019, 6, 'pending');
-INSERT INTO School_Apply_Student (school_id, student_ssn, parent_id, status)
-VALUES (6, 6661239, 10, 'pending');
-INSERT INTO School_Apply_Student (school_id, student_ssn, parent_id, status)
-VALUES (7, 6712049, 8, 'rejected');
+-- INSERT INTO School_Apply_Student (school_id, student_ssn, parent_id, status)
+-- VALUES (1, 612065, 6, 'pending');
+-- INSERT INTO School_Apply_Student (school_id, student_ssn, parent_id, status)
+-- VALUES (1, 5339261, 5, 'accepted');
+-- INSERT INTO School_Apply_Student (school_id, student_ssn, parent_id, status)
+-- VALUES (5, 424875, 9, 'accepted');
+-- INSERT INTO School_Apply_Student (school_id, student_ssn, parent_id, status)
+-- VALUES (4, 4309120, 2, 'accepted');
+-- INSERT INTO School_Apply_Student (school_id, student_ssn, parent_id, status)
+-- VALUES (3, 123945, 1, 'pending');
+-- INSERT INTO School_Apply_Student (school_id, student_ssn, parent_id, status)
+-- VALUES (5, 623019, 6, 'pending');
+-- INSERT INTO School_Apply_Student (school_id, student_ssn, parent_id, status)
+-- VALUES (6, 6661239, 10, 'pending');
+-- INSERT INTO School_Apply_Student (school_id, student_ssn, parent_id, status)
+-- VALUES (7, 6712049, 8, 'rejected');
 
 -- **PARENT REVIEW SCHOOL**
 
-INSERT INTO Parent_Review_School (school_id, parent_id, review)
-VALUES (1, 6, 'good');
-INSERT INTO Parent_Review_School (school_id, parent_id, review)
-VALUES (1, 5, 'great school');
-INSERT INTO Parent_Review_School (school_id, parent_id, review)
-VALUES (5, 9, 'bad');
-INSERT INTO Parent_Review_School (school_id, parent_id, review)
-VALUES (2, 4, 'highly recommended');
-INSERT INTO Parent_Review_School (school_id, parent_id, review)
-VALUES (7, 8, 'not recommended at all');
+-- INSERT INTO Parent_Review_School (school_id, parent_id, review)
+-- VALUES (1, 6, 'good');
+-- INSERT INTO Parent_Review_School (school_id, parent_id, review)
+-- VALUES (1, 5, 'great school');
+-- INSERT INTO Parent_Review_School (school_id, parent_id, review)
+-- VALUES (5, 9, 'bad');
+-- INSERT INTO Parent_Review_School (school_id, parent_id, review)
+-- VALUES (2, 4, 'highly recommended');
+-- INSERT INTO Parent_Review_School (school_id, parent_id, review)
+-- VALUES (7, 8, 'not recommended at all');
 
--- **CLUB MEMBER STUDENT**
+-- -- **CLUB MEMBER STUDENT**
 
-INSERT INTO Club_Member_Student (student_ssn, school_id, club_name)
-VALUES (5339261, 1, 'IEEE');
-INSERT INTO Club_Member_Student (student_ssn, school_id, club_name)
-VALUES (5339261, 1, 'Art Club');
-INSERT INTO Club_Member_Student (student_ssn, school_id, club_name)
-VALUES (424875, 5, 'Music Club');
+-- INSERT INTO Club_Member_Student (student_ssn, school_id, club_name)
+-- VALUES (5339261, 1, 'IEEE');
+-- INSERT INTO Club_Member_Student (student_ssn, school_id, club_name)
+-- VALUES (5339261, 1, 'Art Club');
+-- INSERT INTO Club_Member_Student (student_ssn, school_id, club_name)
+-- VALUES (424875, 5, 'Music Club');
 
--- **ACTIVITIES**
+-- -- **ACTIVITIES**
 
-INSERT INTO Activities (name, school_id, activity_datetime, location, equipment, description, type, admin_id, teacher_id)
-VALUES ('Camping in Dahab', 2, '2017-01-15 07:00', 'Dahab', 'personal stuff, blanket, compass',
-        'you are welcome to enjoy many camping activities in Dahab including snorkleling and Safari trips', 'Camp', 10,
-        3);
-INSERT INTO Activities (name, school_id, activity_datetime, location, equipment, description, type, admin_id, teacher_id)
-VALUES ('Cycling Race', 5, '2016-12-12 17:00', 'ElGouna', 'Bicycle and Helmet',
-        'our students can participate in Cycling race, prizes will be offered to winners', 'Cycling Race', 11, 6);
+-- INSERT INTO Activities (name, school_id, activity_datetime, location, equipment, description, type, admin_id, teacher_id)
+-- VALUES ('Camping in Dahab', 2, '2017-01-15 07:00', 'Dahab', 'personal stuff, blanket, compass',
+--         'you are welcome to enjoy many camping activities in Dahab including snorkleling and Safari trips', 'Camp', 10,
+--         3);
+-- INSERT INTO Activities (name, school_id, activity_datetime, location, equipment, description, type, admin_id, teacher_id)
+-- VALUES ('Cycling Race', 5, '2016-12-12 17:00', 'ElGouna', 'Bicycle and Helmet',
+--         'our students can participate in Cycling race, prizes will be offered to winners', 'Cycling Race', 11, 6);
 
--- **STUDENT JOIN ACTIVITY**
+-- -- **STUDENT JOIN ACTIVITY**
 
-INSERT INTO Activities_JoinedBy_Students (student_ssn, activity_name, school_id)
-VALUES (5339261, 'Camping in Dahab', 2);
+-- INSERT INTO Activities_JoinedBy_Students (student_ssn, activity_name, school_id)
+-- VALUES (5339261, 'Camping in Dahab', 2);
 
--- **COURSES TAUGHT TO STUDENTS BY TEACHERS**
 
-INSERT INTO Courses_TaughtTo_Students_By_Teachers (course_code, student_ssn, teacher_id)
-VALUES (1107, 424875, 6);
-INSERT INTO Courses_TaughtTo_Students_By_Teachers (course_code, student_ssn)
-VALUES (1103, 424875);
-INSERT INTO Courses_TaughtTo_Students_By_Teachers (course_code, student_ssn)
-VALUES (1106, 424875);
+-- -- **ASSIGNMENTS**
 
-INSERT INTO Courses_TaughtTo_Students_By_Teachers (course_code, student_ssn, teacher_id)
-VALUES (301, 5339261, 12);
-INSERT INTO Courses_TaughtTo_Students_By_Teachers (course_code, student_ssn)
-VALUES (303, 5339261);
-INSERT INTO Courses_TaughtTo_Students_By_Teachers (course_code, student_ssn)
-VALUES (305, 5339261);
+-- INSERT INTO Assignments (assignment_number, course_code, school_id, post_date, due_date, content, teacher_id)
+-- VALUES
+--   (2, 1107, 5, '2016-10-30', '2016-11-12', 'http://dar-eltarbiah-national-school.edu.eg/download1107assignment2', 6);
+-- INSERT INTO Assignments (assignment_number, course_code, school_id, post_date, due_date, content, teacher_id)
+-- VALUES (1, 301, 2, '2016-10-15', '2016-11-1', 'http://al-bashaer-school.edu.eg/download301assignment1', 12);
+-- INSERT INTO Assignments (assignment_number, course_code, school_id, post_date, due_date, content, teacher_id)
+-- VALUES (3, 701, 4, '2016-11-18', '2016-11-30', 'http://narmer-american-college.edu.eg/download701assignment3', 5);
 
-INSERT INTO Courses_TaughtTo_Students_By_Teachers (course_code, student_ssn, teacher_id)
-VALUES (701, 4309120, 5);
-INSERT INTO Courses_TaughtTo_Students_By_Teachers (course_code, student_ssn)
-VALUES (706, 4309120);
-INSERT INTO Courses_TaughtTo_Students_By_Teachers (course_code, student_ssn)
-VALUES (707, 4309120);
+-- -- **SOLUTIONS**
 
--- **ASSIGNMENTS**
+-- INSERT INTO Solutions (student_ssn, assignment_number, course_code, school_id, solution)
+-- VALUES (424875, 2, 1107, 5, 'assignment2-1107-nour-malek-4248.rar');
+-- INSERT INTO Solutions (student_ssn, assignment_number, course_code, school_id, solution)
+-- VALUES (5339261, 1, 301, 2, 'assignment1-301-shaghaf-tawfik-5339.zip');
+-- INSERT INTO Solutions (student_ssn, assignment_number, course_code, school_id, solution)
+-- VALUES (4309120, 3, 701, 4, 'assignment3-701-ramy-malek-4309.rar');
 
-INSERT INTO Assignments (assignment_number, course_code, school_id, post_date, due_date, content, teacher_id)
-VALUES
-  (2, 1107, 5, '2016-10-30', '2016-11-12', 'http://dar-eltarbiah-national-school.edu.eg/download1107assignment2', 6);
-INSERT INTO Assignments (assignment_number, course_code, school_id, post_date, due_date, content, teacher_id)
-VALUES (1, 301, 2, '2016-10-15', '2016-11-1', 'http://al-bashaer-school.edu.eg/download301assignment1', 12);
-INSERT INTO Assignments (assignment_number, course_code, school_id, post_date, due_date, content, teacher_id)
-VALUES (3, 701, 4, '2016-11-18', '2016-11-30', 'http://narmer-american-college.edu.eg/download701assignment3', 5);
+-- -- **GRADES**
 
--- **SOLUTIONS**
-
-INSERT INTO Solutions (student_ssn, assignment_number, course_code, school_id, solution)
-VALUES (424875, 2, 1107, 5, 'assignment2-1107-nour-malek-4248.rar');
-INSERT INTO Solutions (student_ssn, assignment_number, course_code, school_id, solution)
-VALUES (5339261, 1, 301, 2, 'assignment1-301-shaghaf-tawfik-5339.zip');
-INSERT INTO Solutions (student_ssn, assignment_number, course_code, school_id, solution)
-VALUES (4309120, 3, 701, 4, 'assignment3-701-ramy-malek-4309.rar');
-
--- **GRADES**
-
-INSERT INTO Teachers_Grade_Solutions (student_ssn, assignment_number, course_code, school_id, teacher_id, grade)
-VALUES (424875, 2, 1107, 5, 6, 80);
-INSERT INTO Teachers_Grade_Solutions (student_ssn, assignment_number, course_code, school_id, teacher_id, grade)
-VALUES (5339261, 1, 301, 2, 12, 99);
+-- INSERT INTO Teachers_Grade_Solutions (student_ssn, assignment_number, course_code, school_id, teacher_id, grade)
+-- VALUES (424875, 2, 1107, 5, 6, 80);
+-- INSERT INTO Teachers_Grade_Solutions (student_ssn, assignment_number, course_code, school_id, teacher_id, grade)
+-- VALUES (5339261, 1, 301, 2, 12, 99);
 
 -- **ANNOUNCEMTNS**
 
@@ -675,30 +653,30 @@ VALUES ('Day off.', '2016-11-23', 'news', 'The first three days of the next week
 INSERT INTO Announcements (title, announcement_date, type, description, admin_id, school_id)
 VALUES ('Football league', '2016-09-05', 'sport', 'Start of the football league this month.', 7, 6);
 
--- **PARENT RATE TEACHER**
+-- -- **PARENT RATE TEACHER**
 
-INSERT INTO Parents_Rate_Teachers (parent_id, teacher_id, rating)
-VALUES (2, 6, 6);
-INSERT INTO Parents_Rate_Teachers (parent_id, teacher_id, rating)
-VALUES (9, 6, 8);
-INSERT INTO Parents_Rate_Teachers (parent_id, teacher_id, rating)
-VALUES (5, 12, 9);
-INSERT INTO Parents_Rate_Teachers (parent_id, teacher_id, rating)
-VALUES (9, 5, 8);
+-- INSERT INTO Parents_Rate_Teachers (parent_id, teacher_id, rating)
+-- VALUES (2, 6, 6);
+-- INSERT INTO Parents_Rate_Teachers (parent_id, teacher_id, rating)
+-- VALUES (9, 6, 8);
+-- INSERT INTO Parents_Rate_Teachers (parent_id, teacher_id, rating)
+-- VALUES (5, 12, 9);
+-- INSERT INTO Parents_Rate_Teachers (parent_id, teacher_id, rating)
+-- VALUES (9, 5, 8);
 
--- **QUESTIONS**
+-- -- **QUESTIONS**
 
-INSERT INTO Questions (q_id, student_ssn, course_code, content)
-VALUES (1, 424875, 1107, 'what is the definition of specific heat capacity?');
-INSERT INTO Questions (q_id, student_ssn, course_code, content)
-VALUES (1, 4309120, 701, 'What will be included in the next quiz?');
+-- INSERT INTO Questions (q_id, student_ssn, course_code, content)
+-- VALUES (1, 424875, 1107, 'what is the definition of specific heat capacity?');
+-- INSERT INTO Questions (q_id, student_ssn, course_code, content)
+-- VALUES (1, 4309120, 701, 'What will be included in the next quiz?');
 
--- **ANSWERS**
+-- -- **ANSWERS**
 
-INSERT INTO Answers (answer_sub_id, q_id, course_code, teacher_id, answer)
-VALUES (1, 1, 1107, 6, 'The energy required to raise the temperature of 1 Kg of the material 1°C');
-INSERT INTO Answers (answer_sub_id, q_id, course_code, teacher_id, answer)
-VALUES (1, 1, 701, 5, 'The first three chapters');
+-- INSERT INTO Answers (answer_sub_id, q_id, course_code, teacher_id, answer)
+-- VALUES (1, 1, 1107, 6, 'The energy required to raise the temperature of 1 Kg of the material 1°C');
+-- INSERT INTO Answers (answer_sub_id, q_id, course_code, teacher_id, answer)
+-- VALUES (1, 1, 701, 5, 'The first three chapters');
 
 
 

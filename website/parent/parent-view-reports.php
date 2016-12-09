@@ -122,7 +122,7 @@ if(!empty($_GET['child_ssn']) && !empty($_GET['teacher_id']) && !empty('report_d
 									//   <textarea class='form-control' rows='3' name = '$row[0]$record[4]$record[3]'></textarea>
 									// </div>
 									// "; 
-									echo "<a href = 'parent-report.php?id=$id&child_ssn=$row[0]&first_name=$row[1]&last_name=$row[2]&teacher_id=$record[4]&teacher_fname=$record[0]&teacher_lname=$record[0]&report_date=$record[3]' class = 'btn btn-success'> Reply </a>";
+									echo "<a href = 'parent-report.php?id=$id&child_ssn=$row[0]&first_name=$row[1]&last_name=$row[2]&teacher_id=$record[4]&teacher_fname=$record[0]&teacher_lname=$record[1]&report_date=$record[3]' class = 'btn btn-success'> Reply </a>";
 									echo "
 									<hr>";
 								}

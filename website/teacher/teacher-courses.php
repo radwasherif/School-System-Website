@@ -43,7 +43,6 @@
 	</nav>
 
 	<?php 
-	
 	include '../connection-values.php'; 
 	 // mysqli_close($conn);
 	$stmt = mysqli_stmt_init($conn);
@@ -52,10 +51,10 @@
 		print "Failed to prepare statement\n";
 	}
 	else
-	{
-		
+	{  
 		mysqli_stmt_bind_param($stmt, "i", $id);
 		mysqli_stmt_execute($stmt);
+		echo $stmt->error; 
 		$result = mysqli_stmt_get_result($stmt);
 
 		echo "<div class='container'>";
@@ -71,7 +70,7 @@
 		echo		"<tbody>";
 
 		while ($row = mysqli_fetch_array($result, MYSQLI_NUM))
-		{
+		{  
 			echo "<tr>";
 			$count = 0;
 			$code;

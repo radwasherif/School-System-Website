@@ -1,4 +1,4 @@
-
+DROP DATABASE School_System;
 CREATE DATABASE School_System;
 USE School_System; 
 
@@ -144,57 +144,6 @@ CREATE TABLE Employees (
 	age INT,
 	FOREIGN KEY (school_id) REFERENCES Schools(id) ON DELETE SET NULL
 ); 
-
-DELIMITER  //
-
-CREATE TRIGGER EmployeesAge BEFORE INSERT
-	ON Employees
-	FOR EACH ROW BEGIN
-		SET New.age = YEAR(CURDATE()) - YEAR(New.birthdate);
-
-END//
-
-CREATE TRIGGER StudentsAge BEFORE INSERT
-	ON Students
-	FOR EACH ROW BEGIN
-		SET New.age = YEAR(CURDATE()) - YEAR(New.birthdate);
-
-END//
-
-CREATE TRIGGER StudentGrade BEFORE INSERT
-	ON Students
-	FOR EACH ROW
-		SET New.grade = YEAR(CURDATE()) - YEAR(New.birthdate) - 5;
-
-CREATE TRIGGER TeachersExpYears BEFORE INSERT
-	ON Teachers
-	FOR EACH ROW BEGIN
-	IF(New.start_date IS NOT NULL ) THEN
-			SET New.exp_years = (YEAR(CURDATE()) - YEAR(New.start_date));
-	END IF;
-END //
-
-CREATE TRIGGER TeachersExpYearsUpdate BEFORE UPDATE
-	ON Teachers
-	FOR EACH ROW BEGIN
-	IF(New.start_date IS NOT NULL ) THEN
-			SET New.exp_years = (YEAR(CURDATE()) - YEAR(New.start_date));
-	END IF;
-END //
-
-CREATE TRIGGER StudentLevel BEFORE INSERT
-	ON Students
-	FOR EACH ROW BEGIN
-	IF(New.grade >= 1 AND NEW.grade <= 6)
-		THEN SET New.level = 'elementary';
-		ELSEIF (New.grade <= 9)
-			THEN SET New.level = 'middle';
-		ELSE
-			SET New.level = 'high';
-	END IF;
-END //
-
-DELIMITER ;
 
 CREATE TABLE Administrators
 	 (
@@ -408,5 +357,122 @@ CREATE TABLE Parents_Reply_Reports
 		FOREIGN KEY (parent_id) REFERENCES Parents(id) ON DELETE CASCADE,
 		FOREIGN KEY (report_date, student_ssn, teacher_id) REFERENCES Reports(report_date, student_ssn, teacher_id) ON DELETE CASCADE
 	);
+ DELIMITER  //
+
+CREATE TRIGGER EmployeesAge BEFORE INSERT
+	ON Employees
+	FOR EACH ROW BEGIN
+		SET New.age = YEAR(CURDATE()) - YEAR(New.birthdate);
+
+END//
+
+ CREATE TRIGGER StudentsAge BEFORE INSERT
+	ON Students
+	FOR EACH ROW BEGIN
+		SET New.age = YEAR(CURDATE()) - YEAR(New.birthdate);
+        SET New.grade = YEAR(CURDATE()) - YEAR(New.birthdate) - 5;
+        IF(New.grade >= 1 AND NEW.grade <= 6)
+		THEN SET New.level = 'elementary';
+		ELSEIF (New.grade <= 9)
+			THEN SET New.level = 'middle';
+		ELSE
+			SET New.level = 'high';
+	END IF;
+	IF(New.grade >= 1 AND NEW.grade <= 6)
+		THEN SET New.level = 'elementary';
+		ELSEIF (New.grade <= 9)
+			THEN SET New.level = 'middle';
+		ELSE
+			SET New.level = 'high';
+	END IF;
+
+END//
+
+-- CREATE TRIGGER StudentGrade BEFORE INSERT
+-- 	ON Students
+-- 	FOR EACH ROW
+-- 		SET New.grade = YEAR(CURDATE()) - YEAR(New.birthdate) - 5;
+
+CREATE TRIGGER TeachersExpYears BEFORE INSERT
+	ON Teachers
+	FOR EACH ROW BEGIN
+	IF(New.start_date IS NOT NULL ) THEN
+			SET New.exp_years = (YEAR(CURDATE()) - YEAR(New.start_date));
+	END IF;
+END //
+
+CREATE TRIGGER TeachersExpYearsUpdate BEFORE UPDATE
+	ON Teachers
+	FOR EACH ROW BEGIN
+	IF(New.start_date IS NOT NULL ) THEN
+			SET New.exp_years = (YEAR(CURDATE()) - YEAR(New.start_date));
+	END IF;
+END //
+
+-- CREATE TRIGGER StudentLevel BEFORE INSERT
+-- 	ON Students
+-- 	FOR EACH ROW BEGIN
+-- 	IF(New.grade >= 1 AND NEW.grade <= 6)
+-- 		THEN SET New.level = 'elementary';
+-- 		ELSEIF (New.grade <= 9)
+-- 			THEN SET New.level = 'middle';
+-- 		ELSE
+-- 			SET New.level = 'high';
+-- 	END IF;
+-- END //
+
+DELIMITER ;
+
+DELIMITER  //
+
+CREATE TRIGGER EmployeesAge BEFORE INSERT
+	ON Employees
+	FOR EACH ROW BEGIN
+		SET New.age = YEAR(CURDATE()) - YEAR(New.birthdate);
+
+END//
+
+CREATE TRIGGER StudentsAge BEFORE INSERT
+	ON Students
+	FOR EACH ROW BEGIN
+		SET New.age = YEAR(CURDATE()) - YEAR(New.birthdate);
+
+END//
+
+CREATE TRIGGER StudentGrade BEFORE INSERT
+	ON Students
+	FOR EACH ROW
+		SET New.grade = YEAR(CURDATE()) - YEAR(New.birthdate) - 5;
+
+CREATE TRIGGER TeachersExpYears BEFORE INSERT
+	ON Teachers
+	FOR EACH ROW BEGIN
+	IF(New.start_date IS NOT NULL ) THEN
+			SET New.exp_years = (YEAR(CURDATE()) - YEAR(New.start_date));
+	END IF;
+END //
+
+CREATE TRIGGER TeachersExpYearsUpdate BEFORE UPDATE
+	ON Teachers
+	FOR EACH ROW BEGIN
+	IF(New.start_date IS NOT NULL ) THEN
+			SET New.exp_years = (YEAR(CURDATE()) - YEAR(New.start_date));
+	END IF;
+END //
+
+CREATE TRIGGER StudentLevel BEFORE INSERT
+	ON Students
+	FOR EACH ROW BEGIN
+	IF(New.grade >= 1 AND NEW.grade <= 6)
+		THEN SET New.level = 'elementary';
+		ELSEIF (New.grade <= 9)
+			THEN SET New.level = 'middle';
+		ELSE
+			SET New.level = 'high';
+	END IF;
+END //
+
+DELIMITER ;
+
 
 

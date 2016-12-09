@@ -468,7 +468,7 @@ VALUES (5555, 'Marwa', 'Gesrha', 'female', '2000-5-25', 'high');
 
 -- chilren of 6
 INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level, school_id, username, password, id)
-VALUES (6666, 'Shaghaf', 'Tawfik', 'female', '2008-8-26', 'elementary', 2, 'Shaghaf.Tawfik1', 'St1124610', 1);
+VALUES (666, 'Shaghaf', 'Tawfik', 'female', '2008-8-26', 'elementary', 2, 'Shaghaf.Tawfik1', 'St1124610', 1);
 INSERT INTO Students (ssn, first_name, last_name, gender, birthdate, level)
 VALUES (6666, 'Shahd', 'Tawfik', 'female', '2003-3-30', 'middle');
 

@@ -666,7 +666,7 @@ BEGIN
   INSERT INTO Teachers (id) VALUES (@emp_id);
 END //
 
-
+# DROP PROCEDURE teacher_view_courses;
 CREATE PROCEDURE teacher_view_courses(IN teacher_id INT)
 BEGIN
   SELECT C.code, C.name, C.level, C.grade
@@ -786,7 +786,7 @@ BEGIN
   INSERT INTO Answers (answer_sub_id, course_code, q_id, answer, teacher_id) VALUES (count + 1, course_code, q_id, answer, teacher_id);
 
 END //
-
+# drop PROCEDURE teacher_view_students;
 CREATE PROCEDURE teacher_view_students(IN teacher_id INT)
 BEGIN
   SELECT S.ssn, S.first_name, S.last_name, S.id, S.grade, S.level, S.gender, S.birthdate, S.age
@@ -795,7 +795,7 @@ BEGIN
   GROUP BY S.grade
   ORDER BY S.first_name, S.last_name;
 END //
--- drop procedure teacher_view_students_in_grade;
+# drop procedure teacher_view_students_in_grade;
 CREATE PROCEDURE teacher_view_students_in_grade(IN teacher_id INT, IN grade INT)
 BEGIN
   SELECT S.ssn, CONCAT_WS('',S.first_name, ' ',S.last_name) AS student_name, S.id, S.gender, S.age

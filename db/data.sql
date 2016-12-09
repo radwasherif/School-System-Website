@@ -119,3 +119,6 @@ INNER JOIN Students S ON S.ssn = CTTSBT.student_ssn
 WHERE S.school_id = 2
   ORDER BY CTTSBT.course_code;
 
+UPDATE Parents
+SET password = '12345';
+

@@ -41,7 +41,7 @@
 			</div>
 			
 			<ul class="nav navbar-nav">
-				<li><a href="../index.php">Home</a></li>
+				<li><a href="../index.php">Log Out</a></li>
 				<li><a href="../view-schools.php">View Schools</a></li>
 				<?php echo "<li><a href='teacher.php?id=$teacher_id'>My Homepage</a></li>";?>
 				<?php echo "<li><a href='teacher-courses.php?id=$teacher_id'>All Courses</a></li>";?>

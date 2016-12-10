@@ -59,7 +59,7 @@ if(!empty($_GET['child_ssn']) && !empty($_GET['teacher_id']) && !empty('report_d
 			</div>
 			
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="../index.php">Home</a></li>
+				<li class="active"><a href="../index.php">Log Out</a></li>
 				<li><a href="../view-schools.php">View Schools</a></li>
 			</ul>
 			

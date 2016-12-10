@@ -2,96 +2,78 @@ USE School_System;
 
 -- **SCHOOLS**
 
-INSERT INTO Schools (id, name, address, mission, vision, language, general_info, fees, type, email)
-VALUES (1, 'Manor House International School', '67 Hussein Ahmed Rashad, Ad Doqi, Giza Governorate',
-        'Manor House American School thrives to provide a holistic learning experience that provides individuals the opportunity to learn and discover who they are in a culturally attuned environment that fosters pride in one’s identity. We instill the basic foundation of respect for the other.',
-        'Manor House American School is a learning institution that provides the opportunity for self discovery. The premise of “Know Thy Self” is our main belief.',
-        'English', 'Both American and IGCSE sections.', 30000, 'International', 'manorhouse@schools.com');
-
+INSERT INTO Schools (name, address, mission, vision, language, general_info, fees, type, email)
+VALUES ('Manor House International School', '67 Hussein Ahmed Rashad, Ad Doqi, Giza Governorate', 'Manor House American School thrives to provide a holistic learning experience that provides individuals the opportunity to learn and discover who they are in a culturally attuned environment that fosters pride in one’s identity. We instill the basic foundation of respect for the other.', 'Manor House American School is a learning institution that provides the opportunity for self discovery. The premise of “Know Thy Self” is our main belief.', 'English', 'Both American and IGCSE sections.', 30000, 'International', 'manorhouse@schools.com');
+ 
 -- SET @school = (LAST_INSERT_ID());  
-INSERT INTO Phone_School (school_id, phone) VALUES (1, '+20 26 17 21 33');
-INSERT INTO Phone_School (school_id, phone) VALUES (1, '+20 26 17 21 34');
-INSERT INTO Phone_School (school_id, phone) VALUES (1, '+20 26 17 21 36');
-INSERT INTO Phone_School (school_id, phone) VALUES (1, '+20 26 17 21 37');
-INSERT INTO Level_School (school_id, level) VALUES (1, 'elementary');
-INSERT INTO Level_School (school_id, level) VALUES (1, 'middle');
-INSERT INTO Level_School (school_id, level) VALUES (1, 'high');
-
-INSERT INTO Schools (id, name, address, mission, vision, language, general_info, fees, type, email)
-VALUES (2, 'Al Bashaer', ' Zahraa Al Maadi, El-Basatin Sharkeya, Al Maadi, Cairo Governorate',
-        'To build a generation who :\nBelieves in God and obeying Him lovingly and choosingly .\nUpdated with the latest scientific developments and technology. \n Well exposed to the entire world and well – rounded enough to cope with people from different cultures and backgrounds. \n Loving nature and proactively interacting with  surroundings.',
-        'To remain as one of the most prominent, moderate Islamic schools in Egypt. (current mission).\nCompete at the global level from the educational perspective. (within 3 years).\nExpansion and transfer of expertise, opening new schools in other Islamic or non Islamic countries (within 10 years).\nEstablishing a university or institutes, having the same mission, in the future (within the coming 10 years).',
-        'English',
-        'Al Bashaer Schools,  were founded in 1994, and cover five educational levels starting from Preschool & Kindergarten up to Secondary.',
-        200000, 'International', 'albashaer@schools.com');
-SET @school_id = LAST_INSERT_ID();
-INSERT INTO Phone_School (school_id, phone) VALUES (2, '+201011108241');
-INSERT INTO Phone_School (school_id, phone) VALUES (2, '+201000024687');
-INSERT INTO Phone_School (school_id, phone) VALUES (2, '+2-029706625-6');
-INSERT INTO Level_School (school_id, level) VALUES (2, 'elementary');
-INSERT INTO Level_School (school_id, level) VALUES (2, 'middle');
-INSERT INTO Level_School (school_id, level) VALUES (2, 'high');
-
-
-INSERT INTO Schools (id, name, address, mission, vision, language, general_info, fees, type, email)
-VALUES (3, 'Futures Languages Schools', 'El Meerag City, Ring Road, Near Carrefour Maadi, Cairo.',
-        'We are set to create a unique educational and cultural model that contributes to narrowing Egypt’s chronic growth gap through raising a critical mass of our graduates.',
-        'Futures Educational Systems (FES) was initiated with a mission to help enhance quality and equity of education in Egypt by establishing an educational model that would be replicable.',
-        'English',
-        'Commencing in 1993, Futures Language Schools (FLS) are now the largest chain of private schools in Egypt.',
-        70000, 'National', 'info@futuresnet.net');
-SET @school_id = LAST_INSERT_ID();
-
+INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '+20 26 17 21 33');
+INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '+20 26 17 21 34'); 
+INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '+20 26 17 21 36');  
+INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '+20 26 17 21 37');  
+INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'elementary');
+INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'middle');
+INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'high');
 
 INSERT INTO Schools (name, address, mission, vision, language, general_info, fees, type, email)
-VALUES
-  ('Narmer American College in Egypt', '20 El-Narguis Service Area El Tagamoa–El Khames, New Cairo City, Cairo, Egypt',
-   'Narmer American College has as its primary mission the education and development of the whole student-mind, body and spirit. The students will be equipped to assume positions of leadership with an understanding of technology and its impact on the global community. Students will be able to cooperate in a diverse multicultural community.',
-   '', 'English',
-   'The school was founded in the year 2000 by Mr. Mohamed El Rashidy, an educator with an experience of 50 years in Education.  The school campus has outstanding facilities. Our Faculty members are highly experienced and qualified professional educators. ',
-   10000, 'International', 'info@nacegypt.com');
-SET @school_id = LAST_INSERT_ID();
-INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '+20(2) 2920-1200');
-INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '+20(2) 2920-1990');
-INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '0124801000');
+VALUES ('Al Bashaer', ' Zahraa Al Maadi, El-Basatin Sharkeya, Al Maadi, Cairo Governorate', 'To build a generation who :\nBelieves in God and obeying Him lovingly and choosingly .\nUpdated with the latest scientific developments and technology. \n Well exposed to the entire world and well – rounded enough to cope with people from different cultures and backgrounds. \n Loving nature and proactively interacting with  surroundings.', 'To remain as one of the most prominent, moderate Islamic schools in Egypt. (current mission).\nCompete at the global level from the educational perspective. (within 3 years).\nExpansion and transfer of expertise, opening new schools in other Islamic or non Islamic countries (within 10 years).\nEstablishing a university or institutes, having the same mission, in the future (within the coming 10 years).', 'English', 'Al Bashaer Schools,  were founded in 1994, and cover five educational levels starting from Preschool & Kindergarten up to Secondary.', 200000, 'International', 'albashaer@schools.com'); 
+SET @school_id = LAST_INSERT_ID(); 
+INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '+201011108241');  
+INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '+201000024687');  
+INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '+2-029706625-6');  
 INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'elementary');
 INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'middle');
 INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'high');
 
 
 INSERT INTO Schools (name, address, mission, vision, language, general_info, fees, type, email)
-VALUES ('Dar El Tarbiah National School', '12 Mahmoud Azmy Str.,Zamalek – Cairo – Egypt., Zamalek, Giza Governorate',
-        'A set of basic skills – linguistic, mathematical, scientific, artistic, physical and social. \nAn inquiring and discriminating mind and a desire for knowledge.\nStrong self esteem and high personal expectations.\nTolerance and respect for others. \nA very remarkable and outstanding standard of education needed to assist them in becoming future global citizens empowered to face all the challenges of the 21st century.',
-        's to enable all students to become life-long learners through providing them with the essential knowledge, skills and tools to become productive, responsible citizen in our fast growing world. We are committed to provide educational excellence for all.',
-        'English',
-        'Dar El Tarbiah Schools is an Egyptian educational institution founded in 1958 by Dr. Nawal El Degwi. Dar El Tarbiah was the first English-language instruction medium institution founded by Egyptians.',
-        14000, 'National', 'national.bh@dareltarbiah.edu.eg');
-SET @school_id = LAST_INSERT_ID();
+VALUES ('Futures Languages Schools', 'El Meerag City, Ring Road, Near Carrefour Maadi, Cairo.', 'We are set to create a unique educational and cultural model that contributes to narrowing Egypt’s chronic growth gap through raising a critical mass of our graduates.', 'Futures Educational Systems (FES) was initiated with a mission to help enhance quality and equity of education in Egypt by establishing an educational model that would be replicable.', 'English', 'Commencing in 1993, Futures Language Schools (FLS) are now the largest chain of private schools in Egypt.', 70000, 'National', 'info@futuresnet.net'); 
+SET @school_id = LAST_INSERT_ID(); 
+INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '(202) 2520 4592');  
+INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '(202) 2520 4596');  
 
-
-
-INSERT INTO Schools (name, address, mission, vision, language, general_info, fees, type, email)
-VALUES ('Dar El Tarbiah IGCSE School', '24 Ismail Mohamed St., Zamalek  – Cairo- Egypt',
-        'A set of basic skills – linguistic, mathematical, scientific, artistic, physical and social. \nAn inquiring and discriminating mind and a desire for knowledge.\nStrong self esteem and high personal expectations.\nTolerance and respect for others. \nA very remarkable and outstanding standard of education needed to assist them in becoming future global citizens empowered to face all the challenges of the 21st century.',
-        's to enable all students to become life-long learners through providing them with the essential knowledge, skills and tools to become productive, responsible citizen in our fast growing world. We are committed to provide educational excellence for all.',
-        'English',
-        'Dar El Tarbiah Schools is an Egyptian educational institution founded in 1958 by Dr. Nawal El Degwi. Dar El Tarbiah was the first English-language instruction medium institution founded by Egyptians.',
-        24000, 'International', 'ig.agouza@dareltarbiah.edu.eg');
-SET @school_id = LAST_INSERT_ID();
-
-
-INSERT INTO Schools (name, address, mission, vision, language, general_info, fees, type, email)
-VALUES ('Dar El Tarbiah American High School', '24 Ismail Mohamed St., Zamalek  – Cairo- Egypt',
-        'A set of basic skills – linguistic, mathematical, scientific, artistic, physical and social. \nAn inquiring and discriminating mind and a desire for knowledge.\nStrong self esteem and high personal expectations.\nTolerance and respect for others. \nA very remarkable and outstanding standard of education needed to assist them in becoming future global citizens empowered to face all the challenges of the 21st century.',
-        's to enable all students to become life-long learners through providing them with the essential knowledge, skills and tools to become productive, responsible citizen in our fast growing world. We are committed to provide educational excellence for all.',
-        'English',
-        'Dar El Tarbiah Schools is an Egyptian educational institution founded in 1958 by Dr. Nawal El Degwi. Dar El Tarbiah was the first English-language instruction medium institution founded by Egyptians.',
-        24000, 'International', 'american@dareltarbiah.edu.eg');
-SET @last_id = LAST_INSERT_ID();
-INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '27365970');
-INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '27357682');
-INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '27357683');
 INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'elementary');
+INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'middle');
+INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'high');
+
+INSERT INTO Schools (name, address, mission, vision, language, general_info, fees, type, email)
+VALUES ('Narmer American College in Egypt', '20 El-Narguis Service Area El Tagamoa–El Khames, New Cairo City, Cairo, Egypt', 'Narmer American College has as its primary mission the education and development of the whole student-mind, body and spirit. The students will be equipped to assume positions of leadership with an understanding of technology and its impact on the global community. Students will be able to cooperate in a diverse multicultural community.', '', 'English', 'The school was founded in the year 2000 by Mr. Mohamed El Rashidy, an educator with an experience of 50 years in Education.  The school campus has outstanding facilities. Our Faculty members are highly experienced and qualified professional educators. ', 10000, 'International', 'info@nacegypt.com' ); 
+SET @school_id = LAST_INSERT_ID(); 
+INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '+20(2) 2920-1200');  
+INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '+20(2) 2920-1990');  
+INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '0124801000'); 
+INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'elementary');
+INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'middle');
+INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'high');
+
+
+INSERT INTO Schools (name, address, mission, vision, language, general_info, fees, type, email)
+VALUES ('Dar El Tarbiah National School', '12 Mahmoud Azmy Str.,Zamalek – Cairo – Egypt., Zamalek, Giza Governorate', 'A set of basic skills – linguistic, mathematical, scientific, artistic, physical and social. \nAn inquiring and discriminating mind and a desire for knowledge.\nStrong self esteem and high personal expectations.\nTolerance and respect for others. \nA very remarkable and outstanding standard of education needed to assist them in becoming future global citizens empowered to face all the challenges of the 21st century.', 's to enable all students to become life-long learners through providing them with the essential knowledge, skills and tools to become productive, responsible citizen in our fast growing world. We are committed to provide educational excellence for all.', 'English', 'Dar El Tarbiah Schools is an Egyptian educational institution founded in 1958 by Dr. Nawal El Degwi. Dar El Tarbiah was the first English-language instruction medium institution founded by Egyptians.',14000, 'National', 'national.bh@dareltarbiah.edu.eg'); 
+SET @school_id = LAST_INSERT_ID(); 
+INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '27368145');  
+INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '27384152');  
+INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'elementary');
+INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'middle');
+INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'high');
+
+
+INSERT INTO Schools (name, address, mission, vision, language, general_info, fees, type, email)
+VALUES ('Dar El Tarbiah IGCSE School', '24 Ismail Mohamed St., Zamalek  – Cairo- Egypt', 'A set of basic skills – linguistic, mathematical, scientific, artistic, physical and social. \nAn inquiring and discriminating mind and a desire for knowledge.\nStrong self esteem and high personal expectations.\nTolerance and respect for others. \nA very remarkable and outstanding standard of education needed to assist them in becoming future global citizens empowered to face all the challenges of the 21st century.', 's to enable all students to become life-long learners through providing them with the essential knowledge, skills and tools to become productive, responsible citizen in our fast growing world. We are committed to provide educational excellence for all.', 'English', 'Dar El Tarbiah Schools is an Egyptian educational institution founded in 1958 by Dr. Nawal El Degwi. Dar El Tarbiah was the first English-language instruction medium institution founded by Egyptians.',24000, 'International', 'ig.agouza@dareltarbiah.edu.eg'); 
+SET @school_id = LAST_INSERT_ID(); 
+INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '33443231');  
+-- INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '33443231');  
+INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'elementary');
+INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'middle');
+INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'high');
+
+INSERT INTO Schools (name, address, mission, vision, language, general_info, fees, type, email)
+VALUES ('Dar El Tarbiah American High School', '24 Ismail Mohamed St., Zamalek  – Cairo- Egypt', 'A set of basic skills – linguistic, mathematical, scientific, artistic, physical and social. \nAn inquiring and discriminating mind and a desire for knowledge.\nStrong self esteem and high personal expectations.\nTolerance and respect for others. \nA very remarkable and outstanding standard of education needed to assist them in becoming future global citizens empowered to face all the challenges of the 21st century.', 's to enable all students to become life-long learners through providing them with the essential knowledge, skills and tools to become productive, responsible citizen in our fast growing world. We are committed to provide educational excellence for all.', 'English', 'Dar El Tarbiah Schools is an Egyptian educational institution founded in 1958 by Dr. Nawal El Degwi. Dar El Tarbiah was the first English-language instruction medium institution founded by Egyptians.',24000, 'International', 'american@dareltarbiah.edu.eg'); 
+SET @last_id = LAST_INSERT_ID(); 
+INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '27365970');  
+INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '27357682');  
+INSERT INTO Phone_School (school_id, phone) VALUES (LAST_INSERT_ID(), '27357683');  
+INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'elementary');
+INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'middle');
+INSERT INTO Level_School (school_id, level) VALUES (LAST_INSERT_ID(), 'high');
 
 -- **COURSES** 
 
@@ -632,26 +614,26 @@ VALUES (10, 101010);
 -- **ANNOUNCEMTNS**
 
 INSERT INTO Announcements (title, announcement_date, type, description, admin_id, school_id)
-VALUES ('Upcoming trip!', '2016-11-17', 'trip', 'We will be organizing a trip to the Giza Zoo next Friday.', 10, 1);
+VALUES ('Upcoming trip!', '2016-11-17', 'trip', 'We will be organizing a trip to the Giza Zoo next Friday.', 1, 1);
 
 INSERT INTO Announcements (title, announcement_date, type, description, admin_id, school_id)
-VALUES ('Day off.', '2016-11-20', 'news', 'Tomorrow and the day after are days off.', 10, 1);
+VALUES ('Day off.', '2016-11-20', 'news', 'Tomorrow and the day after are days off.', 1, 1);
 
 INSERT INTO Announcements (title, announcement_date, type, description, admin_id, school_id)
-VALUES ('Concert', '2016-10-1', 'activities', 'The school band will play a concert next week.', 11, 5);
+VALUES ('Concert', '2016-10-1', 'activities', 'The school band will play a concert next week.', 5, 2);
 
 INSERT INTO Announcements (title, announcement_date, type, description, admin_id, school_id)
-VALUES ('Trip', '2016-11-20', 'trip', 'Trip to the nationl museum of Arts next week.', 11, 5);
+VALUES ('Trip', '2016-11-20', 'trip', 'Trip to the nationl museum of Arts next week.', 9, 3);
 
 INSERT INTO Announcements (title, announcement_date, type, description, admin_id, school_id)
 VALUES ('Competition', '2016-05-06', 'competition',
-        'Our school will be holding a poeetry contest next year. Sign up online.', 7, 6);
+        'Our school will be holding a poeetry contest next year. Sign up online.', 9, 3);
 
 INSERT INTO Announcements (title, announcement_date, type, description, admin_id, school_id)
-VALUES ('Day off.', '2016-11-23', 'news', 'The first three days of the next week will be off.', 7, 6);
+VALUES ('Day off.', '2016-11-23', 'news', 'The first three days of the next week will be off.', 5, 2);
 
 INSERT INTO Announcements (title, announcement_date, type, description, admin_id, school_id)
-VALUES ('Football league', '2016-09-05', 'sport', 'Start of the football league this month.', 7, 6);
+VALUES ('Football league', '2016-09-05', 'sport', 'Start of the football league this month.', 1, 1);
 
 -- -- **PARENT RATE TEACHER**
 

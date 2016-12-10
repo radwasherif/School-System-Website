@@ -131,24 +131,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 						<div class="form-group">
 							<label>First name: </label>
 							<span class="error">* <?php echo $fnameErr;?></span>
-							<input type="text" class="form-control" placeholder="First name" name = "fname">
+							<input type="text" class="form-control" required placeholder="First name" name = "fname">
 						</div>
 						<div class="form-group">
 							<label>Last name: </label>
 							<span class="error">* <?php echo $lnameErr;?></span>
-							<input type="text" class="form-control" placeholder="Last name" name = "lname">
+							<input type="text" class="form-control" required placeholder="Last name" name = "lname">
 						</div>
 
 						<div class="form-group">
 							<label>Mobile no.: </label>
 							<span class="error">* <?php echo $mobileErr;?></span>
-							<input type="text" class="form-control" placeholder="Mobile no." name = "mobile">
+							<input type="text" class="form-control" required placeholder="Mobile no." name = "mobile">
 						</div>
 						
 						<div class="form-group">
 							<label>Email: </label>
 							<span class="error">* <?php echo $emailErr;?></span>
-							<input type="text" class="form-control" placeholder="Email" name = "email">
+							<input type="text" class="form-control" required placeholder="Email" name = "email">
 						</div>
 
 						
@@ -163,13 +163,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 						<div class = "form-group">
 							<label>Username: </label>
 							<span class="error">* <?php echo $usernameErr;?></span>
-							<input type="text" class="form-control" placeholder="Username" name = "username">
+							<input type="text" class="form-control" requied placeholder="Username" name = "username">
 							
 						</div>
 						<div class="form-group">
 							<label>Password: </label>
 							<span class="error">* <?php echo $passwordErr;?></span>
-							<input type="text" class="form-control" placeholder="Password" name = "password">
+							<input type="text" class="form-control" required placeholder="Password" name = "password">
 						</div>
 						<button type="submit" class="btn btn-default">Sign up</button>
 						<br> 

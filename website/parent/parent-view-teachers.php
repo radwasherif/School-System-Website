@@ -139,7 +139,7 @@ if(!empty($_GET['child_ssn']) && !empty($_GET['teacher_id']) && !empty('report_d
 													// echo "CALLED"; 
 													$result2 = $ratecall->get_result(); 
 													if($record2 = $result2->fetch_array(MYSQLI_BOTH)) {
-														echo "<td> $record2[1] </td>"; 
+														echo "<td> <span class = 'badge' >$record2[1] </span> </td>"; 
 													} else {
 														echo "<td> No rating yet. </td>"; 
 													}

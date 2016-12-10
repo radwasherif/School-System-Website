@@ -55,7 +55,7 @@ if($call = $conn->prepare('CALL parent_view_reviews(?)')) {
 			</div>
 			
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="../index.php">Home</a></li>
+				<li class="active"><a href="../index.php">Log Out</a></li>
 				<li><a href="../view-schools.php">View Schools</a></li>
 			</ul>
 			

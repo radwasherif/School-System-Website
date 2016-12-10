@@ -27,7 +27,7 @@
 			</div>
 			
 			<ul class="nav navbar-nav">
-				<li><a href="../index.php">Home</a></li>
+				<li><a href="../index.php">Log Out</a></li>
 				<li><a href="../view-schools.php">View Schools</a></li>
 				<?php echo "<li><a href='teacher.php?id=$id'>My Homepage</a></li>";?>
 			</ul>

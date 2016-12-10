@@ -364,7 +364,7 @@
 
   <!-- Container (Reviews Section) -->
   <div id="reviews" class="container-fluid text-center">
-    <h2>What our customers say</h2>
+    <h2>What parents say about us</h2>
     <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">

@@ -2,6 +2,7 @@
 <html>
 <link rel="stylesheet" type="text/css" href="../bootstrap.css">
 <link rel="stylesheet" type="text/css" href="teacher.css">
+<!-- <link rel="stylesheet" type="text/css" href="../homepage.css"> -->
 <head>
 	<title>Teacher Signup</title>
 </head>
@@ -86,7 +87,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 		</div>
 	</nav>
-
+	<br>
 	<div class="container">
 		<div class = "row" class = "center">
 			<div id="sign-up" class = "col-md-4 col-centered">
@@ -95,7 +96,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 					<div class="form-group">
 						<label>First name: </label>
 						<span class="error"><?php echo"<font color='red'>* $fnameErr </font>";?></span>
-						<input type="text" class="form-control" placeholder="First name" name = "fname">
+						<input type="text" class="form-control" required placeholder="First name" name = "fname">
 					</div>
 
 					<div class="form-group">
@@ -105,12 +106,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 					<div class="form-group">
 						<label>Last name: </label>
 						<span class="error"><?php echo"<font color='red'>* $lnameErr </font>";?></span>
-						<input type="text" class="form-control" placeholder="Last name" name = "lname">		
+						<input type="text" class="form-control" required placeholder="Last name" name = "lname">		
 					</div>
 					<div class="form-group">
 						<label>Email: </label>
 						<span class="error"><?php echo "<font color='red'>* $emailErr </font>";?></span>
-						<input type="text" class="form-control" placeholder="Email" name = "email">
+						<input type="text" class="form-control" required placeholder="Email" name = "email">
 					</div>
 
 					<div class="form-group">
@@ -120,10 +121,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 					<div class="form-group">
 						<label>Birthdate: </label>
 						<span class="error"><?php echo "<font color='red'>* $birthdateErr </font>";?></span>
-						<input type="date" class="form-control" name = "birthdate">
+						<input type="date" class="form-control" required name = "birthdate">
 
 					</div>
-					<div class = "form-group">
+					<div class = "form-group" required>
 						<label>Gender: </label>
 						<span class="error"><?php echo "<font color='red'>* $genderErr </font>";?></span>
 						<label class = "radio-inline">

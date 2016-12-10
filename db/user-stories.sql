@@ -669,7 +669,7 @@ END //
 # DROP PROCEDURE teacher_view_courses;
 CREATE PROCEDURE teacher_view_courses(IN teacher_id INT)
 BEGIN
-  SELECT C.code, C.name, C.level, C.grade
+  SELECT DISTINCT C.code, C.name, C.level, C.grade
   FROM Teachers T
   INNER JOIN Courses_TaughtTo_Students_By_Teachers CT ON T.id = CT.teacher_id  
   INNER JOIN Courses C  ON C.code = CT.course_code
@@ -716,7 +716,7 @@ END //
 -- drop procedure teacher_view_solutions;
 CREATE PROCEDURE teacher_view_solutions(IN teacher_id INT, IN assignment_number INT, IN course_code INT)
 BEGIN
-  SELECT CONCAT_WS('',S.first_name, ' ',S.last_name) AS student_name,S.id, SOL.solution
+  SELECT CONCAT_WS('',S.first_name, ' ',S.last_name) AS student_name,S.id, SOL.solution, SOL.grade
   FROM Solutions SOL 
   INNER JOIN Students S ON SOL.student_ssn = S.ssn
   INNER JOIN Assignments A ON A.assignment_number = SOL.assignment_number AND A.course_code = SOL.course_code AND A.school_id = SOL.school_id

@@ -89,7 +89,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 			</div>
 			
 			<ul class="nav navbar-nav">
-				<li><a href="../index.php">Home</a></li>
+				<li><a href="../index.php">Log Out</a></li>
 				<li><a href="../view-schools.php">View Schools</a></li>
 				<?php echo "<li><a href='teacher.php?id=$id'>My Homepage</a></li>";?>
 				<?php echo "<li><a href='course-info.php?id=$id&code=$code'>Course Main Page</a></li>";?>
@@ -188,6 +188,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 					$student_name;
 					$student_id;
 					$solution;
+					$grade;
 					
 					echo "<tr>";
 
@@ -202,10 +203,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 							$student_id = $r;
 							
 						}
-						else 
+						else if($count == 2)
 						{
 							$solution = $r;
 							
+						}
+						else
+						{
+							$grade = $r;
 						}
 						$count = $count + 1;
 					}
@@ -215,7 +220,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
 					echo "<td><form method='post' action=".htmlspecialchars($_SERVER["PHP_SELF"])."?id=$id&code=$code&student_id=$student_id&assignment=$assignment\">";
 					echo "<div class='form-group'>";
-					echo				"<textarea class='form-control' rows='1' required name = 'grade'></textarea>";
+					echo				"<textarea class='form-control' rows='1' required name = 'grade'>$grade</textarea>";
 					echo			"</div>";
 					echo "<button type='submit' class='btn btn-success'>SUBMIT</button>";	
 					echo "</form></td>";			

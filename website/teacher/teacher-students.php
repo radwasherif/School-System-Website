@@ -27,14 +27,14 @@
 			</div>
 			
 			<ul class="nav navbar-nav">
-				<li><a href="../index.php">Home</a></li>
+				<li><a href="../index.php">Log Out</a></li>
 				<li><a href="../view-schools.php">View Schools</a></li>
 				<?php echo "<li><a href='teacher.php?id=$id'>My Homepage</a></li>";?>
 			</ul>
 			
 			<form id = "search-bar"  method = "post" class="navbar-form navbar-right" action = "../search-schools.php">
 				<div class="form-group">
-					<input  type="text" class="form-control" placeholder="Search schools by name, address or type" name="school">
+					<input  typfe="text" class="form-control" placeholder="Search schools by name, address or type" name="school">
 				</div>
 				<button type="submit" class="btn btn-default">Search</button>
 			</form>
